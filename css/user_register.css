@@ -1,0 +1,82 @@
+body {
+
+	background-color: #38B6FF;
+}
+
+.container 
+{
+
+	background-color: white;
+	filter: drop-shadow(2px 2px 4px black);
+	margin-left: 100px;
+}
+
+.container > div > h3 
+{
+	width: 64.4vw;
+}
+
+.register
+{
+	background-color:#0097B2 ;
+	height: 40px;
+	width: 100%;
+
+	
+}
+
+.section-1
+{
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 50px;
+	place-items: center ;
+	margin: auto;
+	flex-wrap: wrap;
+	border: 1px solid black;
+	margin-top: -40px;
+}
+
+.section-2 > div:last-child 
+{
+	text-align: center;
+}
+
+/*notification CSS
+
+.error {
+
+	background-color: rgba(255, 179, 179, 1);
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	position: absolute;
+	margin-top: -530px;
+	width: 100%;
+	max-width: 250px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 20px;
+	text-align: center;
+}
+.error.show {
+  display: block;
+  opacity: 1;
+}
+.success.show {
+	display: block;
+  	opacity: 1;
+}
+
+.success {
+
+	background-color: rgba(145, 254, 101, 0.54);
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-weight: bold;
+	position: absolute;
+	margin-top: -530px;
+	width: 100%;
+	max-width: 250px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 20px;
+	text-align: center;
+}

@@ -1,0 +1,121 @@
+* {
+	font-family: Tahoma, Geneva, sans-serif;
+	margin: 0;
+	top: 0;
+}
+.sidebar{
+
+	position: absolute;
+	top: 0;
+	background-color: #000;
+	height: 100%;
+	width: 85px;
+	filter: drop-shadow(1px 1px 2px black);
+}
+.logo {
+
+	margin-top: 10px;
+	margin-left: 12px;
+	height: 55px;
+	width: 55px;
+	border-radius: 50%;
+	filter: drop-shadow(1px 1px 5px black);
+
+}
+
+.tooltip {
+
+	color: white;
+}
+
+#logout {
+
+	margin-top: 50px;
+}
+
+.nav-link {
+
+	height: 80vh;
+}
+
+.nav-item {
+
+	text-align: center;
+	margin-top: 25px;
+	height: 50px;
+	padding: 10px;
+	/*font-size: .69rem;*/
+	font-size: clamp(0.5rem, 0.2625rem + 0.76vw, 0.69rem);
+	font-weight: bold;
+	padding-bottom: 15px;
+}
+.nav-item:nth-last-child(2) {
+	background-color: rgba(31, 86, 7, 0.37);
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	filter: drop-shadow(1px 1px 2px whitesmoke);
+}
+
+.btn {
+
+	width: 100%;
+	max-width: 25px;
+}
+
+
+.container {
+
+	margin-left: 85px;
+	height: 99vh;
+	overflow-y: scroll;
+	scroll-behavior: smooth;
+
+
+}
+.content {
+
+	border: 1px solid black;
+	margin: 70px 30px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+div > h1 {
+
+	text-indent: 15px;
+	margin-top: 6px;
+}  
+
+		/*Respsonsive mobile*/
+@media screen and (min-width: 360px) and (max-width:  900px){
+
+.logo {
+	width: 45px;
+	height: 45px;
+	margin-left: 9px;
+}
+.sidebar{
+
+	background-color: #00BF63;
+	height: 100vh;
+	width: 65px;
+	opacity: 1;
+}
+.container {
+
+	height: 100vh;
+	margin-left: 65px;
+	overflow-y: scroll;
+	overflow-x: scroll;
+
+}
+.content {
+
+	width: 1500px;
+	height: 1500px;
+}
+
+
+}
