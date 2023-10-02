@@ -7,7 +7,7 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="./css/user_addresort.css">
+	<link rel="stylesheet" href="./css/user_dashboard.css">
 
 	<title>User Dashboard</title>
 </head>
@@ -64,9 +64,70 @@
 
 		<!-- MAIN -->
 		<main>
-			
-			
+			<div class="form-content">
+				<h1>User Information</h1>
+				<div class="content">
+					<div>
+						<p>Firstname:</p>
+						<p> Mark Russel</p>
+					</div>
+					<div>
+						<p>Lastname:</p>
+						<p> Trapsi</p>
+					</div>
+					<div>
+						<p>Email:</p>
+						<p>mark@gmail.com</p>
+					</div>
+					<div>
+						<p>Address:</p>
+						<p>Porac Botolan Zambales</p>
+					</div>
+				</div>
+
+				<h1>Owner Information</h1>
 				
+				<div class="content">
+					<div>
+						<p>Name:</p>
+						<p>Mark Russel Trapsi</p>
+					</div>
+					<div>
+						<p>Address:</p>
+						<p>Porac Botolan Zambales</p>
+					</div>
+					<div>
+						<p>Email:</p>
+						<p>mark@gmail.com</p>
+					</div>
+					<div>
+						<p>Address:</p>
+						<p>Porac Botolan Zambales</p>
+					</div>
+				</div>
+
+				<h1>Contact Information</h1>
+				
+				<div class="content">
+					<div>
+						<p>Owner's Contact:</p>
+						<p>0976 - 249 - 9708</p>
+					</div>
+					<div>
+						<p>Office Contact:</p>
+						<p>0976 - 249 - 9708</p>
+					</div>
+					<div>
+						<p>Resort's Contact:</p>
+						<p>0976 - 249 - 9708</p>
+					</div>
+					<div>
+						<p>Manager's Contacts:</p>
+						<p>0976 - 249 - 9708</p>
+					</div>
+				</div>
+			</div>
+		</div>
 		</main>
 		<!-- MAIN -->
 	</section>

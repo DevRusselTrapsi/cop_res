@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-
-
 include './dbcon.php';
 // $_SERVER['REQUEST_METHOD'] == 'POST'
 //POST is connected to the input using the request method
@@ -130,58 +128,10 @@ mysqli_close($conn);
     				<input type="email" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" required>
   				</div>
 
-				<!-- Contacts and Resort info -->
-				<div>
-					<h3>Resort and Owner Information</h3>
-				</div>
-
-		<div class="section-2 row g-2 mt-3">
-
-					<div class="col-md-5">
-    					<label for="inputEmail4" class="form-label">Name of the Establishment:</label>
-    					<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" name="resort_name" required>
-  					</div>
-  					<div class="col-md-5">
-    					<label for="inputEmail4" class="form-label">Address:</label>
-    					<input type="text" class="form-control" id="inputEmail4" placeholder="Establishment's Address" value="<?php echo $fname;?>" name="resort_address" required>
-  					</div>
-  					<div class="col-md-5">
-    					<label for="inputEmail4" class="form-label">Owner:</label>
-    					<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" name="owner_name" required>
-  					</div>
-  					 <div class="col-md-5">
-    					<label for="inputEmail4" class="form-label">Address:</label>
-    					<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" name="owner_address" placeholder="(Owner's Address)" required>
-  					</div>
-									
-							<h4>Contacts:</h4>
-  					 <div class="col-md-5">
-    					<label for="inputEmail4" class="form-label">Office Contact</label>
-    					<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" name="resort_office" placeholder="09********" required>
-  					</div>
-  					 <div class="col-md-5">
-    					<label for="inputEmail4" class="form-label">Home Contact:</label>
-    					<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" name="resort_contact" placeholder="09********" required>
-  					</div>
-					<div class="col-md-5">
-    					<label for="inputEmail4" class="form-label">Owner Contact:</label>
-    					<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" name="owner_contact" placeholder="09********" required>
-  					</div>
-  					 <div class="col-md-5">
-    					<label for="inputEmail4" class="form-label">Manager Contact:</label>
-    					<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" name="manager_contact" placeholder="09********" required>
-  					</div>
-  					<div class="input-group mb-4">
-  						<input type="file" class="form-control" name ="resort_url" id="inputGroupFile02">
-  						<label class="input-group-text" for="inputGroupFile02">image establishment:</label>
-					</div>
-
-
-					<div class="d-grid gap-2 col-6 mx-auto">
+					<div>
+						<div class="d-grid gap-2 col-6 mx-auto">
 							<input class="btn btn-primary mb-3" type="submit" name="submit" value="Submit">
 					</div>
-
-					<div>
 						<p>Already have an account? 
 							<a href="./user_login.php">LOGIN</a>
 						</p>

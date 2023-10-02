@@ -63,7 +63,7 @@
 		<!-- MAIN -->
 		<main>
 
-			<form class="row g-2 mt-3 m-5"method="post" action="./backend-addresort.php" enctype="multipart/form-data">
+			<form method="post" action="./backend-addresort.php" enctype="multipart/form-data">
 
 		<div class="container">
 
@@ -71,14 +71,64 @@
 
 			<div class="content">
 
-				<div class="first-form">
+					<!-- FIRST FORM STRUCTURE-->
+
+					<div class="first-form">
+						<div class="input-form">
+
+						<h3>Information</h3>
+							<div>
+								<label>Name of the Establishment:</label>
+								<input type="text" class="input" name="resort_name" required>
+							</div>
+
+							<div>
+							<label>Address:</label>
+								<input type="text" class="input" name="resort_address" placeholder="(Establishment's Address)" required>
+							</div>
+							<div>
+								<label>Owner:</label>
+								<input type="text" class="input" name="owner_name" placeholder="(Firsname, Middlename, Lastname)" required>
+							</div>
+							<div>
+								<label>Address:</label>
+								<input type="text" class="input" name="owner_address" placeholder="(Owner's Address)" required>
+							</div>
+									
+							<p>Contacts:</p>
+
+							<div>
+								<label>Office Contact:</label>
+								<input type="text" name="resort_office" class="input" placeholder="09********" required><br>
+							</div>							
+							<div>
+								<label>Home Contact:</label>
+								<input type="text" name="resort_contact" class="input" placeholder="09********" required>
+							</div>
+							<div>
+								<label>Owner Contact:</label>
+								<input type="text" name="owner_contact" class="input" placeholder="09********" required>
+							</div>
+							<div>
+								<label>Manager Contact:</label>
+								<input type="text" name="manager_contact" class="input" placeholder="09********" required>
+							</div>						
+							<div>
+								<label>Upload image of the establishment:</label>
+								<input type="file" name="resort_url" class="input" style="background-color: white; cursor: pointer;" required>
+							</div>
+					</div>
+				</div>
+					<!-- SECOND FORM STRUCTURE-->
+
+				<div class="second-form">
 
 					<p>Accommodation</p>
 
 					<button class="btn-add" name="add_more" type="submit" >Add more</button>
 
 					<div class="input-form">
-						<div class="header-accom row">
+						<div class="header-accom">
 							<div><label>Type of Room:</label></div>
 							<div><label>No. of Rooms:<label></div>
 							<div><label>Capacity:</label></div>
