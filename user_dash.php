@@ -17,7 +17,7 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
 			<span class="text">User Admin</span>
 		</a>
 		<ul class="side-menu top">

@@ -20,9 +20,9 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
-    $address = $_POST['address'];
+    $address = $_POST['user_address'];
     $contact = $_POST['contact'];
-    $password = $_POST['admin_pass'];
+    $password = $_POST['user_pass'];
     $confirm_password = $_POST['confirm_pass'];
 
     // Use a prepared statement to check if the email already exists in the database
@@ -49,14 +49,33 @@ if (isset($_POST['submit'])) {
             $query = "INSERT INTO `tbl_user` (`fname`, `lname`, `email`, `contact`, `user_address`, `user_pass`) VALUES (?, ?, ?, ?, ?, ?)";
 
             // Use a prepared statement to insert data into the database
-            $stmt = mysqli_prepare($con, $query);
+            $stmt = mysqli_prepare($conn, $query);
             // note: when using hashed_password make sure that stmt_bind_param of the hashed is "s" not "i"
             mysqli_stmt_bind_param($stmt, "sssiss" ,$fname, $lname, $email, $contact,$address, $hashed_password);
 
-            if (mysqli_stmt_execute($stmt)) {
-                $success = "REGISTRATION COMPLETE";
+             if (mysqli_stmt_execute($stmt)) {
+
+                // Registration successful, get the user_id from the database
+
+                $query = "SELECT `user_id` FROM `tbl_user` WHERE `email` = ?";
+                $stmt = mysqli_prepare($conn, $query);
+                mysqli_stmt_bind_param($stmt, "s", $email);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                $row = mysqli_fetch_assoc($result);
+
+                if ($row) {
+                    // Set the user_id into a session variable
+                    $_SESSION['user_id'] = $row['user_id'];
+                }
+
+                echo "<script>alert('REGISTRATION COMPLETE')</script>";
+
+                header('Location: ./user_login.php');
+
             } else {
-                $error = "REGISTRATION ERROR. TRY AGAIN";
+                echo "<script>alert('REGISTRATION ERROR. TRY AGAIN')</script>";
+                header('Location: ./user_register.php');
             }
         }
     }
@@ -99,34 +118,52 @@ mysqli_close($conn);
 				<h4>User Information</h4>
 			</div>
 
-				<div class="col-md-5">
-    				<label for="inputEmail4" class="form-label">FirstName:</label>
-    				<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" required>
-  				</div>
-  				<div class="col-md-5">
-    				<label for="inputEmail4" class="form-label">Address:</label>
-    				<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" required>
-  				</div>
-  				<div class="col-md-5">
-    				<label for="inputEmail4" class="form-label">LastName:</label>
-    				<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" required>
-  				</div>
-  				<div class="col-md-5">
-    				<label for="inputEmail4" class="form-label">Password:</label>
-    				<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" required>
-  				</div>
-  				<div class="col-md-5">
-    				<label for="inputEmail4" class="form-label">Contact:</label>
-    				<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" required>
-  				</div>
-  				<div class="col-md-5">
-    				<label for="inputEmail4" class="form-label">Re-type password:</label>
-    				<input type="text" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" required>
-  				</div>
-  				<div class="col-md-5">
-    				<label for="inputEmail4" class="form-label">Email:</label>
-    				<input type="email" class="form-control" id="inputEmail4" value="<?php echo $fname;?>" required>
-  				</div>
+                <!-- ,,,,,, -->
+    
+
+                <!-- ..... -->
+				            <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Firstname</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="fname" id="inputEmail3"value="<?php echo $fname;?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Lastname</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="lname" id="inputEmail3" value="<?php echo $lname;?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                    <input type="email" class="form-control" name="email" id="inputEmail3" value="<?php echo $email;?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Contact</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="contact" id="inputEmail3" value="<?php echo $contact;?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Address</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="user_address" id="inputEmail3" value="<?php echo $address;?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                    <input type="password" class="form-control" name="user_pass" id="inputEmail3"  value="<?php echo $password;?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Re-type Password</label>
+                    <div class="col-sm-10">
+                    <input type="password" class="form-control" name="confirm_pass" id="inputEmail3"  value="<?php echo $confirm_password;?>">
+                    </div>
+                </div>
 
 					<div>
 						<div class="d-grid gap-2 col-6 mx-auto">

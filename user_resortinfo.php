@@ -17,7 +17,7 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
 			<span class="text">User Admin</span>
 		</a>
 		<ul class="side-menu top">
@@ -62,8 +62,13 @@
 
 		<!-- MAIN -->
 		<main>
-			<h1>(Resort's Name)</h1>
+			
 		<div class="form-content">
+			<div class="profile">
+				<h1>(Resort's Name)</h1>
+				<img src="" alt="Image">
+				<!-- this is where the image will popout -->
+			</div>
 				<h1>Accommodations</h1>
 				<div class="content">
 					<div>

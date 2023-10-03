@@ -8,7 +8,7 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_addresort.css">
-
+	
 	<title>User Dashboard</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
 			<span class="text">User Admin</span>
 		</a>
 		<ul class="side-menu top">
@@ -74,6 +74,7 @@
 					<!-- FIRST FORM STRUCTURE-->
 
 					<div class="first-form">
+						
 						<div class="input-form">
 
 						<h3>Information</h3>
@@ -84,11 +85,12 @@
 
 							<div>
 							<label>Address:</label>
-								<input type="text" class="input" name="resort_address" placeholder="(Establishment's Address)" required>
+								<input type="text" class="input" name="resort_address" placeholder="Establishment's Address" required>
+
 							</div>
 							<div>
 								<label>Owner:</label>
-								<input type="text" class="input" name="owner_name" placeholder="(Firsname, Middlename, Lastname)" required>
+								<input type="text" class="input" name="owner_name" placeholder="(Firstname, Middlename, Lastname)" required>
 							</div>
 							<div>
 								<label>Address:</label>
@@ -115,7 +117,7 @@
 							</div>						
 							<div>
 								<label>Upload image of the establishment:</label>
-								<input type="file" name="resort_url" class="input" style="background-color: white; cursor: pointer;" required>
+								<input type="file" class="insert_img" name="resort_url"  style="background-color: white; cursor: pointer;" required>
 							</div>
 					</div>
 				</div>
@@ -149,7 +151,7 @@
 								<input type="text" class="input" name="accom_rates" required>
 							</div>
 							<div>
-								<input type="file" class="input" id="input_file" name="accom_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;">
+								<input type="file" class="insert_img" id="input_file" name="accom_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;">
 							</div>
 						</div>
 					</div>
@@ -184,7 +186,7 @@
 								<input type="text" class="input" name="faci_rates" required>
 							</div>
 							<div>
-								<input type="file" class="input" name="faci_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>
+								<input type="file" class="insert_img" name="faci_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>
 							</div>
 						</div>
 					</div>
@@ -222,7 +224,7 @@
 
 				<!-- end -->
 				
-				<input type="submit" class="btn-save" name="submit" value="Add Resort">
+				<input type="submit" class="btn_save" name="submit" value="Add Resort">
 			</div>
 		</div>
 
@@ -235,5 +237,40 @@
 	
 
 	<script src="script.js"></script>
+	<script>
+        // Function to add the input form
+        function addInputForm() {
+            const formContainer = document.getElementById('formContainer');
+            const inputForm = document.createElement('div');
+            inputForm.className = 'inputform';
+            inputForm.innerHTML = `
+                <div class="service_section">
+                    <div>
+                    <input type="text" class="input" name="service_name">
+                    </div>
+                    <div>
+                    <input type="text" class="input" name="description">
+                    </div>
+                    <div>
+                    <input type="text" class="input" name="rates">
+                    </div>
+                </div>
+            `;
+            formContainer.appendChild(inputForm);
+        }
+
+        // Function to remove the last input form
+        function removeInputForm() {
+            const formContainer = document.getElementById('formContainer');
+            const inputForms = formContainer.getElementsByClassName('inputform');
+            if (inputForms.length > 0) {
+                formContainer.removeChild(inputForms[inputForms.length - 1]);
+            }
+        }
+
+        // Add event listeners to the buttons
+        document.getElementById('addButton').addEventListener('click', addInputForm);
+        document.getElementById('removeButton').addEventListener('click', removeInputForm);
+    </script>
 </body>
 </html>

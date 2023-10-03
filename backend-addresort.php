@@ -1,8 +1,11 @@
 <?php 
+session_start();
+
 	require('./dbcon.php');
+if(isset($_SESSION['user_id'])){
+	$user_id = $_SESSION['user_id'];
 
-
-if (isset($_POST['submit'])) {
+	if (isset($_POST['submit'])) {
 
 	mysqli_query($conn, "SET FOREIGN_KEY_CHECKS=0");
 
@@ -33,6 +36,7 @@ if (isset($_POST['submit'])) {
 
  	if (mysqli_query($conn,$query)) {
 
+ 		echo "Error: " . mysqli_error($conn);
 		// Retrieve the auto-generated primary key value
  		$service_id = $conn->insert_id;
 
@@ -60,21 +64,23 @@ if (isset($_POST['submit'])) {
 		$num_accom = $_POST['no_accom_units'];
 		$accom_capacity = $_POST['accom_capacity'];
 		$accom_rates = $_POST['accom_rates'];
-		$accom_url = $_FILES['accom_url']['tmp_name'];
+		$accom_tmp_name = $_FILES['accom_url']['tmp_name'];
 
 	//query for the tbl_accom
- 	$query3 = "INSERT INTO tbl_accommodation (type_of_room, no_accom_units, accom_capacity, accom_rates, acom_url) VALUES ('$room_type', '$num_accom', '$accom_capacity', '$accom_rates', '$accom_url')";
+ 	$query3 = "INSERT INTO tbl_accommodation (type_of_room, no_accom_units, accom_capacity, accom_rates, acom_url) VALUES ('$room_type', '$num_accom', '$accom_capacity', '$accom_rates', '$destination_accomfolder".$_FILES['accom_url']['name']."')";
+
 
  			// check if the query3 is true
  			if(mysqli_query($conn, $query3)) {
 
  				// moving the upload files to the folder of accom_img
-    			move_uploaded_file($_FILES['accom_url']['tmp_name'], "accom_img/".$_FILES['accom_url']['name']);
+    			move_uploaded_file($_FILES['accom_url']['tmp_name'], $destination_accomfolder . $_FILES['accom_url']['name']);
+
 
     			// Retrieve the auto-generated primary key value
     			$accom_id = $conn->insert_id;
 
-
+    			$user_id = $_SESSION['user_id'];    			
     			// initialize for the resort table
 				$resort_name = $_POST['resort_name'];
 				$resort_address = $_POST['resort_address'];
@@ -88,7 +94,7 @@ if (isset($_POST['submit'])) {
 
 
 				// query to the table resort
-				$query4 = "INSERT INTO tbl_resort (owner_name, owner_address, owner_contact, resort_office, resort_contact, manager_contact, resort_url, resort_address,accom_id, faci_id,service_id) VALUES ('$owner_name', '$owner_address', '$owner_contact', '$resort_office', '$resort_contact', '$manager_contact', '$resort_url', '$resort_address','$accom_id','$faci_id','$service_id')";
+				$query4 = "INSERT INTO tbl_resort (user_id, resort_name, owner_name, owner_address, owner_contact, resort_office, resort_contact, manager_contact, resort_url, resort_address, accom_id, faci_id, service_id) VALUES ('$user_id', '$resort_name', '$owner_name', '$owner_address', '$owner_contact', '$resort_office', '$resort_contact', '$manager_contact', '$resort_url', '$resort_address', '$accom_id', '$faci_id', '$service_id')";
 
 				if (mysqli_query($conn, $query4)){
 
@@ -96,6 +102,8 @@ if (isset($_POST['submit'])) {
     				move_uploaded_file($_FILES['resort_url']['tmp_name'], "estab_img/".$_FILES['resort_url']['name']);
 
     				echo"<script>alert('Registration Complete')</script>";
+
+    				
 
 				}else{
 					echo"<script>alert('Error: ')</script>".mysqli_error($conn);
@@ -116,4 +124,10 @@ if (isset($_POST['submit'])) {
 	}
 }
 mysqli_close($conn);
+} else {
+
+	echo "<script>alert('User not logged in')</script>";
+}
+
+
 ?>
