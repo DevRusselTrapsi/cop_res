@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2023 at 11:50 AM
+-- Generation Time: Oct 04, 2023 at 06:25 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -44,7 +44,8 @@ INSERT INTO `tbl_accommodation` (`accom_id`, `type_of_room`, `no_accom_units`, `
 (7, 'queen bed size', 1, 2, 15000, 'C:xampp	mpphp47B5.tmp'),
 (8, 'queen bed size', 1, 2, 5000, 'C:xampp	mpphp8675.tmp'),
 (9, 'queen bed size', 1, 2, 5000, 'accom_img/Screenshot (73).png'),
-(10, 'queen bed size', 1, 2, 5000, 'accom_img/Screenshot (73).png');
+(10, 'queen bed size', 1, 2, 5000, 'accom_img/Screenshot (73).png'),
+(11, 'king bed size', 2, 4, 15000, 'accom_img/Screenshot 2023-09-21 224137.png');
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,8 @@ INSERT INTO `tbl_facility` (`faci_id`, `type_of_facility`, `faci_capacity`, `no_
 (6, 'basketball', 10, 1, 150, 'Array'),
 (7, 'basketball', 10, 1, 150, 'Array'),
 (8, 'basketball', 10, 1, 150, 'Array'),
-(9, 'basketball', 10, 1, 150, 'Array');
+(9, 'basketball', 10, 1, 150, 'Array'),
+(10, 'swimming pool', 20, 3, 150, 'Array');
 
 -- --------------------------------------------------------
 
@@ -119,10 +121,10 @@ CREATE TABLE `tbl_resort` (
 --
 
 INSERT INTO `tbl_resort` (`resort_id`, `user_id`, `resort_name`, `owner_name`, `owner_address`, `owner_contact`, `resort_office`, `resort_contact`, `manager_contact`, `resort_url`, `resort_address`, `accom_id`, `faci_id`, `service_id`) VALUES
-(20, 1, 'Kainomayan', 'Bing Maniquiz', 'Iba Zambales', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphp47A4.tmp', 'San Juan, Botolan Zambales', 7, 6, 6),
 (21, 5, 'kainomayan', 'marion', 'porac', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphp8664.tmp', 'san juan', 8, 7, 7),
 (22, 5, 'kainomayan', 'marion', 'porac', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphp3B80.tmp', 'san juan', 9, 8, 8),
-(23, 5, 'kainomayan', 'marion', 'porac', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphp2EB.tmp', 'san juan', 10, 9, 9);
+(23, 5, 'kainomayan', 'marion', 'porac', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphp2EB.tmp', 'san juan', 10, 9, 9),
+(24, 6, 'Indira', 'Juvy Parohinog', 'beneg', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphpD5B6.tmp', 'Danacbunga', 11, 10, 10);
 
 -- --------------------------------------------------------
 
@@ -145,7 +147,8 @@ INSERT INTO `tbl_service` (`service_id`, `type_of_service`, `description`, `serv
 (6, 'laundry', 'laundry service for a one week', 500),
 (7, 'laundry', 'awdwa', 140),
 (8, 'laundry', 'awdwa', 140),
-(9, 'laundry', 'awdwa', 140);
+(9, 'laundry', 'awdwa', 140),
+(10, '3 meals a day', 'free meals for 1 week', 1500);
 
 -- --------------------------------------------------------
 
@@ -170,7 +173,8 @@ CREATE TABLE `tbl_user` (
 INSERT INTO `tbl_user` (`user_id`, `fname`, `lname`, `email`, `contact`, `user_address`, `user_pass`) VALUES
 (1, 'mark russel', 'trapsi', 'mark@gmail.com', 9762499708, 'porac,botolan, zambales', '$2y$10$2U8CSdaDYaDe5rKm5LNwQ.mvBDMvQQ2GG1Znxd49IxhWsnOKY6Dbq'),
 (4, 'aljay', 'Devillas', 'Aljay@gmail.com', 97624997708, 'Taugtog', '$2y$10$8KBFywJa9av7EXB1ctGOquVZxZWzxojJ.brnCGGj8j7QOF8lwKlkK'),
-(5, 'marion', 'barroga', 'marion@gmail.com', 9762499708, 'porac', '$2y$10$ENAf.MQC0gkABQX.TasznOD7.4DAIX/sdGXGfkpN72jqhBjGO0O9G');
+(5, 'marion', 'barroga', 'marion@gmail.com', 9762499708, 'porac', '$2y$10$ENAf.MQC0gkABQX.TasznOD7.4DAIX/sdGXGfkpN72jqhBjGO0O9G'),
+(6, 'juvy', 'parohinog', 'juvy@gmail.com', 9762499708, 'Beneg', '$2y$10$k1KMbvp28j3kgm26RjZdC.sH6YeZusFM9yceTWA4YEO9Ug5FW.CfK');
 
 -- --------------------------------------------------------
 
@@ -242,7 +246,7 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `tbl_accommodation`
 --
 ALTER TABLE `tbl_accommodation`
-  MODIFY `accom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `accom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -254,25 +258,25 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_facility`
 --
 ALTER TABLE `tbl_facility`
-  MODIFY `faci_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `faci_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_resort`
 --
 ALTER TABLE `tbl_resort`
-  MODIFY `resort_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `resort_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_service`
 --
 ALTER TABLE `tbl_service`
-  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `verification`
