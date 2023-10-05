@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2023 at 06:25 PM
+-- Generation Time: Oct 05, 2023 at 06:50 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tbl_accommodation` (
   `accom_id` int(11) NOT NULL,
+  `resort_id` int(11) NOT NULL,
   `type_of_room` varchar(200) NOT NULL,
   `no_accom_units` int(100) NOT NULL,
   `accom_capacity` int(100) NOT NULL,
@@ -40,12 +41,11 @@ CREATE TABLE `tbl_accommodation` (
 -- Dumping data for table `tbl_accommodation`
 --
 
-INSERT INTO `tbl_accommodation` (`accom_id`, `type_of_room`, `no_accom_units`, `accom_capacity`, `accom_rates`, `acom_url`) VALUES
-(7, 'queen bed size', 1, 2, 15000, 'C:xampp	mpphp47B5.tmp'),
-(8, 'queen bed size', 1, 2, 5000, 'C:xampp	mpphp8675.tmp'),
-(9, 'queen bed size', 1, 2, 5000, 'accom_img/Screenshot (73).png'),
-(10, 'queen bed size', 1, 2, 5000, 'accom_img/Screenshot (73).png'),
-(11, 'king bed size', 2, 4, 15000, 'accom_img/Screenshot 2023-09-21 224137.png');
+INSERT INTO `tbl_accommodation` (`accom_id`, `resort_id`, `type_of_room`, `no_accom_units`, `accom_capacity`, `accom_rates`, `acom_url`) VALUES
+(17, 17, 'king bed', 2, 4, 1600, 'accom_img/Screenshot (74).png'),
+(18, 18, 'king bed', 2, 4, 1600, 'accom_img/Screenshot (74).png'),
+(19, 19, 'queen bed', 2, 4, 1500, 'accom_img/Screenshot (74).png'),
+(20, 22, '', 0, 213, 213, 'accom_img/Screenshot (74).png');
 
 -- --------------------------------------------------------
 
@@ -55,7 +55,7 @@ INSERT INTO `tbl_accommodation` (`accom_id`, `type_of_room`, `no_accom_units`, `
 
 CREATE TABLE `tbl_admin` (
   `admin_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `admin_pass` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -64,8 +64,9 @@ CREATE TABLE `tbl_admin` (
 -- Dumping data for table `tbl_admin`
 --
 
-INSERT INTO `tbl_admin` (`admin_id`, `name`, `email`, `admin_pass`) VALUES
-(1, 'mark russel trapsi', 'mark@gmail.com', '$2y$10$3.0Nczcn.4xQJ/zTHCa7FeYsiKXbQLT210Kkt9a4va1vlqhio0e.C');
+INSERT INTO `tbl_admin` (`admin_id`, `username`, `email`, `admin_pass`) VALUES
+(1, '', 'mark@gmail.com', '$2y$10$3.0Nczcn.4xQJ/zTHCa7FeYsiKXbQLT210Kkt9a4va1vlqhio0e.C'),
+(2, 'marky', 'marky@gmail.com', '$2y$10$fs7tUwxduqH2NwWERbEj8uwdzJ1vCZn4K.9oUGo7aKcQVTXCXsePG');
 
 -- --------------------------------------------------------
 
@@ -75,6 +76,7 @@ INSERT INTO `tbl_admin` (`admin_id`, `name`, `email`, `admin_pass`) VALUES
 
 CREATE TABLE `tbl_facility` (
   `faci_id` int(11) NOT NULL,
+  `resort_id` int(11) NOT NULL,
   `type_of_facility` varchar(200) NOT NULL,
   `faci_capacity` int(50) NOT NULL,
   `no_faci_units` int(50) NOT NULL,
@@ -86,12 +88,13 @@ CREATE TABLE `tbl_facility` (
 -- Dumping data for table `tbl_facility`
 --
 
-INSERT INTO `tbl_facility` (`faci_id`, `type_of_facility`, `faci_capacity`, `no_faci_units`, `faci_rates`, `faci_url`) VALUES
-(6, 'basketball', 10, 1, 150, 'Array'),
-(7, 'basketball', 10, 1, 150, 'Array'),
-(8, 'basketball', 10, 1, 150, 'Array'),
-(9, 'basketball', 10, 1, 150, 'Array'),
-(10, 'swimming pool', 20, 3, 150, 'Array');
+INSERT INTO `tbl_facility` (`faci_id`, `resort_id`, `type_of_facility`, `faci_capacity`, `no_faci_units`, `faci_rates`, `faci_url`) VALUES
+(17, 17, 'basketball', 10, 1, 150, 'C:xampp	mpphpE8F9.tmp'),
+(18, 18, 'basketball', 10, 1, 150, 'C:xampp	mpphpC157.tmp'),
+(19, 19, 'basketball', 10, 1, 150, 'C:xampp	mpphpE1C3.tmp'),
+(20, 20, 'Array', 0, 0, 0, 'Array'),
+(21, 21, 'Array', 0, 0, 0, 'Array'),
+(22, 22, 'dwa', 213, 21, 21312, 'C:xampp	mpphpA83C.tmp');
 
 -- --------------------------------------------------------
 
@@ -121,10 +124,10 @@ CREATE TABLE `tbl_resort` (
 --
 
 INSERT INTO `tbl_resort` (`resort_id`, `user_id`, `resort_name`, `owner_name`, `owner_address`, `owner_contact`, `resort_office`, `resort_contact`, `manager_contact`, `resort_url`, `resort_address`, `accom_id`, `faci_id`, `service_id`) VALUES
-(21, 5, 'kainomayan', 'marion', 'porac', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphp8664.tmp', 'san juan', 8, 7, 7),
-(22, 5, 'kainomayan', 'marion', 'porac', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphp3B80.tmp', 'san juan', 9, 8, 8),
-(23, 5, 'kainomayan', 'marion', 'porac', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphp2EB.tmp', 'san juan', 10, 9, 9),
-(24, 6, 'Indira', 'Juvy Parohinog', 'beneg', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphpD5B6.tmp', 'Danacbunga', 11, 10, 10);
+(17, 17, 'kainomayan', 'mark', 'porac', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphpE8A8.tmp', 'porac', 17, 17, 17),
+(18, 18, 'kainomayan', 'mark', 'porac', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphpC125.tmp', 'porac', 18, 18, 18),
+(19, 19, 'kainomayan', 'mark', 'porac', 9762499708, 9762499708, 9762499708, 9762499708, 'C:xampp	mpphpE1B1.tmp', 'porac', 19, 19, 19),
+(20, 20, 'awd', 'awd', 'awd', 123, 123, 123, 123, 'C:xampp	mpphpA82A.tmp', 'awd', 20, 22, 22);
 
 -- --------------------------------------------------------
 
@@ -134,6 +137,7 @@ INSERT INTO `tbl_resort` (`resort_id`, `user_id`, `resort_name`, `owner_name`, `
 
 CREATE TABLE `tbl_service` (
   `service_id` int(11) NOT NULL,
+  `resort_id` int(11) NOT NULL,
   `type_of_service` varchar(200) NOT NULL,
   `description` varchar(200) NOT NULL,
   `service_rates` double NOT NULL
@@ -143,12 +147,13 @@ CREATE TABLE `tbl_service` (
 -- Dumping data for table `tbl_service`
 --
 
-INSERT INTO `tbl_service` (`service_id`, `type_of_service`, `description`, `service_rates`) VALUES
-(6, 'laundry', 'laundry service for a one week', 500),
-(7, 'laundry', 'awdwa', 140),
-(8, 'laundry', 'awdwa', 140),
-(9, 'laundry', 'awdwa', 140),
-(10, '3 meals a day', 'free meals for 1 week', 1500);
+INSERT INTO `tbl_service` (`service_id`, `resort_id`, `type_of_service`, `description`, `service_rates`) VALUES
+(17, 0, 'laundry', 'laundry', 150),
+(18, 0, 'laundry', 'laundry', 150),
+(19, 0, 'laundry', 'laundry', 150),
+(20, 0, 'Array', 'Array', 0),
+(21, 0, 'Array', 'Array', 0),
+(22, 0, 'adw', 'adwaw', 213);
 
 -- --------------------------------------------------------
 
@@ -171,10 +176,7 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`user_id`, `fname`, `lname`, `email`, `contact`, `user_address`, `user_pass`) VALUES
-(1, 'mark russel', 'trapsi', 'mark@gmail.com', 9762499708, 'porac,botolan, zambales', '$2y$10$2U8CSdaDYaDe5rKm5LNwQ.mvBDMvQQ2GG1Znxd49IxhWsnOKY6Dbq'),
-(4, 'aljay', 'Devillas', 'Aljay@gmail.com', 97624997708, 'Taugtog', '$2y$10$8KBFywJa9av7EXB1ctGOquVZxZWzxojJ.brnCGGj8j7QOF8lwKlkK'),
-(5, 'marion', 'barroga', 'marion@gmail.com', 9762499708, 'porac', '$2y$10$ENAf.MQC0gkABQX.TasznOD7.4DAIX/sdGXGfkpN72jqhBjGO0O9G'),
-(6, 'juvy', 'parohinog', 'juvy@gmail.com', 9762499708, 'Beneg', '$2y$10$k1KMbvp28j3kgm26RjZdC.sH6YeZusFM9yceTWA4YEO9Ug5FW.CfK');
+(3, 'mark russel', 'trapsi', 'mark@gmail.com', 9762499708, 'porac botolan  zambales', '$2y$10$8yrJwvlY8wQJtf..DTfmW.I/2ofxkwAC8QbNm4e9Fhxzl0lVjhZbK');
 
 -- --------------------------------------------------------
 
@@ -196,7 +198,8 @@ CREATE TABLE `verification` (
 -- Indexes for table `tbl_accommodation`
 --
 ALTER TABLE `tbl_accommodation`
-  ADD PRIMARY KEY (`accom_id`);
+  ADD PRIMARY KEY (`accom_id`),
+  ADD KEY `resort_id` (`resort_id`);
 
 --
 -- Indexes for table `tbl_admin`
@@ -208,7 +211,8 @@ ALTER TABLE `tbl_admin`
 -- Indexes for table `tbl_facility`
 --
 ALTER TABLE `tbl_facility`
-  ADD PRIMARY KEY (`faci_id`);
+  ADD PRIMARY KEY (`faci_id`),
+  ADD KEY `resort_id` (`resort_id`);
 
 --
 -- Indexes for table `tbl_resort`
@@ -216,15 +220,16 @@ ALTER TABLE `tbl_facility`
 ALTER TABLE `tbl_resort`
   ADD PRIMARY KEY (`resort_id`),
   ADD KEY `user_id` (`user_id`),
+  ADD KEY `accom_id` (`accom_id`),
   ADD KEY `faci_id` (`faci_id`),
-  ADD KEY `service_id` (`service_id`),
-  ADD KEY `accom_id` (`accom_id`);
+  ADD KEY `service_id` (`service_id`);
 
 --
 -- Indexes for table `tbl_service`
 --
 ALTER TABLE `tbl_service`
-  ADD PRIMARY KEY (`service_id`);
+  ADD PRIMARY KEY (`service_id`),
+  ADD KEY `resort_id` (`resort_id`);
 
 --
 -- Indexes for table `tbl_user`
@@ -246,37 +251,37 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `tbl_accommodation`
 --
 ALTER TABLE `tbl_accommodation`
-  MODIFY `accom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `accom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_facility`
 --
 ALTER TABLE `tbl_facility`
-  MODIFY `faci_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `faci_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_resort`
 --
 ALTER TABLE `tbl_resort`
-  MODIFY `resort_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `resort_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_service`
 --
 ALTER TABLE `tbl_service`
-  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `verification`
@@ -289,13 +294,31 @@ ALTER TABLE `verification`
 --
 
 --
+-- Constraints for table `tbl_accommodation`
+--
+ALTER TABLE `tbl_accommodation`
+  ADD CONSTRAINT `tbl_accommodation_ibfk_1` FOREIGN KEY (`resort_id`) REFERENCES `tbl_resort` (`resort_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_facility`
+--
+ALTER TABLE `tbl_facility`
+  ADD CONSTRAINT `tbl_facility_ibfk_1` FOREIGN KEY (`resort_id`) REFERENCES `tbl_resort` (`resort_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `tbl_resort`
 --
 ALTER TABLE `tbl_resort`
   ADD CONSTRAINT `tbl_resort_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_resort_ibfk_2` FOREIGN KEY (`faci_id`) REFERENCES `tbl_facility` (`faci_id`),
-  ADD CONSTRAINT `tbl_resort_ibfk_3` FOREIGN KEY (`service_id`) REFERENCES `tbl_service` (`service_id`),
-  ADD CONSTRAINT `tbl_resort_ibfk_4` FOREIGN KEY (`accom_id`) REFERENCES `tbl_accommodation` (`accom_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_resort_ibfk_2` FOREIGN KEY (`accom_id`) REFERENCES `tbl_accommodation` (`accom_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_resort_ibfk_3` FOREIGN KEY (`faci_id`) REFERENCES `tbl_facility` (`faci_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_resort_ibfk_4` FOREIGN KEY (`service_id`) REFERENCES `tbl_service` (`service_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_service`
+--
+ALTER TABLE `tbl_service`
+  ADD CONSTRAINT `tbl_service_ibfk_1` FOREIGN KEY (`resort_id`) REFERENCES `tbl_resort` (`resort_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

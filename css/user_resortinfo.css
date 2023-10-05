@@ -280,11 +280,6 @@ body {
 	margin-right: 20px;
 }
 
-table,tr,th,td
-{
-	border: 1px solid black;
-}
-
 
 /* MAIN */
 #content main {
@@ -295,12 +290,28 @@ table,tr,th,td
 	overflow-y: auto;
 }
 
+.brand > p
+{
+	font-size: 20px;
+	margin-right: 5px;
+}
+
+.brand > span
+{
+	font-size: 17px;
+}
+
 .form-content
 {
 	border: 1px solid black;
 	background-color: white;
 	border-radius: 10px;
 	padding: 20px;
+}
+
+h3
+{
+	font-family: var(--lato);
 }
 
 .form-content > h1
@@ -348,18 +359,64 @@ table,tr,th,td
 
 .content > div > p:first-child
 {
-	font-size: 20px;
-	font-weight: bold;
+	font-size: 18px;
 	font-family: var(--lato);
 }
 
 .content > div > p:last-child
 {
 	font-family: var(--lato);
-	font-size: 20px;
+	font-size: 16px;
 	text-indent: 10px;
 }
 
+.profile
+{
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	margin-bottom: 20px;
+
+}
+
+.profile > img
+{
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	filter: drop-shadow(1px 1px 5px black);
+}
+
+.btn_section
+{
+	display: inline-flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.delete
+{
+	width: 90px;
+	height: 40px;
+	background-color: red;
+	font-family: var(--lato);
+	border: .5px solid red;
+	filter: drop-shadow(1px 1px 1px black);
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.update
+{
+	width: 90px;
+	height: 40px;
+	background-color: rgba(0, 239, 27, 1);
+	font-family: var(--lato);
+	border: .5px solid rgba(0, 239, 27, 1);
+	filter: drop-shadow(1px 1px 1px black);
+	cursor: pointer;
+	border-radius: 5px;
+}
 /* MAIN */
 
 @media screen and (max-width: 768px) {

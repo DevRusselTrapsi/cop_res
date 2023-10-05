@@ -4,18 +4,19 @@ session_start();
 include 'dbcon.php';
 
 // $username ="";
-$email="";
+$username="";
 $password = "";
+
 if (isset($_POST['submit'])) {
+
     $error = "";
-    // $username ="";
-    $email = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
     // Use prepared statements to prevent SQL injection
-    $sql = "SELECT * FROM tbl_admin WHERE email=?";
+    $sql = "SELECT * FROM tbl_admin WHERE username=?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_bind_param($stmt, "s", $username);
     mysqli_stmt_execute($stmt);
 
     $result = mysqli_stmt_get_result($stmt);
@@ -27,17 +28,21 @@ if (isset($_POST['submit'])) {
     }else{
         	
         $row = mysqli_fetch_assoc($result);
+
+        $_SESSION['username'] = $row['username'];
         $hashed_password = $row['admin_pass'];
 
         // Use password_verify() to compare the entered password with the hashed password
         if (password_verify($password, $hashed_password)) {
         	// Password is correct, redirect to the index page or perform the necessary actions
-
+ 			
         	header("Location: admin_dash.php");
         	exit;
+
         } else {
         	// Login FAILED
-        	$error = "Incorrect Password. Please Try Again";
+
+        	$error = "Error: ".mysqli_error($conn);
         }
 // Close the statement
 mysqli_stmt_close($stmt);
@@ -118,7 +123,7 @@ button {
 	font-size: 14px;
 }
 
-input[type=email],
+input[type=text],
 input[type=password] {
 
 	max-width: 210px;
@@ -133,7 +138,7 @@ input[type=password] {
 	font-size: 15px;
 }
 
-.email {
+.username {
 
 	background: url('./assets/icons/closemail-admin.svg') no-repeat left;
 	background-size: 40px;
@@ -189,14 +194,13 @@ input[type=password] {
 		
 		<div class="container">
 			<div class="label"><p>LOGIN FORM</p></div>
-
 			<?php 
 					if (!empty($error)) {
        				 echo '<div class="error" >' . $error . '</div>';
     				}
 				?>
 
-				<input type="email" class="email" name="email" value="<?php echo $email ;?>" placeholder="Email">
+				<input type="text" class="username" name="username" value="<?php echo $username;?>" placeholder="Username">
 				
 				<input type="password" class="password" name="password" value="<?php echo $password ;?>" placeholder="Password">
 				
