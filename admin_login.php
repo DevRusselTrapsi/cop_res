@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
 
     // Use prepared statements to prevent SQL injection
     $sql = "SELECT * FROM tbl_admin WHERE email=?";
-    $stmt = mysqli_prepare($con, $sql);
+    $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
 
@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
         if (password_verify($password, $hashed_password)) {
         	// Password is correct, redirect to the index page or perform the necessary actions
 
-        	header("Location: admin_dashboard.php");
+        	header("Location: admin_dash.php");
         	exit;
         } else {
         	// Login FAILED
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
         }
 // Close the statement
 mysqli_stmt_close($stmt);
-mysqli_close($con);
+mysqli_close($conn);
 	}
 }
 ?>

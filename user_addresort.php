@@ -8,7 +8,7 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_addresort.css">
-
+	
 	<title>User Dashboard</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
 			<span class="text">User Admin</span>
 		</a>
 		<ul class="side-menu top">
@@ -63,7 +63,7 @@
 		<!-- MAIN -->
 		<main>
 
-			<form class="row g-2 mt-3 m-5"method="post" action="./backend-addresort.php" enctype="multipart/form-data">
+			<form method="post" action="./backend-addresort.php" enctype="multipart/form-data">
 
 		<div class="container">
 
@@ -71,14 +71,66 @@
 
 			<div class="content">
 
-				<div class="first-form">
+					<!-- FIRST FORM STRUCTURE-->
+
+					<div class="first-form">
+						
+						<div class="input-form">
+
+						<h3>Information</h3>
+							<div>
+								<label>Name of the Establishment:</label>
+								<input type="text" class="input" name="resort_name" required>
+							</div>
+
+							<div>
+							<label>Address:</label>
+								<input type="text" class="input" name="resort_address" placeholder="Establishment's Address" required>
+
+							</div>
+							<div>
+								<label>Owner:</label>
+								<input type="text" class="input" name="owner_name" placeholder="(Firstname, Middlename, Lastname)" required>
+							</div>
+							<div>
+								<label>Address:</label>
+								<input type="text" class="input" name="owner_address" placeholder="(Owner's Address)" required>
+							</div>
+									
+							<p>Contacts:</p>
+
+							<div>
+								<label>Office Contact:</label>
+								<input type="text" name="resort_office" class="input" placeholder="09********" required><br>
+							</div>							
+							<div>
+								<label>Home Contact:</label>
+								<input type="text" name="resort_contact" class="input" placeholder="09********" required>
+							</div>
+							<div>
+								<label>Owner Contact:</label>
+								<input type="text" name="owner_contact" class="input" placeholder="09********" required>
+							</div>
+							<div>
+								<label>Manager Contact:</label>
+								<input type="text" name="manager_contact" class="input" placeholder="09********" required>
+							</div>						
+							<div>
+								<label>Upload image of the establishment:</label>
+								<input type="file" class="insert_img" name="resort_url"  style="background-color: white; cursor: pointer;" required>
+							</div>
+					</div>
+				</div>
+					<!-- SECOND FORM STRUCTURE-->
+
+				<div class="second-form">
 
 					<p>Accommodation</p>
 
 					<button class="btn-add" name="add_more" type="submit" >Add more</button>
 
 					<div class="input-form">
-						<div class="header-accom row">
+						<div class="header-accom">
 							<div><label>Type of Room:</label></div>
 							<div><label>No. of Rooms:<label></div>
 							<div><label>Capacity:</label></div>
@@ -99,7 +151,7 @@
 								<input type="text" class="input" name="accom_rates" required>
 							</div>
 							<div>
-								<input type="file" class="input" id="input_file" name="accom_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;">
+								<input type="file" class="insert_img" id="input_file" name="accom_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;">
 							</div>
 						</div>
 					</div>
@@ -134,7 +186,7 @@
 								<input type="text" class="input" name="faci_rates" required>
 							</div>
 							<div>
-								<input type="file" class="input" name="faci_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>
+								<input type="file" class="insert_img" name="faci_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>
 							</div>
 						</div>
 					</div>
@@ -172,7 +224,7 @@
 
 				<!-- end -->
 				
-				<input type="submit" class="btn-save" name="submit" value="Add Resort">
+				<input type="submit" class="btn_save" name="submit" value="Add Resort">
 			</div>
 		</div>
 
@@ -185,5 +237,40 @@
 	
 
 	<script src="script.js"></script>
+	<script>
+        // Function to add the input form
+        function addInputForm() {
+            const formContainer = document.getElementById('formContainer');
+            const inputForm = document.createElement('div');
+            inputForm.className = 'inputform';
+            inputForm.innerHTML = `
+                <div class="service_section">
+                    <div>
+                    <input type="text" class="input" name="service_name">
+                    </div>
+                    <div>
+                    <input type="text" class="input" name="description">
+                    </div>
+                    <div>
+                    <input type="text" class="input" name="rates">
+                    </div>
+                </div>
+            `;
+            formContainer.appendChild(inputForm);
+        }
+
+        // Function to remove the last input form
+        function removeInputForm() {
+            const formContainer = document.getElementById('formContainer');
+            const inputForms = formContainer.getElementsByClassName('inputform');
+            if (inputForms.length > 0) {
+                formContainer.removeChild(inputForms[inputForms.length - 1]);
+            }
+        }
+
+        // Add event listeners to the buttons
+        document.getElementById('addButton').addEventListener('click', addInputForm);
+        document.getElementById('removeButton').addEventListener('click', removeInputForm);
+    </script>
 </body>
 </html>

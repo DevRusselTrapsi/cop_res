@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 
     // Use a prepared statement to check if the email already exists in the database
     $query = "SELECT * FROM `tbl_admin` WHERE `email` = ?";
-    $stmt = mysqli_prepare($con, $query);
+    $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
             $query = "INSERT INTO `tbl_admin`(`email`, `admin_pass`) VALUES (?, ?)";
 
             // Use a prepared statement to insert data into the database
-            $stmt = mysqli_prepare($con, $query);
+            $stmt = mysqli_prepare($conn, $query);
             mysqli_stmt_bind_param($stmt, "ss", $email, $hashed_password);
             if (mysqli_stmt_execute($stmt)) {
                 $success = "REGISTRATION COMPLETE";
@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
     mysqli_stmt_close($stmt);
 }
 
-mysqli_close($con);
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
