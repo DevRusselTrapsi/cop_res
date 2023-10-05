@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['username'])){
+
+	header('Location: ./admin_login.php');
+	exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,42 +140,11 @@
 							<tr>
 								<td>
 									<img src="img/images (1).png">
-									<p>Kainomayan</p>
+									<p><a href="">Kainomayan</a></p>
 								</td>
 								<td>01-10-2021</td>
-								<td><span class="status completed">Verified</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/images (1).png">
-									<p>Kainomayan</p>
+								<td><span class="status completed">Completed</span>
 								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/images (1).png">
-									<p>Kainomayan</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status process">Process</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/images (1).png">
-									<p>Kainomayan</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/images (1).png">
-									<p>Kainomayan</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
 							</tr>
 						</tbody>
 					</table>

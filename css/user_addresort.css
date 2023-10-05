@@ -379,13 +379,24 @@ body {
 }
 .btn-add {
 	height: 30px;
-	width: 90px;
+	width: 30px;
 	margin: auto;
-	margin-left: 90%;
 	border: none;
 	filter: drop-shadow(1px 1px 1px black);
 	border-radius: 5px;
 	background-color: #00BFFF;
+	cursor: pointer;
+}
+
+.btn-remove
+{
+	height: 30px;
+	width: 30px;
+	margin: auto;
+	border: none;
+	filter: drop-shadow(1px 1px 1px black);
+	border-radius: 5px;
+	background-color: red;
 	cursor: pointer;
 }
 
@@ -462,7 +473,7 @@ h1 {
 	height: 130px;
 	padding-top: 10px;
 	padding-left: 10px;
-	background-color: rgba(210, 210, 210, 0.49);
+	background-color: #03FCF8;
 	display: inline-flex;
 	justify-content: space-around;
 	flex-wrap: wrap;
@@ -518,7 +529,7 @@ h1 {
 	height: 130px;
 	padding-top: 10px;
 	padding-left: 10px;
-	background-color: rgba(210, 210, 210, 0.49);
+	background-color: #03FCF8;
 	display: inline-flex;
 	justify-content: space-around;
 	flex-wrap: wrap;
@@ -572,10 +583,10 @@ h1 {
 {
 	font-family: var(--lato);
 	width: 100%;
-	height: 130px;
+	height: 230px;
 	padding-top: 10px;
 	padding-left: 10px;
-	background-color: rgba(210, 210, 210, 0.49);
+	background-color: #03FCF8;
 	display: inline-flex;
 	justify-content: space-around;
 	flex-wrap: wrap;
@@ -586,6 +597,89 @@ h1 {
 .service_section > div > input
 {
 	border: none;
+}
+
+.service > button:last-child
+{
+	margin-top: 5px;
+}
+
+.input_group
+{
+	display: flex;
+	justify-content: space-evenly;
+	height: 30px;
+	width: 100%;
+
+
+}
+.input_group2
+{
+	display: flex;
+	justify-content: space-evenly;
+	height: 30px;
+	width: 100%;
+
+
+}
+
+.input_group3
+{
+	display: flex;
+	justify-content: space-evenly;
+	height: 30px;
+	width: 100%;
+
+}
+
+
+/*Button add*/
+.hover-tool
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 40px;
+
+/*    opacity: 0;*/
+    overflow: hidden;
+    transition: ease-in-out 0.3s;
+    background-color: rgba(179, 179, 179, 0.4);
+    position: absolute;
+    top: 550px;
+    right: 70px;
+}
+
+.hover-tool:hover
+{
+    width: 90%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+}
+
+.accom
+{
+    display: flex;
+    width: 200px;
+    justify-content: space-evenly;
+}
+
+.facility
+{
+    display: flex;
+    width: 200px;
+    justify-content: space-evenly;
+}
+
+.service
+{
+    display: flex;
+    width: 200px;
+    justify-content: space-evenly;
+
 }
 
 
