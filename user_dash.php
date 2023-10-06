@@ -1,20 +1,3 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['email'])) {
-
-	header("Location: ./user_login.php");
-	exit();
-}
-
-$user_email = $_SESSION["email"];
-$fname = $_SESSION["fname"];
-
-
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,14 +16,19 @@ $fname = $_SESSION["fname"];
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="./user_dash.php" class="brand">
+		<a href="#" class="brand">
 			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
-			<p>WELCOME!</p>
-			
-			<span class="text"><?php echo $fname;?></span>
+			<span class="text">User Admin</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
+				<a href="./user_dash.php">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Owner & User Info</span>
+
+				</a>
+			</li>
+			<li>
 				<a href="./user_resortinfo.php">
 					<i class='bx bxs-info-circle'></i>
 					<span class="text">Resort Info</span>
@@ -53,7 +41,7 @@ $fname = $_SESSION["fname"];
 				</a>
 			</li>
 			<li>
-				<a href="./logout.php">
+				<a href="./index.php">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>

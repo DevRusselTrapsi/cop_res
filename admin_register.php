@@ -4,7 +4,6 @@ include './dbcon.php';
 // $_SERVER['REQUEST_METHOD'] == 'POST'
 //POST is connected to the input using the request method
 $email="";
-$username = "";
 $password = "";
 $confirm_password = "";
 
@@ -14,7 +13,6 @@ if (isset($_POST['submit'])) {
     $success = "";
     $email = $_POST['email'];
     $password = $_POST['admin_pass'];
-    $username = $_POST['username'];
     $confirm_password = $_POST['confirm_pass'];
 
     // Use a prepared statement to check if the email already exists in the database
@@ -35,11 +33,11 @@ if (isset($_POST['submit'])) {
         } else {
             // hashed_password variable turns the password into a hash for security
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-            $query = "INSERT INTO `tbl_admin`(`username`,`email`, `admin_pass`) VALUES (?, ?, ?)";
+            $query = "INSERT INTO `tbl_admin`(`email`, `admin_pass`) VALUES (?, ?)";
 
             // Use a prepared statement to insert data into the database
             $stmt = mysqli_prepare($conn, $query);
-            mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashed_password);
+            mysqli_stmt_bind_param($stmt, "ss", $email, $hashed_password);
             if (mysqli_stmt_execute($stmt)) {
                 $success = "REGISTRATION COMPLETE";
             } else {
@@ -128,8 +126,7 @@ button {
 }
 
 input[type=email],
-input[type=password],
-input[type=text]{
+input[type=password] {
 
 	max-width: 210px;
 	width: 100%;
@@ -142,14 +139,6 @@ input[type=text]{
 }
 
 .email {
-
-	background: url('./assets/icons/closemail-admin.svg') no-repeat left;
-	background-size: 35px;
-	padding-left: 37px;
-
-}
-
-.username {
 
 	background: url('./assets/icons/closemail-admin.svg') no-repeat left;
 	background-size: 35px;
@@ -250,8 +239,6 @@ input[type=text]{
 				?>
 
 				<input type="email" class="email" name="email" placeholder="Email" value="<?php echo $email;?>"required>
-
-				<input type="text" class="username" name="username" placeholder="Username" value="<?php echo $username;?>"required>
 				
 				<input type="password" class="password" name="admin_pass"  placeholder="Password" value="<?php echo $password;?>"required>
 

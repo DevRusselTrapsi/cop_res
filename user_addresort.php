@@ -1,19 +1,3 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['email'])) {
-
-	header("Location: ./user_login.php");
-	exit();
-}
-
-$user_email = $_SESSION["email"];
-$fname = $_SESSION["fname"];
-$user_id = $_SESSION["user_id"];
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,22 +16,28 @@ $user_id = $_SESSION["user_id"];
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="./user_dash.php" class="brand">
+		<a href="#" class="brand">
 			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
-			<p>WELCOME!</p>
-			<span class="text"><?php echo $fname;?></span>
+			<span class="text">User Admin</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
-				<a href="./user_addresort.php">
-					<i class='bx bxs-plus-circle'></i>
-					<span class="text">Add Resort</span>
+			<li>
+				<a href="./user_dash.php">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Owner & User Info</span>
+
 				</a>
 			</li>
 			<li>
 				<a href="./user_resortinfo.php">
 					<i class='bx bxs-shopping-bag-alt' ></i>
 					<span class="text">Resort Info</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="./user_addresort.php">
+					<i class='bx bxs-plus-circle'></i>
+					<span class="text">Add Resort</span>
 				</a>
 			</li>
 			<li>
@@ -72,7 +62,7 @@ $user_id = $_SESSION["user_id"];
 
 		<!-- MAIN -->
 		<main>
-				
+
 			<form method="post" action="./backend-addresort.php" enctype="multipart/form-data">
 
 		<div class="container">
@@ -99,8 +89,8 @@ $user_id = $_SESSION["user_id"];
 
 							</div>
 							<div>
-								<label>Owner:</label>
-								<input type="text" class="input" name="owner_name" placeholder="(Firstname, Middlename, Lastname)" required>
+								<label>Owners Fullname:</label>
+								<input type="text" class="input" name="owner_name" placeholder="Enter your Name" required>
 							</div>
 							<div>
 								<label>Address:</label>
@@ -137,34 +127,31 @@ $user_id = $_SESSION["user_id"];
 
 					<p>Accommodation</p>
 
+					<button class="btn-add" name="add_more" type="submit" >Add more</button>
+
 					<div class="input-form">
 						<div class="header-accom">
 							<div><label>Type of Room:</label></div>
 							<div><label>No. of Rooms:<label></div>
 							<div><label>Capacity:</label></div>
-							<div><label>Price:</label></div>
+							<div><label>Rate:</label></div>
 							<div><label>Insert Image of the Room:</label></div>
 						</div>
-						<div class="accom_section" id="formContainer3">
-							<div class="input_group3" >
-								<div class="input_group3">
-    								<div>
-        								<input type="text" class="input" name="type_of_room" required>
-    								</div>
-    								<div>
-        								<input type="text" class="input" name="no_accom_units" required>
-    								</div>
-    								<div>
-       								 <input type="text" class="input" name="accom_capacity" required>
-    								</div>
-    								<div>
-        								<input type="text" class="input" name="accom_rates" required>
-    								</div>
-    								<div>
-        								<input type="file" class="insert_img" id="input_file" name="accom_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;">
-   								 </div>
-								</div>
-
+						<div class="accom_section">
+							<div>
+								<input type="text" class="input" name="type_of_room" required>
+							</div>
+							<div>
+								<input type="text" class="input" name="no_accom_units" required>
+							</div>
+							<div>
+								<input type="text" class="input" name="accom_capacity" required>
+							</div>
+							<div>
+								<input type="text" class="input" name="accom_rates" required>
+							</div>
+							<div>
+								<input type="file" class="insert_img" id="input_file" name="accom_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;">
 							</div>
 						</div>
 					</div>
@@ -174,31 +161,32 @@ $user_id = $_SESSION["user_id"];
 
 				<div class="third-form">
 
+					<p>Existing Facilities and Ammenities</p>
+					<button class="btn-add" name="add_more" type="submit" >Add more</button>
+
 					<div class="input-form">
 						<div class="header-faci">
 							<div><label>Type of Facility:</label></div>
 							<div><label>No. of Units:<label></div>
 							<div><label>Capacity:</label></div>
-							<div><label>Price:</label></div>
+							<div><label>Rate:</label></div>
 							<div><label>Insert Image of the Room:</label></div>
 						</div>
-						<div class="faci_section" id="formContainer2">
-							<div class="input_group2">
-								<div>
-									<input type="text" class="input" name="type_of_facility" required>
-								</div>
-								<div>
-									<input type="text" class="input" name="no_faci_units" required>
-								</div>
-								<div>
-									<input type="text" class="input" name="faci_capacity" required>
-								</div>
-								<div>
-									<input type="text" class="input" name="faci_rates" required>
-								</div>
-								<div>
-									<input type="file" class="insert_img" name="faci_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>
-								</div>
+						<div class="faci_section">
+							<div>
+								<input type="text" class="input" name="type_of_facility" required>
+							</div>
+							<div>
+								<input type="text" class="input" name="no_faci_units" required>
+							</div>
+							<div>
+								<input type="text" class="input" name="faci_capacity" required>
+							</div>
+							<div>
+								<input type="text" class="input" name="faci_rates" required>
+							</div>
+							<div>
+								<input type="file" class="insert_img" name="faci_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>
 							</div>
 						</div>
 					</div>
@@ -210,25 +198,25 @@ $user_id = $_SESSION["user_id"];
 				<div class="fourth-form">
 
 					<p>Services</p>
+					<button class="btn-add" name="add_more" type="submit" >Add more</button>
 
-					<div class="input-form" id="input-form">
-						<div  class="header-service">
+					<div class="input-form">
+						<div class="header-service">
 							<div><label>Type of Service:</label></div>
 							<div><label>Description:<label></div>
-							<div><label>Price:</label></div>
+							<div><label>Rates:</label></div>
 						</div>
-						<div class="service_section" id="formContainer">
-							<div class="input_group">
-								<div>
-									<input type="text" class="input" name="type_of_service" required>
-								</div>
-								<div>
-									<input type="text" class="input" name="description" required>
-								</div>
-								<div>
-									<input type="text" class="input" name="service_rates" required>
-								</div>
+						<div class="service_section">
+							<div>
+								<input type="text" class="input" name="type_of_service" required>
 							</div>
+							<div>
+								<input type="text" class="input" name="description" required>
+							</div>
+							<div>
+								<input type="text" class="input" name="service_rates" required>
+							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -241,48 +229,7 @@ $user_id = $_SESSION["user_id"];
 		</div>
 
 	</form>
-						<!-- add and remove -->
-
-			<div class="hover-tool">
-					<div>
-						<div>
-							<img src="./assets/icons/add-circle-black.svg" alt="" style=" margin-left: -2.5px; margin-top: 5px;">
-						</div>
-					</div>
-					<div class="accom">
-						<div>
-							<p>Service</p>
-						</div>
-						<div>
-							<button id="addButton" class="btn-add" name="add" type="submit">+</button>
-						</div>
-						<div>
-							<button id="removeButton" class="btn-remove" name="remove" type="submit">-</button>
-						</div>      
-        			</div>
-					<div class="facility">
-						<div>
-							<p>Facility</p>
-						</div>
-						<div>
-							<button id="addfaci" class="btn-add" name="add" type="submit">+</button>
-						</div>
-						<div>
-							<button id="removefaci" class="btn-remove" name="remove" type="submit">-</button>
-						</div>
-        			</div>
-					<div class="service">
-						<div>
-							<p>Accommodation</p>
-						</div>
-						<div>
-							<button id="addaccom" class="btn-add" name="add" type="submit">+</button>
-						</div>
-						<div>
-							<button id="removeaccom" class="btn-remove" name="remove" type="submit">-</button>
-						</div>
-					</div>
-				</div>	
+				
 		</main>
 		<!-- MAIN -->
 	</section>
@@ -290,8 +237,40 @@ $user_id = $_SESSION["user_id"];
 	
 
 	<script src="script.js"></script>
-	<script src="./js/addresort.js"></script>
-	<script src="./js/addaccom.js"></script>
-	<script src="./js/addfaci.js"></script>
+	<script>
+        // Function to add the input form
+        function addInputForm() {
+            const formContainer = document.getElementById('formContainer');
+            const inputForm = document.createElement('div');
+            inputForm.className = 'inputform';
+            inputForm.innerHTML = `
+                <div class="service_section">
+                    <div>
+                    <input type="text" class="input" name="service_name">
+                    </div>
+                    <div>
+                    <input type="text" class="input" name="description">
+                    </div>
+                    <div>
+                    <input type="text" class="input" name="rates">
+                    </div>
+                </div>
+            `;
+            formContainer.appendChild(inputForm);
+        }
+
+        // Function to remove the last input form
+        function removeInputForm() {
+            const formContainer = document.getElementById('formContainer');
+            const inputForms = formContainer.getElementsByClassName('inputform');
+            if (inputForms.length > 0) {
+                formContainer.removeChild(inputForms[inputForms.length - 1]);
+            }
+        }
+
+        // Add event listeners to the buttons
+        document.getElementById('addButton').addEventListener('click', addInputForm);
+        document.getElementById('removeButton').addEventListener('click', removeInputForm);
+    </script>
 </body>
 </html>

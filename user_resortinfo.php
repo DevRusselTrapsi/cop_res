@@ -1,20 +1,3 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['email'])) {
-
-	header("Location: ./user_login.php");
-	exit();
-}
-
-$user_email = $_SESSION["email"];
-$fname = $_SESSION["fname"];
-
-
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,23 +16,28 @@ $fname = $_SESSION["fname"];
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="./user_dash.php" class="brand">
+		<a href="#" class="brand">
 			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
-			<p class="wc">WELCOME!</p>
-			<span><?php echo $fname;?></span>
+			<span class="text">User Admin</span>
 		</a>
-
 		<ul class="side-menu top">
 			<li>
-				<a href="./user_addresort.php">
-					<i class='bx bxs-plus-circle'></i>
-					<span class="text">Add Resort</span>
+				<a href="./user_dash.php">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Owner & User Info</span>
+
 				</a>
 			</li>
 			<li  class="active">
 				<a href="./user_resortinfo.php">
 					<i class='bx bxs-info-circle'></i>
 					<span class="text">Resort Info</span>
+				</a>
+			</li>
+			<li>
+				<a href="./user_addresort.php">
+					<i class='bx bxs-plus-circle'></i>
+					<span class="text">Add Resort</span>
 				</a>
 			</li>
 			<li>
@@ -74,79 +62,72 @@ $fname = $_SESSION["fname"];
 
 		<!-- MAIN -->
 		<main>
-			<form>
+			
 		<div class="form-content">
 			<div class="profile">
-				<img src="./assets/img/123.png" alt="Image">
-				<h2>Kainomayan</h2>
+				<h1>(Resort's Name)</h1>
+				<img src="" alt="Image">
 				<!-- this is where the image will popout -->
-
 			</div>
-				<h3>Accommodations</h3>
-
+				<h1>Accommodations</h1>
 				<div class="content">
 					<div>
 						<p>Type of Room:</p>
-						<p>Queen Bed size</p>
+						<p> Mark Russel</p>
 					</div>
 					<div>
-						<p>no. of Rooms:</p>
-						<p>2</p>
+						<p>No. of Rooms:</p>
+						<p> Trapsi</p>
 					</div>
 					<div>
 						<p>Capacity:</p>
-						<p>4</p>
+						<p>mark@gmail.com</p>
 					</div>
 					<div>
-						<p>Price:</p>
-						<p>1500</p>
+						<p>Rate:</p>
+						<p>Porac Botolan Zambales</p>
 					</div>
 				</div>
 
-				<h3>Existing Facilities and Amenities</h3>
+				<h1>Existing Facilities and Amenities</h1>
 				
 				<div class="content">
 					<div>
 						<p>Type of Facility:</p>
-						<p>basketball</p>
+						<p>Mark Russel Trapsi</p>
 					</div>
 					<div>
-						<p>no. of Units:</p>
-						<p>1</p>
+						<p>No. of Units:</p>
+						<p>Porac Botolan Zambales</p>
 					</div>
 					<div>
 						<p>Capacity:</p>
-						<p>10</p>
+						<p>mark@gmail.com</p>
 					</div>
 					<div>
-						<p>Price:</p>
-						<p>150</p>
+						<p>Rate:</p>
+						<p>Porac Botolan Zambales</p>
 					</div>
 				</div>
 
-				<h3>Services</h3>
+				<h1>Services</h1>
 				
 				<div class="content">
 					<div>
 						<p>Type of Service:</p>
-						<p>Laundry</p>
+						<p>0976 - 249 - 9708</p>
 					</div>
 					<div>
 						<p>Descriptions:</p>
 						<p>The service that we provide is we collect your laundry in every two days for 1 month.</p>
 					</div>
 					<div>
-						<p>Price:</p>
-						<p>150</p>
+						<p>Rate:</p>
+						<p>0976 - 249 - 9708</p>
 					</div>
 				</div>
-			<div class="btn_section">
-				<button type="submit" class="update">Update</button>&nbsp&nbsp&nbsp
-				<button type="submit" class="delete">Delete</button>
-			</div>
 			</div>
 		</div>
-		</form>
 		</main>
 		<!-- MAIN -->
 	</section>
