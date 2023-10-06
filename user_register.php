@@ -84,6 +84,17 @@ if (isset($_POST['submit'])) {
 
 mysqli_close($conn);
 ?>
+			<!-- 	<php 
+					if (!empty($error)) {
+       				 echo '<div class="error" id="error">' . $error . '</div>';
+    				}
+				?>
+				<php 
+					if (!empty($success)) {
+       				 echo '<div class="success" id="success">' . $success . '</div>';
+    				}
+				?>
+ -->
 <!DOCTYPE html>
 <html>
 <head>

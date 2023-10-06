@@ -1,161 +1,186 @@
-<?php
-session_start();
-
-if(!isset($_SESSION['username'])){
-
-	header('Location: ./admin_login.php');
-	exit();
-}
-
+<?php 
+	session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<!-- Boxicons -->
-	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-	<!-- My CSS -->
-	<link rel="stylesheet" href="style.css">
-
-	<title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Add Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Add your custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Admin Dashboard</title>
 </head>
 <body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-smile'></i>
+            <span class="text">Admin</span>
+        </a>
+        <ul class="side-menu top">
+            <!-- Add your sidebar links here -->
+            <li class="active">
+                <a href="./admin_dash.php">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="./admin_resort.php">
+                    <i class='bx bxs-shopping-bag-alt'></i>
+                    <span class="text">Resort</span>
+                </a>
+            </li>
+            <li>
+                <a href="./admin_search.php">
+                    <i class='bx bxs-search-alt-2'></i>
+                    <span class="text">Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="./index.php">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Dashboard</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a class="active" href="#">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Box Info -->
+            <ul class="box-info">
+                <!-- Replace the values with your data -->
+                <li>
+                    <i class='bx bxs-building-house'></i>
+                    <span class="text">
+                        <?php
+                        require('dbcon.php');
+
+                        $query = "SELECT resort_id FROM tbl_resort ORDER BY resort_id";
+                        $query_run = mysqli_query($conn, $query);
+
+                        $row = mysqli_num_rows($query_run);	
+
+                        echo '<h3> '.$row. '</h3>'
+
+                        ?>
+                        <p>Establishment</p>
+                    </span>
+                </li>
+                <li>
+                    <i class='bx bxs-group'></i>
+                    <span class="text">
+                        <?php
+                        require('dbcon.php');
+
+                        $query = "SELECT user_id FROM tbl_user ORDER BY user_id";
+                        $query_run = mysqli_query($conn, $query);
+
+                        $row = mysqli_num_rows($query_run);	
+
+                        echo '<h3> '.$row. '</h3>'
+
+                        ?>
+                        <p>User</p>
+                    </span>
+                </li>
+                <li>
+                    <i class='bx bxs-user-pin'></i>
+                    <span class="text">
+                        <?php
+                        require('dbcon.php');
+
+                        $query = "SELECT owner_name FROM tbl_resort ORDER BY owner_name";
+                        $query_run = mysqli_query($conn, $query);
+
+                        $row = mysqli_num_rows($query_run);	
+
+                        echo '<h3> '.$row. '</h3>'
+
+                        ?>
+                        <p>Owner</p>
+                    </span>
+                </li>
+                <li>
+                    <i class='bx bxs-show'></i>
+                    <span class="text">
 
 
-	<!-- SIDEBAR -->
-	<section id="sidebar">
-		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
-			<span class="text">Admin</span>
-		</a>
-		<ul class="side-menu top">
-			<li class="active">
-				<a href="./admin_dash.php">
-					<i class='bx bxs-dashboard' ></i>
-					<span class="text">Dashboard</span>
+                       <h3><?php echo $_SESSION['count']; ?></h3>
+                        <p>Views</p>
+                    </span>
+                </li>
+            </ul>
+            <!-- End Box Info -->
 
-				</a>
-			</li>
-			<li>
-				<a href="./admin_resort.php">
-					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">Resort</span>
-				</a>
-			</li>
-			<li>
-				<a href="./admin_search.php">
-					<i class='bx bxs-search-alt-2' ></i>
-					<span class="text">Search</span>
-				</a>
-			</li>
-			<li>
-				<a href="./index.php">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
-	</section>
-	<!-- SIDEBAR -->
+            <!-- Table Data -->
+            <div class="table-data">
+                <div class="order">
+                    <div class="head">
+                        <h3>Recent Resort</h3>
+                        
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Add your table rows with resort data here -->
+                            <tr>
+                                <td>
+                                    <img src="img/images (1).png">
+                                    <p>Kainomayan</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td><span class="status completed">Verified</span></td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- End Table Data -->
+        </main>
+        <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
 
-
-	<!-- CONTENT -->
-	<section id="content">
-		<!-- NAVBAR -->
-		<nav>
-			<i class='bx bx-menu' ></i>
-		</nav>
-		<!-- NAVBAR -->
-
-		<!-- MAIN -->
-		<main>
-			<div class="head-title">
-				<div class="left">
-					<h1>Dashboard</h1>
-					<ul class="breadcrumb">
-						<li>
-							<a href="#">Dashboard</a>
-						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
-						<li>
-							<a class="active" href="#">Home</a>
-						</li>
-					</ul>
-				</div>
-				
-			</div>
-
-			<ul class="box-info">
-				
-
-				<li>
-					<i class='bx bxs-building-house' ></i>
-					<span class="text">
-						<h3>1020</h3>
-						<p>Establishment</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-group' ></i>
-					<span class="text">
-						<h3>2834</h3>
-						<p>User</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-user-pin' ></i>
-					<span class="text">
-						<h3>2</h3>
-						<p>Owner</p>
-					</span>
-					<li>
-					<i class='bx bxs-show' ></i>
-					<span class="text">
-						<h3>12312</h3>
-						<p>Views</p>
-					</span>
-				</li>
-				</li>
-			</ul>
-
-
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Recent Resort</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<table>
-						<thead>
-							<tr>
-								<th>Name</th>
-									<th>Date</th>
-									<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<img src="img/images (1).png">
-									<p><a href="">Kainomayan</a></p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				
-		</main>
-		<!-- MAIN -->
-	</section>
-	<!-- CONTENT -->
-	
-
-	<script src="script.js"></script>
+    <!-- Include your custom JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>

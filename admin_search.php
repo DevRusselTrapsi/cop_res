@@ -1,13 +1,3 @@
-<?php
-session_start();
-
-if(!isset($_SESSION['username'])){
-
-	header('Location: ./admin_login.php');
-	exit();
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +7,8 @@ if(!isset($_SESSION['username'])){
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="./css/admin_search.css">
+	<link rel="stylesheet" href="style.css">
+
 	<title>Admin</title>
 </head>
 <body>
@@ -71,48 +62,116 @@ if(!isset($_SESSION['username'])){
 
 		<!-- MAIN -->
 		<main>
-			
-			<form class="form-content">
-				<div><input type="search" name="" id="search_engine" class="search"></div>
-				<div class="search_content">
-					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
-						<div>
-							<p>C & J</p>
-						</div>
-					</div>
-					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
-						<div>
-							<p>Sundowners</p>
-						</div>
-					</div>
-					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
-						<div>
-							<p>Kainomayan</p>
-						</div>
-					</div>
-					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
-						<div>
-							<p>Balihay</p>
-						</div>
-					</div>
-					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
-						<div>
-							<p>C & J</p>
-						</div>
-					</div>
-					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
-						<div>
-							<p>C & J</p>
-						</div>
-					</div>
+			<!-- <div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
 				</div>
-			</form>
+				
+			</div>
+
+			<ul class="box-info">
+				
+
+				<li>
+					<i class='bx bxs-building-house' ></i>
+					<span class="text">
+						<h3>1020</h3>
+						<p>Establishment</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3>2834</h3>
+						<p>User</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-user-pin' ></i>
+					<span class="text">
+						<h3>2</h3>
+						<p>Owner</p>
+					</span>
+					<li>
+					<i class='bx bxs-show' ></i>
+					<span class="text">
+						<h3>12312</h3>
+						<p>Views</p>
+					</span>
+				</li>
+				</li>
+			</ul>
+
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Recent Resort</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+									<th>Date</th>
+									<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<img src="img/images (1).png">
+									<p>Kainomayan</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Verified</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="img/images (1).png">
+									<p>Kainomayan</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status pending">Pending</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="img/images (1).png">
+									<p>Kainomayan</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status process">Process</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="img/images (1).png">
+									<p>Kainomayan</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status pending">Pending</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="img/images (1).png">
+									<p>Kainomayan</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Completed</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div> -->
+				
 		</main>
 		<!-- MAIN -->
 	</section>
