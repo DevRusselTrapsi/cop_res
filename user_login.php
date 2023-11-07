@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-include('dbcon.php');
+include 'dbcon.php';
 
     $email = "";
     $password = "";
@@ -25,27 +25,28 @@ if (isset($_POST['submit'])) {
 
     }else{
 
-		$row = mysqli_fetch_assoc($result); // Fetch the user record
-        $_SESSION['email'] = $email;
-        $_SESSION['fname'] = $row['fname'];
-        $_SESSION['user_id'] = $row['user_id'];
-
-       $hashed_password = $row['user_pass'];
+		$stmt->fetch();
+        	
+        $row = mysqli_fetch_assoc($result);
+        $hashed_password = $row['user_pass'];
 
         // Use password_verify() to compare the entered password with the hashed password
         if (password_verify($password, $hashed_password)) {
-            // Password is correct, redirect to the index page or perform the necessary actions
-            header("Location: user_dash.php");
-            exit;
+        	// Password is correct, redirect to the index page or perform the necessary actions
+
+        	header("Location: user_dash.php");
+        	exit;
+
         } else {
-            // Login FAILED
-            $error = "Incorrect Password. Please Try Again";
+
+        	// Login FAILED
+        	$error = "Incorrect Password. Please Try Again";
         }
 
-        // Close the statement
-        mysqli_stmt_close($stmt);
-        mysqli_close($conn);
-    }
+// Close the statement
+mysqli_stmt_close($stmt);
+mysqli_close($con);
+	}
 }
 ?>
 
@@ -54,7 +55,7 @@ if (isset($_POST['submit'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>User Login</title>
+	<title>Admin Login</title>
 	<link rel="stylesheet" type="text/css" href="
 
 	">

@@ -14,6 +14,17 @@ include './dbcon.php';
     $confirm_password = "";
 
 ?>
+			<!-- 	<php 
+					if (!empty($error)) {
+       				 echo '<div class="error" id="error">' . $error . '</div>';
+    				}
+				?>
+				<php 
+					if (!empty($success)) {
+       				 echo '<div class="success" id="success">' . $success . '</div>';
+    				}
+				?>
+ -->
 <!DOCTYPE html>
 <html>
 <head>
