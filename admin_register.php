@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['email'])) {
+
+	header("Location: ./u_a_login.php");
+	exit();
+}
+
 include './dbcon.php';
 // $_SERVER['REQUEST_METHOD'] == 'POST'
 //POST is connected to the input using the request method

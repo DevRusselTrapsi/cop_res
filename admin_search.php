@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['username'])){
+if (!isset($_SESSION['email'])) {
 
-	header('Location: ./admin_login.php');
+	header("Location: ./u_a_login.php");
 	exit();
 }
 
@@ -25,37 +25,43 @@ if(!isset($_SESSION['username'])){
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
-			<span class="text">Admin</span>
-		</a>
+        <a href="./admin_dash.php" class="brand">
+            <i><img src="./assets/img/tourism.jpg" class="logo"></i>
+            <p>WELCOME!</p>
+            <span>ADMIN</span>
+        </a>
 		<ul class="side-menu top">
-			<li>
-				<a href="./admin_dash.php">
-					<i class='bx bxs-dashboard' ></i>
-					<span class="text">Dashboard</span>
-
-				</a>
-			</li>
-			<li>
-				<a href="./admin_resort.php">
-					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">Resort</span>
-				</a>
-			</li>
-			<li class="active">
-				<a href="./admin_search.php">
-					<i class='bx bxs-search-alt-2' ></i>
-					<span class="text">Search</span>
-				</a>
-			</li>
-			<li>
-				<a href="logout.php">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
+            <li>
+                <a href="./admin_dash.php">
+                    <i class='bx bxs-shopping-bag-alt' ></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="./admin_addresort.php">
+                    <i class='bx bxs-plus-circle'></i>
+                    <span class="text">Add Resort</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="./admin_search.php">
+                    <i class='bx bxs-search-alt-2' ></i>
+                    <span class="text">Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="./owner_register.php">
+                    <i class='bx bxs-user-plus' ></i>
+                    <span class="text">Add Owner Account</span>
+                </a>
+            </li>
+            <li>
+                <a href="./logout.php">
+                    <i class='bx bxs-log-out-circle' ></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
 	</section>
 	<!-- SIDEBAR -->
 
@@ -73,43 +79,55 @@ if(!isset($_SESSION['username'])){
 		<main>
 			
 			<form class="form-content">
-				<div><input type="search" name="" id="search_engine" class="search"></div>
+				<div class="search_container">
+					<div>	
+					<input type="search" name="" id="search_engine" class="search">
+					</div>
+					<div>
+						<img src="./assets/icons/search.svg">
+					</div>
+				</div>
 				<div class="search_content">
 					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
+						<div class="img_container">
+							<img src="./assets/pictures_resort/haya.jpg">
+						</div>
 						<div>
-							<p>C & J</p>
+							<a href="./admin_resort.php"><p>HAYA</p></a>
 						</div>
 					</div>
 					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
+						<div class="img_container">
+							<img src="./assets/pictures_resort/indirajpg.jpg">
+						</div>
 						<div>
-							<p>Sundowners</p>
+							<a href="./admin_resort.php"><p>Indira</p></a>
 						</div>
 					</div>
 					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
+						<div class="img_container">
+							<img src="./assets/pictures_resort/RAMA.jpg">
+						</div>
 						<div>
-							<p>Kainomayan</p>
+							<a href="./admin_resort.php"><p>RAMA</p></a>
 						</div>
 					</div>
 					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
+						<div class="img_container">
+							<img src="./assets/pictures_resort/sandytoes.jpg">
+						</div>
 						<div>
-							<p>Balihay</p>
+							<a href="./admin_resort.php"><p>SandyToes</p></a>
 						</div>
 					</div>
 					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
+						<div class="img_container">
+							<img src="./assets/pictures_resort/Sundowners.jpg">
+						</div>
 						<div>
-							<p>C & J</p>
+							<a href="./admin_resort.php"><p>Sundowners</p></a>
 						</div>
 					</div>
-					<div class="resort_rect">
-						<img src="./assets/img/123.png" alt="Image">
-						<div>
-							<p>C & J</p>
-						</div>
 					</div>
 				</div>
 			</form>

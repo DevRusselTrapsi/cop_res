@@ -272,7 +272,27 @@ body {
 /* NAVBAR */
 
 
+/*LOGO*/
+/*LOGO*/
+.logo
+{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+.brand > span
+{
+    font-size: 17px;
+    margin-top: 4px;
+}
+.brand > p
+{
+    font-size: 20px;
+    margin-right: 5px;
 
+}
 
 
 
@@ -291,17 +311,37 @@ body {
 
 .search
 {
-    width: 350px;
+    width: 20vw;
     height: 40px;
     border: none;
     filter: drop-shadow(1px 1px 4px black);
     margin-bottom: 15px;
-    border-radius: 30px;
-    padding-right: 10px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding-right: 5px;
     font-family: var(--lato);
     font-size: 17px;
     text-indent: 15px;
 
+}
+.search_container
+{
+    display: flex;
+    justify-content: center;
+}
+
+
+.search_container > div > img
+{
+    height: 41.5px;
+    background-color: grey;
+    border: 1px solid black;
+    filter: drop-shadow(1px 1px 4px black);
+    margin-left: 1px;
+    margin-top: -1.5px;
+    position: relative;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .form-content
@@ -309,27 +349,6 @@ body {
     display: inline-block;
     justify-content: center;
     align-items: center;
-    text-align: center;
-}
-
-.resort_rect
-{
-    display: inline-block;
-    flex-wrap: wrap;
-
-}
-
-.resort_rect > img
-{
-    height: 350px;
-    width: 240px;
-    border-radius: 20px;
-    border: 3px solid black;
-}
-
-.resort_rect > div
-{
-    font-size: 24px;
     text-align: center;
 }
 
@@ -342,6 +361,64 @@ body {
     gap: 60px;
 }
 
+
+.resort_rect
+{
+    display: inline-block;
+    border: 2px solid black;
+    filter: drop-shadow(1px 1px 3px black);
+    width: 270px;
+    overflow: hidden;
+    height: 400px;
+    flex-wrap: wrap;
+}
+
+.img_container
+{
+    width: 100px;
+    height: 250px;
+
+}
+
+.img_container > img
+{
+    width: 270px;
+    height: 450px;
+    position: relative;
+    z-index: -1;
+}
+
+.resort_rect > div
+{
+    font-size: 24px;
+    text-align: center;
+}
+
+.resort_rect > div:last-child > a
+{
+    font-size: 24px;
+    text-align: center;
+    color:black;
+}
+
+.resort_rect > div:last-child > a > p
+{
+    background-color: rgba(251, 251, 251, 0.57);
+    border-radius: 40px;
+    margin-top: -70px;
+
+}
+
+.resort_rect > div:last-child > a > p:hover
+{
+    margin-top: -370px;
+    background-color: rgba(181, 179, 179, 0.9);
+    position: relative;
+    padding-top: 300px;
+    padding-bottom: 300px;
+    transition: ease-in-out 0.3s;
+
+}
 
 /* MAIN */
 
