@@ -9,7 +9,16 @@ if (!isset($_SESSION['email'])) {
 
 $fname = $_SESSION["fname"];
 $user_id = $_SESSION["user_id"];
- 
+
+
+if(isset($_POST['res_update'])){
+		
+
+		// UPDATE DATABASE
+		$sql = "UPDATE clients SET resort_name='$resort_name', resort_address='$resort_address', owner_name='$owner_name', owner_address='$owner_address',resort_office='$resort_office', resort_contact='$resort_contact', owner_contactv='$owner_contact', manager_contact='$manager_contact' WHERE id=$req";
+
+		$result = mysqli_query($conn,$sql);
+	}
 ?>
 
 
@@ -29,83 +38,37 @@ $user_id = $_SESSION["user_id"];
 <body>
 
 
-	<!-- SIDEBAR -->
-	<section id="sidebar">
-		<a href="./user_addresort.php" class="brand">
-			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
-			<p>WELCOME!</p>
-			<span><?php echo $fname ?></span>
-		</a>
-
-		<ul class="side-menu top">
-			<li>
-				<a href="./user_addresort.php">
-					<i class='bx bxs-plus-circle'></i>
-					<span class="text">Add Resort</span>
-				</a>
-			</li>
-			<li class="active">
-				<a href="./user_resortinfo.php">
-					<i class='bx bxs-info-circle'></i>
-					<span class="text">Resort Info</span>
-				</a>
-			</li>
-			<li >
-				<a href="./user_res_table.php">
-					<i class='bx bx-list-ul'></i>
-					<span class="text">Resort List Table</span>
-				</a>
-			</li>
-			<li>
-				<a href="./user_bps.php">
-					<i class='bx bxs-send'></i>
-					<span class="text">Business Permit Submission</span>
-				</a>
-			</li>
-			<li>
-				<a href="./logout.php">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
-	</section>
-	<!-- SIDEBAR -->
-
-
-
-	<!-- CONTENT -->
-	<section id="content">
-		<!-- NAVBAR -->
-		<nav>
-			<i class='bx bx-menu' ></i>
-
-			<div class="dropdown">
-				<button onclick="myFunction()" class="dropbtn" >
-					Profile
-				</button>
-				<div id="myDropdown" class="dropdown-content">
-    				<a href="#about">User Account</a>
-					<a href="#home">Change Email</a>
-				</div>
-			</div>
-		</nav>
-		<!-- NAVBAR -->
-
-		<!-- MAIN -->
-		<main>
-		<form style="border: 1px solid black">
+	<form>
 		<div class="form-content">
-			
+			<div>
+				<a href="./user_res_table.php">BACK</a>
+			</div>
 			<div class="profile">
-				<img src="./assets/pictures_resort/Sundowners.jpg" alt="Image">
-				<h2>Kainomayan</h2>
-				<!-- this is where the image will popout -->
+				<?php 
+include('./dbcon.php');
 
+				$req = $_GET['request'];
+
+							$sql = "SELECT resort_url
+											FROM tbl_resort
+        							WHERE resort_id = '$req'";
+
+        			$r = mysqli_query($conn, $sql);
+
+							if($r && mysqli_num_rows($r) > 0){
+
+								while($profile = mysqli_fetch_assoc($r)) {
+									?>
+					<!-- this is where the image will popout -->
+				<img src='<?php echo $profile['resort_url']; ?>' alt="Image">
+				
+				<?php 
+					}}
+			?>
 			</div>
 
 	<div class="container">
-				<h2>Resorts Info</h2>
+				<p>Resorts Info</p>
 
 		<div class="res_content">
 				<?php 
@@ -195,8 +158,8 @@ $user_id = $_SESSION["user_id"];
 			</div>
 
 			<div class="col-3">
-				<button type="submit" class="update" name="res_update">Update</button>
-				<button type="submit" class="delete" name="res_delete">Delete</button>
+				<a type="submit" class="update" name="res_update">Update</a>
+				<a type="submit" class="delete" name="res_delete">Delete</a>
 			</div>
 		</div>
 		<?php
@@ -276,8 +239,8 @@ $user_id = $_SESSION["user_id"];
 				</div>
 			</div>
 			<div class="col-3">
-				<button type="submit" class="update" name="res_update" disabled>Update</button>
-				<button type="submit" class="delete" name="res_delete" disabled>Delete</button>
+				<a type="submit" class="update" name="res_update" >Update</a>
+				<a type="submit" class="delete" name="res_delete" >Delete</a>
 			</div>
 		</div>
 				 <?php 
@@ -342,8 +305,8 @@ $user_id = $_SESSION["user_id"];
 								<p>".$row['accom_rates']."</p>
 							</div>
 							<div>
-								<button type='submit' class='update' name='accom_update'>Update</button>
-								<button type='submit' class='delete' name='accom_delete'>Delete</button>
+								<a type='submit' class='update' name='accom_update'>Update</a>
+								<a type='submit' class='delete' name='accom_delete'>Delete</a>
 							</div>
 						</div>
 					";
@@ -366,8 +329,8 @@ $user_id = $_SESSION["user_id"];
 								<p>No data input</p>
 							</div>
 							<div>
-						<button type="submit" class="update" name="accom_update" >Update</button>
-						<button type="submit" class="delete" name="accom_delete" >Delete</button>
+						<a type="submit" class="update" name="accom_update" >Update</a>
+						<a type="submit" class="delete" name="accom_delete" >Delete</a>
 					</div>
 
 						<?php 
@@ -427,8 +390,8 @@ $user_id = $_SESSION["user_id"];
 								<p>".$row['faci_rates']."</p>
 							</div>
 							<div>
-								<button type='submit' class='update' name='faci_update' href='update.php'>Update</button>
-								<button type='submit' class='delete' name='faci_delete' href='delete.php'>Delete</button>
+								<a type='submit' class='update' name='faci_update' href='update.php'>Update</a>
+								<a type='submit' class='delete' name='faci_delete' href='delete.php'>Delete</a>
 						</div>
 						</div>
 					";
@@ -449,8 +412,8 @@ $user_id = $_SESSION["user_id"];
 								<p>No data input</p>
 							</div>
 							<div>
-						<button type="submit" class="update" name="faci_update" >Update</button>
-						<button type="submit" class="delete" name="faci_delete" >Delete</button>
+						<a type="submit" class="update" name="faci_update" >Update</a>
+						<a type="submit" class="delete" name="faci_delete" >Delete</a>
 					</div>
 
 					<?php } ?>
@@ -502,8 +465,8 @@ $user_id = $_SESSION["user_id"];
 								<p>".$row['service_rates']."</p>
 							</div>
 							<div>
-								<button type='submit' class='update' name='faci_update' href='update.php'>Update</button>
-								<button type='submit' class='delete' name='faci_delete' href='delete.php'>Delete</button>
+								<a type='submit' class='update' name='faci_update' href='update.php'>Update</a>
+								<a type='submit' class='delete' name='faci_delete' href='delete.php'>Delete</a>
 						</div>
 						</div>
 					";
@@ -524,15 +487,15 @@ $user_id = $_SESSION["user_id"];
 								<p>No data input</p>
 							</div>
 							<div>
-						<button type="submit" class="update" name="service_update" >Update</button>
-						<button type="submit" class="delete" name="service_delete" >Delete</button>
+						<a type="submit" class="update" name="service_update" >Update</a>
+						<a type="submit" class="delete" name="service_delete" >Delete</a>
 					</div>
 
 				<?php } ?>
 				</div>
 			</div>
 			<div class="btn_section">
-				<button type="submit" class="delete">Delete</button>
+				<a type="submit" class="delete">Delete</a>
 			</div>
 		</div>
 	</div>
@@ -542,27 +505,5 @@ $user_id = $_SESSION["user_id"];
 	</section>
 	<!-- CONTENT -->
 
-	<script src="script.js"></script>
-	<script type="text/javascript">
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-		function myFunction() {
-  		document.getElementById("myDropdown").classList.toggle("show");
-		}
-
-// Close the dropdown if the user clicks outside of it
-		window.onclick = function(event) {
-  		if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-	</script>
 </body>
 </html>

@@ -97,7 +97,7 @@ $user_id = $_SESSION["user_id"];
 
 		<!-- MAIN -->
 		<main>
-		<form style="border: 1px solid black">
+		<form>
 		<div class="table-list">
 			<?php 
 
@@ -112,10 +112,7 @@ $user_id = $_SESSION["user_id"];
 						while($row = mysqli_fetch_assoc($res)){
 
 							echo"
-
-							<div class='list'>
-									<div class='res_name'><a href='./user_resortinfo.php?request=".$row['resort_id']."'>".$row['resort_name']."</a></div>
-							</div>";
+									<div class='res_name'><a href='./resort_info.php?request=".$row['resort_id']."'>".ucwords($row['resort_name'])."</a></div>";
 						 }
 						} 
 						?>

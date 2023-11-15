@@ -271,64 +271,6 @@ body {
 }
 /* NAVBAR */
 
-
-.logo
-{
-	width: 30px;
-	height: 30px;
-	border-radius: 100%;
-	margin-left: 10px;
-	margin-right: 20px;
-}
-
-
-/*Dropdown*/
-.dropdown
-{
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-	cursor: pointer;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 100px;
-   margin-top: 35px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-  background-color:  #ddd;
-}
-.dropbtn{
-	cursor: pointer;
-	padding: 10px 20px;
-	border: none;
-	background-color: #2980B9;
-	
-}
-
-.dropdown a:hover {background-color: #ddd;}
-
-.show {display: block;}
-
-/*dropdown*/
-
-
 /* MAIN */
 #content main {
 	width: 100%;
@@ -338,17 +280,6 @@ body {
 	overflow-y: auto;
 }
 
-.brand > span
-{
-	font-size: 17px;
-	margin-top: 4px;
-}
-.brand > p
-{
-	font-size: 20px;
-	margin-right: 5px;
-
-}
 
 .form-content
 {
@@ -595,8 +526,8 @@ h3
 
 .delete
 {
-	width: 60px;
-	height: 30px;
+	padding: 2.9px;
+	font-size: .9rem;
 	background-color: red;
 	font-family: var(--lato);
 	border: .5px solid red;
@@ -608,8 +539,8 @@ h3
 
 .update
 {
-	width: 60px;
-	height: 30px;
+	padding: 2.9px;
+	font-size: .9rem;
 	background-color: rgba(0, 239, 27, 1);
 	font-family: var(--lato);
 	border: .5px solid rgba(0, 239, 27, 1);

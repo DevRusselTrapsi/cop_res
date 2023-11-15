@@ -267,6 +267,7 @@ if (isset($_POST['submit'])) {
 		$_SESSION['user_id'] = $row_user['user_id'];
 		$_SESSION['email'] = $row_user['email'];
 		$_SESSION['fname'] = $row_user['fname'];
+		$_SESSION['resort_id'] = $row_user['resort_id'];
 
 			$hashed_password_user = $row_user['user_pass'];
 

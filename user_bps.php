@@ -9,7 +9,7 @@ header("Location: ./u_a_login.php");
 
 $fname = $_SESSION["fname"];
 $user_id = $_SESSION["user_id"];
-
+$resort_id = $_SESSION["resort_id"];
 
 
 include('dbcon.php');
@@ -18,8 +18,8 @@ if (isset($_POST['submit'])) {
     $verif = "unverified";
     
     // Get the uploaded file details
-    $file_name = $_FILES['business_url']['name'];
-    $file_tmp = $_FILES['business_url']['tmp_name'];
+    $file_name = $_FILES['permit_url']['name'];
+    $file_tmp = $_FILES['permit_url']['tmp_name'];
     
     // Specify the folder where you want to store the uploaded images
     $upload_dir = "permit_img/";
@@ -74,12 +74,6 @@ if (isset($_POST['submit'])) {
 					<span class="text">Add Resort</span>
 				</a>
 			</li>
-			<!-- <li>
-				<a href="./user_resortinfo.php">
-					<i class='bx bxs-info-circle'></i>
-					<span class="text">Resort Info</span>
-				</a>
-			</li> -->
 			<li>
 				<a href="./user_res_table.php">
 					<i class='bx bx-list-ul'></i>
@@ -131,77 +125,75 @@ if (isset($_POST['submit'])) {
 					<div>
 						<h1>Business Permit Submission</h1>
 					</div>
+					
+				</div>
+				
+				
+				<div class="list-table">
+					<?php
+						include('dbcon.php');
+
+						$q = "SELECT resort_name, verification, resort_url FROM tbl_resort WHERE user_id = '$user_id'";
+
+						$res = mysqli_query($conn, $q);
+						
+						if (mysqli_num_rows($res) > 0){
+
+							while ($row = mysqli_fetch_assoc($res)) {
+
+								$verif = $row['verification'];
+								
+								$resort_url = $row['resort_url'];
+
+								echo"<div class='list'>
+						<div class='text'>
+							<div>
+
+								<h1 style='font-size: 2.5rem;'>".$row['resort_name']."</h1>
+							</div>
 					<div>
-						<div class="status" style="background-color: red;">Not Verified</div>
+						";?>
 						<?php 
-					include('dbcon.php');
-
 					// this id must be change to id of the user for checking the image from the user
-					$verify_id = 4;
 
-						$q = "SELECT verified FROM verification WHERE verify_id = $verify_id";
-						$verif = mysqli_query($conn, $q);
-
-					if ($verif && mysqli_num_rows($verif) > 0) {
-    				// Fetch the first row from the result set as an associative array.
-   				 $status = mysqli_fetch_assoc($verif);
-   				 $stats = $status['verified'];
-
-   				 if ($stats == 'verified'){
+   				 if ($verif == 'verified'){
 
    				 	
-   				 		echo '<div class="status" style="background-color: rgba(67, 255, 32, 1);">Verified</div>';
+   				 	echo '<div class="status" style="background-color: rgba(67, 255, 32, 1);">Verified</div>';
 
    				 }else{
 
-   				 		echo '<div class="status" style="background-color: red;">Not Verified</div>';
-   				 	       
+   				     echo '<div class="status" style="background-color: red;">Not Verified</div>';
    				 }
-	   			}
-   				
+	   			
    				 ?>
+					</div>
+				</div>
+						<div class="col-2">
+							<div>
+								<input type="file" name="permit_url" >
+							</div>
+					
+					</div>
 
-						
+						<div class="img_content">
+AWDAWD
+						</div>
+						<div>
+							<button name="submit" class="button">Submit</button>
+						</div>
 					</div>
-				</div>
-				<div>
-					<input type="file" name="business_url" >
-				</div>
-				
-				
-				<div>
-					<div>
-						<button name="submit" class="button">Submit</button>
-					</div>
-				</div>
-			</div>
-		</form>
-		<div class="img_content">
 					<?php
-include('dbcon.php');
-
-$verify_id = 11; // Replace with the actual verif_id you want to use.
-
-$q = "SELECT business_url FROM verification WHERE verify_id = $verify_id";
-$res = mysqli_query($conn, $q);
-
-if ($res && mysqli_num_rows($res) > 0) {
-    // Fetch the first row from the result set as an associative array.
-    $img = mysqli_fetch_assoc($res);
-
-    // Check if the image URL is not empty before displaying it.
-    if (!empty($img['business_url'])) {
-        ?>
-        <img src="<?php echo $img['business_url']; ?>" alt="Business Image">
-        <?php
-    } else {
-        echo "Image URL is empty.";
-    }
-} else {
-    echo "No records found for verify_id $verify_id.";
-}
-?>
+							}
+						
+						}
+					?>
 				</div>
+				
+			</div>
+
+		</form>
+		
 		</main>
 		<!-- MAIN -->
 	</section>

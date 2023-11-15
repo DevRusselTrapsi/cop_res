@@ -255,12 +255,14 @@ include './dbcon.php';
 </html>
 
 <?php
+// Make sure $conn is a valid MySQLi connection
+// ... (Connection code)
 
 if (isset($_POST['submit'])) {
-
     $error = "";
     $success = "";
     
+    // Fetch form data
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
@@ -270,7 +272,7 @@ if (isset($_POST['submit'])) {
     $confirm_password = $_POST['confirm_pass'];
 
     // Use a prepared statement to check if the email already exists in the database
-   $query_user = "SELECT * FROM tbl_user WHERE email = ?";
+    $query_user = "SELECT * FROM tbl_user WHERE email = ?";
     $query_admin = "SELECT * FROM tbl_admin WHERE email = ?";
 
     $stmt_user = mysqli_prepare($conn, $query_user);
@@ -280,13 +282,13 @@ if (isset($_POST['submit'])) {
     mysqli_stmt_bind_param($stmt_admin, "s", $email);
 
     mysqli_stmt_execute($stmt_user);
-    mysqli_stmt_execute($stmt_admin);
-
     $result_user = mysqli_stmt_get_result($stmt_user);
+
+    mysqli_stmt_execute($stmt_admin);
     $result_admin = mysqli_stmt_get_result($stmt_admin);
 
     // Check if the email exists in either tbl_user or tbl_admin
-    if (mysqli_num_rows($result_user) > 0 && mysqli_num_rows($result_admin) > 0) {
+    if (mysqli_num_rows($result_user) > 0 || mysqli_num_rows($result_admin) > 0) {
         ?>
         <script>
             swal({
@@ -296,6 +298,10 @@ if (isset($_POST['submit'])) {
         </script>
         <?php
     } else {
+        // Close the previous result sets
+        mysqli_stmt_close($stmt_user);
+        mysqli_stmt_close($stmt_admin);
+
         // Check if the password matches
         if ($password === $confirm_password) {
             // Hash the password
@@ -337,5 +343,4 @@ if (isset($_POST['submit'])) {
         }
     }
 }
-
 ?>
