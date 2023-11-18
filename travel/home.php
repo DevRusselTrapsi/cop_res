@@ -66,20 +66,6 @@ $_SESSION['user'] = 'loggedInUser'; // You can set this to any value you like
 
 <!-- home section ends -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <!-- custom js file link  -->

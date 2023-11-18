@@ -35,7 +35,7 @@ $user_id = $_SESSION["user_id"];
 		<a href="./user_addresort.php" class="brand">
 			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
 			<p>WELCOME!</p>
-			<span><?php echo $fname;?></span>
+			<span><?php echo ucwords($fname);?></span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">

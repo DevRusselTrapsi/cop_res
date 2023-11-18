@@ -22,7 +22,7 @@
     <!-- Add your custom CSS -->
     <link rel="stylesheet" href="./css/style.css">
     
-    <title>Admin Dashboard</title>
+    <title>Admin</title>
 </head>
 <body>
     <!-- SIDEBAR -->
@@ -55,6 +55,12 @@
                 <a href="./owner_register.php">
                     <i class='bx bxs-user-plus' ></i>
                     <span class="text">Add Owner Account</span>
+                </a>
+            </li>
+            <li>
+                <a href="./user_table.php">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="text">Owner List</span>
                 </a>
             </li>
             <li>
@@ -188,20 +194,43 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Date</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Add your table rows with resort data here -->
+                            <?php
+
+                            include("dbcon.php");
+
+                            $q = "SELECT * FROM tbl_resort";
+
+                            $res = mysqli_query($conn, $q);
+
+                            if ($res && mysqli_num_rows($res) > 0) {
+                            
+                                while($row = mysqli_fetch_assoc($res)){
+
+                            echo "
                             <tr>
                                 <td>
-                                    <img src="./assets/pictures_resort/RAMA.jpg">
-                                    <p><a href="./admin_verif.php">Kainomayan</a></p>
-                                </td>
-                                <td>01-10-2021</td>
-                                <td><span class="status completed">Verified</span></td>
-                            </tr>
+                                    <img src='".$row['resort_url']."'>
+                                    <p><a href='./admin_verif.php?get=".$row['resort_id']."'>".$row['resort_name']."</a></p>
+                                </td>";
+
+                                if($row['verification'] === 'not_verified'){
+                            echo"
+                                <td><span class='status pending'>Not Verified</span></td>
+                            </tr>";
+                                    }else{
+
+                            echo"
+                                <td><span class='status verified'>Verified</span></td>
+                            </tr>";
+                                    }
+                                }
+                            }
+                            ?>
                             <!-- Add more rows as needed -->
                         </tbody>
                     </table>

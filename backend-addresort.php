@@ -28,10 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // resort image upload
     $resort_url = $_FILES['resort_url']['name'];
     $resort_url_tmp = $_FILES['resort_url']['tmp_name'];
-    // permit image upload
-    $permit_url = $_FILES['permit_url']['name'];
-    $permit_url_tmp = $_FILES['permit_url']['tmp_name'];
-
 
     $estab_dir = "estab_img/";
 

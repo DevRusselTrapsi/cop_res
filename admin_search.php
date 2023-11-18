@@ -56,6 +56,12 @@ if (!isset($_SESSION['email'])) {
                 </a>
             </li>
             <li>
+				<a href="./user_table.php">
+					<i class='bx bx-list-ul'></i>
+					<span class="text">Owner List</span>
+				</a>
+			</li>
+            <li>
                 <a href="./logout.php">
                     <i class='bx bxs-log-out-circle' ></i>
                     <span class="text">Logout</span>
@@ -88,47 +94,32 @@ if (!isset($_SESSION['email'])) {
 					</div>
 				</div>
 				<div class="search_content">
-					<div class="resort_rect">
-						<div class="img_container">
-							<img src="./assets/pictures_resort/haya.jpg">
+					<?php 
+
+						include('dbcon.php');
+
+						$q = "SELECT * FROM tbl_resort";
+
+						$res = mysqli_query($conn, $q);
+
+						if($res && mysqli_num_rows($res) > 0) {
+
+							while($row = mysqli_fetch_assoc($res)){
+
+						echo "
+					<div class='resort_rect'>
+						<div class='img_container'>
+							<img src='./assets/pictures_resort/haya.jpg'>
 						</div>
 						<div>
-							<a href="./admin_resort.php"><p>HAYA</p></a>
+							<a href='./admin_resortinfo.php?get=".$row['resort_id']."'><p>".$row['resort_name']."</p></a>
 						</div>
-					</div>
-					<div class="resort_rect">
-						<div class="img_container">
-							<img src="./assets/pictures_resort/indirajpg.jpg">
-						</div>
-						<div>
-							<a href="./admin_resort.php"><p>Indira</p></a>
-						</div>
-					</div>
-					<div class="resort_rect">
-						<div class="img_container">
-							<img src="./assets/pictures_resort/RAMA.jpg">
-						</div>
-						<div>
-							<a href="./admin_resort.php"><p>RAMA</p></a>
-						</div>
-					</div>
-					<div class="resort_rect">
-						<div class="img_container">
-							<img src="./assets/pictures_resort/sandytoes.jpg">
-						</div>
-						<div>
-							<a href="./admin_resort.php"><p>SandyToes</p></a>
-						</div>
-					</div>
-					<div class="resort_rect">
-						<div class="img_container">
-							<img src="./assets/pictures_resort/Sundowners.jpg">
-						</div>
-						<div>
-							<a href="./admin_resort.php"><p>Sundowners</p></a>
-						</div>
-					</div>
-					</div>
+					</div>";
+
+						}
+					}
+					?>
+					
 				</div>
 			</form>
 		</main>

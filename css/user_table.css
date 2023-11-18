@@ -4,12 +4,21 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: var(--lato);
 }
 
 a {
 	text-decoration: none;
-	font-family: var(--lato);
+	color: black;
+}
+
+a:hover
+{
+	color: var(--blue);
+}
+
+span {
+
+	margin-top: -10px;
 }
 
 li {
@@ -47,7 +56,6 @@ body {
 	background: var(--grey);
 	overflow-x: hidden;
 }
-
 
 
 
@@ -177,6 +185,9 @@ body {
 	left: 60px;
 }
 
+
+
+
 /* NAVBAR */
 #content nav {
 	height: 56px;
@@ -236,8 +247,40 @@ body {
 	width: 100%;
 	color: var(--dark);
 }
-
-
+#content nav form .form-input button {
+	width: 36px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--blue);
+	color: var(--light);
+	font-size: 18px;
+	border: none;
+	outline: none;
+	border-radius: 0 36px 36px 0;
+	cursor: pointer;
+}
+#content nav .notification {
+	font-size: 20px;
+	position: relative;
+}
+#content nav .notification .num {
+	position: absolute;
+	top: -6px;
+	right: -6px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 2px solid var(--light);
+	background: var(--red);
+	color: var(--light);
+	font-weight: 700;
+	font-size: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 #content nav .profile img {
 	width: 36px;
 	height: 36px;
@@ -268,7 +311,6 @@ body {
 	left: calc(100% - (25px - 4px) - 2px);
 }
 /* NAVBAR */
-
 
 .logo
 {
@@ -303,6 +345,7 @@ body {
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
+  font-size: 13px;
   text-decoration: none;
   display: block;
   cursor: pointer;
@@ -325,14 +368,9 @@ body {
 
 /*dropdown*/
 
-/* MAIN */
-#content main {
-	width: 100%;
-	padding: 36px 24px;
-	/*font-family: var(--poppins);*/
-	max-height: calc(100vh - 56px);
-	overflow-y: auto;
-}
+
+						/* MAIN */
+
 
 .brand > span
 {
@@ -346,76 +384,51 @@ body {
 
 }
 
-.container
-{
-	border-radius: 20px;
-	padding: 20px;
-	background-color: #F9F9F9;
+#content main {
+	width: 100%;
+	padding: 36px 24px;
+	/*font-family: var(--poppins);*/
+	max-height: calc(100vh - 56px);
+	overflow-y: auto;
 }
 
-.list-table
+
+.table-list
 {
+	width: 100%;
+	height: 540px;
+	overflow-y: auto;
+	padding: 50px;
 	display: inline-block;
+	align-items: center;
 	justify-content: center;
-	align-items: center;
-	width: 100%;
-}
-
-
-
-.list
-{
-	/*border: 1px solid black;*/
-	border-radius: 10px;
-	padding: 5px;
-	box-shadow: 2px 2px 5px black;
-}
-
-.list > div:last-child
-{
-	text-align: right;
-}
-
-.col-2
-{
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-}
-
-.top2
-{
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	padding: 10px;
-	margin-bottom: 10px;
-}
-
-.text
-{
-	display: inline-flex;
-	justify-content: space-between;
-	width: 100%;
-}
-
-
-.status
-{
-	margin-top: 10px;
-	margin-right: 15px;
-	width: 100px;
-	padding: 5px;
 	text-align: center;
-	border-radius: 20px;
 }
 
-.text > div > h1 > a{
-	font-family: var(--lato);
-	color: black;
-	font-weight: normal;
+.res_name
+{
+	text-align: center;
+	background-color: whitesmoke;
+	filter: drop-shadow(0px 4px 5px black);
+	border-radius: 10px;
+	font-size: 2rem;
+	width: 90%;
+	padding: 10px;
+	margin-bottom: 9px;
 }
-/* MAIN */
+
+.res_name > a:hover
+{
+	color: black;
+}
+
+		/*--------------MAIN*--------------*/
+
+
+
+
+
+
 
 @media screen and (max-width: 768px) {
 	#sidebar {
@@ -431,30 +444,6 @@ body {
 		display: none;
 	}
 }
-
-
-@media screen and (max-width)
-{
-	.form-content
-	{
-		font: ;
-	}
-
-	.form-content > h1
-	{
-		font-size: clamp(0.9rem, 0.025rem + 2.8vw, 1.6rem);
-		font-family: var(--lato);
-	}
-
-	.content > div > p
-	{
-		font-size: clamp(0.5625rem, -0.2969rem + 2.75vw, 1.25rem);
-		font-family: var(--lato);
-	}
-
-}
-
-
 
 
 @media screen and (max-width: 576px) {
@@ -480,5 +469,24 @@ body {
 		border-radius: 0 36px 36px 0;
 		color: var(--light);
 		background: var(--red);
+	}
+
+	#content nav form.show ~ .notification,
+	#content nav form.show ~ .profile {
+		display: none;
+	}
+
+	#content main .box-info {
+		grid-template-columns: 1fr;
+	}
+
+	#content main .table-data .head {
+		min-width: 420px;
+	}
+	#content main .table-data .order table {
+		min-width: 420px;
+	}
+	#content main .table-data .todo .todo-list {
+		min-width: 420px;
 	}
 }

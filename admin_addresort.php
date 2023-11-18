@@ -21,7 +21,7 @@ if (!isset($_SESSION['email'])) {
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_addresort.css">
 	
-	<title>User Dashboard</title>
+	<title>Admin</title>
 </head>
 <body>
 
@@ -58,6 +58,12 @@ if (!isset($_SESSION['email'])) {
                     <span class="text">Add Owner Account</span>
                 </a>
             </li>
+            <li>
+				<a href="./user_table.php">
+					<i class='bx bx-list-ul'></i>
+					<span class="text">Owner List</span>
+				</a>
+			</li>
             <li>
                 <a href="./logout.php">
                     <i class='bx bxs-log-out-circle' ></i>

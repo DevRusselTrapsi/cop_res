@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
 		<a href="./user_addresort.php" class="brand">
 			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
 			<p>WELCOME!</p>
-			<span><?php echo $fname;?></span>
+			<span><?php echo ucwords($fname);?></span>
 		</a>
 
 		<ul class="side-menu top">
@@ -133,23 +133,22 @@ if (isset($_POST['submit'])) {
 					<?php
 						include('dbcon.php');
 
-						$q = "SELECT resort_name, verification, resort_url FROM tbl_resort WHERE user_id = '$user_id'";
+						$q = "SELECT resort_id, resort_name, verification, resort_url FROM tbl_resort WHERE user_id = '$user_id'";
 
 						$res = mysqli_query($conn, $q);
 						
 						if (mysqli_num_rows($res) > 0){
 
 							while ($row = mysqli_fetch_assoc($res)) {
-
-								$verif = $row['verification'];
 								
 								$resort_url = $row['resort_url'];
+								$verif = $row['verification'];
 
 								echo"<div class='list'>
 						<div class='text'>
 							<div>
 
-								<h1 style='font-size: 2.5rem;'>".$row['resort_name']."</h1>
+								<h1 style='font-size: 2.5rem;'><a href='bp_submit.php?get=".$row['resort_id']."'>".$row['resort_name']."</a></h1>
 							</div>
 					<div>
 						";?>
@@ -168,20 +167,6 @@ if (isset($_POST['submit'])) {
 	   			
    				 ?>
 					</div>
-				</div>
-						<div class="col-2">
-							<div>
-								<input type="file" name="permit_url" >
-							</div>
-					
-					</div>
-
-						<div class="img_content">
-AWDAWD
-						</div>
-						<div>
-							<button name="submit" class="button">Submit</button>
-						</div>
 					</div>
 					<?php
 							}

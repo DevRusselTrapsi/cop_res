@@ -8,6 +8,7 @@
 
 a {
     text-decoration: none;
+    color: black;
 }
 
 li {
@@ -495,14 +496,13 @@ body {
     border-radius: 20px;
     font-weight: 700;
 }
-#content main .table-data .order table tr td .status.completed {
-    background: var(--blue);
-}
-#content main .table-data .order table tr td .status.process {
-    background: var(--yellow);
-}
 #content main .table-data .order table tr td .status.pending {
-    background: var(--orange);
+    background: red;
+    font-size: .7rem;
+}
+#content main .table-data .order table tr td .status.verified {
+    background: rgba(32, 232, 42, 1);
+    font-size: .7rem;
 }
 
 

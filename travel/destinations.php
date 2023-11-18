@@ -103,19 +103,6 @@ if (!isset($_SESSION['user'])) {
 
 <!-- destinations section ends -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <!-- custom js file link  -->

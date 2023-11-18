@@ -244,6 +244,12 @@ mysqli_close($conn);
                 </a>
             </li>
             <li>
+                <a href="./user_table.php">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="text">Owner List</span>
+                </a>
+            </li>
+            <li>
                 <a href="./logout.php">
                     <i class='bx bxs-log-out-circle' ></i>
                     <span class="text">Logout</span>

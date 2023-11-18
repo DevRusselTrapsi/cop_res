@@ -109,24 +109,9 @@ if (!isset($_SESSION['user'])) {
 
 <!-- contact section ends -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
 
 </body>
-</html>

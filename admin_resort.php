@@ -215,11 +215,10 @@
 		/* FACILITY CSS  */
 
 
-	button[type=submit]{
+	a {
 		padding: 5px 10px;
 		border-radius: 3px;
-		margin-bottom: 10px;
-		margin-top: 20px;
+		margin-bottom: 5px;
 		cursor: pointer;
 		border: none;
 		filter: drop-shadow(1px 1px 5px grey);
@@ -379,8 +378,8 @@
 							<p><?php echo $row['accom_rates'];?></p>
 						</div>
 						<div>	
-							<button type="submit" class="update">Update</button>&nbsp&nbsp&nbsp
-							<button type="submit" class="delete">Delete</button>
+							<a type="submit" class="update">Update</a>
+							<a type="submit" class="delete">Delete</a>
 						</div>
 					<?php }else{ ?>
 						<div>
@@ -396,8 +395,8 @@
 							<p>No Data input</p>
 						</div>
 						<div>	
-							<button type="submit" class="update">Update</button>&nbsp&nbsp&nbsp
-							<button type="submit" class="delete">Delete</button>
+							<a type="submit" class="update">Update</a>
+							<a type="submit" class="delete">Delete</a>
 						</div>
 					</div>
 				
@@ -455,8 +454,8 @@
 							<p><?php echo $row['faci_rates']; ?></p>
 						</div>
 						<div>	
-							<button type="submit" class="update">Update</button>&nbsp&nbsp&nbsp
-							<button type="submit" class="delete">Delete</button>
+							<a type="submit" class="update">Update</a>
+							<a type="submit" class="delete">Delete</a>
 						</div>
 
 				<?php }else{ ?>
@@ -473,8 +472,8 @@
 							<p>No Data input</p>
 						</div>
 						<div>	
-							<button type="submit" class="update">Update</button>&nbsp&nbsp&nbsp
-							<button type="submit" class="delete">Delete</button>
+							<a type="submit" class="update">Update</a>
+							<a type="submit" class="delete">Delete</a>
 						</div>
 					<?php } ?>
 				</div>
@@ -522,8 +521,8 @@
 							<p><?php echo $row['service_rates']; ?></p>
 						</div>
 						<div>	
-							<button type="submit" class="update">Update</button>&nbsp&nbsp&nbsp
-							<button type="submit" class="delete">Delete</button>
+							<a type="submit" class="update">Update</a>
+							<a type="submit" class="delete">Delete</a>
 						</div>
 
 				<?php }else {?> 
@@ -538,8 +537,8 @@
 						<p>No Data input</p>
 					</div>
 					<div>	
-						<button type="submit" class="update">Update</button>&nbsp&nbsp&nbsp
-						<button type="submit" class="delete">Delete</button>
+						<a type="submit" class="update">Update</a>
+						<a type="submit" class="delete">Delete</a>
 					</div>
 				<?php } ?>
 				</div>
