@@ -3,14 +3,12 @@ session_start();
 
 if(!isset($_SESSION['email'])){
 
-header("Location: ./u_a_login.php");
+	header("Location: ./login.php");
 	exit();
 }
 
 $fname = $_SESSION["fname"];
 $user_id = $_SESSION["user_id"];
-$resort_id = $_SESSION["resort_id"];
-
 
 include('dbcon.php');
 
@@ -48,12 +46,11 @@ if (isset($_POST['submit'])) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_bps.css">
-
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>User Dashboard</title>
 </head>
 <body>
@@ -130,6 +127,8 @@ if (isset($_POST['submit'])) {
 				
 				
 				<div class="list-table">
+					
+
 					<?php
 						include('dbcon.php');
 
@@ -144,39 +143,38 @@ if (isset($_POST['submit'])) {
 								$resort_url = $row['resort_url'];
 								$verif = $row['verification'];
 
-								echo"<div class='list'>
-						<div class='text'>
-							<div>
+								echo"
+								<div class='list'>
+									<div class='text'>
+										<div>
 
-								<h1 style='font-size: 2.5rem;'><a href='bp_submit.php?get=".$row['resort_id']."'>".$row['resort_name']."</a></h1>
-							</div>
-					<div>
+										<h1 style='font-size: 2.5rem;'><a href='bp_submit.php?get=".$row['resort_id']."'>".$row['resort_name']."</a></h1>
+										</div>
+									</div>
+								
 						";?>
+
 						<?php 
 					// this id must be change to id of the user for checking the image from the user
 
-   				 if ($verif == 'verified'){
+   				 	if ($verif == 'verified'){
 
-   				 	
-   				 	echo '<div class="status" style="background-color: rgba(67, 255, 32, 1);">Verified</div>';
+	   				 	
+	   				 	echo '<div class="status" style="background-color: rgba(67, 255, 32, 1);">Verified</div>';
 
-   				 }else{
+   				 	}else{
 
    				     echo '<div class="status" style="background-color: red;">Not Verified</div>';
-   				 }
-	   			
-   				 ?>
+   				 	}?>
+
 					</div>
-					</div>
+				</div>
 					<?php
 							}
 						
 						}
 					?>
 				</div>
-				
-			</div>
-
 		</form>
 		
 		</main>

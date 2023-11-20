@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['email'])) {
 
-	header("Location: ./u_a_login.php");
+	header("Location: ./login.php");
 	exit();
 }
 
@@ -24,7 +24,7 @@ $user_id = $_SESSION["user_id"];
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_addresort.css">
-	
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>User Dashboard</title>
 </head>
 <body>
@@ -353,36 +353,5 @@ $user_id = $_SESSION["user_id"];
 <script src="./js/addservice.js"></script>
 <script src="./js/addaccom.js"></script>
 <script src="./js/addfaci.js"></script>
-<script src="./js/sweetalert.min.js"></script>
-
-<?php 
-
-if($_SESSION['status'] == "success"){
-
-	?>
-	<script>
-				swal({
-  					title: "<?php echo $_SESSION['error']; ?>",
-  					// text: "You clicked the button!",
-  					icon: "error",
-					});
-			</script>
-	<?php	
-
-}else{
-
-	?>
-	<script>
-				swal({
-  					title: "<?php echo $_SESSION['success']; ?>",
-  					// text: "You clicked the button!",
-  					icon: "error",
-					});
-			</script>
-	<?php			
-	
-}
-
-?>
 </body>
 </html>

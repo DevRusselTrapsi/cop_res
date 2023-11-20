@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['email'])) {
 
-	header("Location: ./user_index.php");
+	header("Location: ./login.php");
 	exit();
 }
 
@@ -51,7 +51,7 @@ if(isset($_POST['submit'])){
 
 	if (isset($_POST['delete'])) {
 
-		$del_permit = " ";
+		$del_permit = "no_permit";
 		
 		$q = "UPDATE tbl_resort SET permit_url = '$del_permit' WHERE resort_id = '$id'";
 
@@ -78,55 +78,12 @@ if(isset($_POST['submit'])){
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<!-- My CSS -->
-	<link rel="stylesheet" href="./css/user_resortinfo.css">
-
+	<link rel="stylesheet" href="./css/bp_submit.css">
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>User Dashboard</title>
 </head>
 <style type="text/css">
-	.content
-	{
-		display: inline-block;
-	}
-	.content > div
-	{
-		margin-bottom: 30px;
-	}
-
-	.img
-	{
-		height: 1500px;
-		width: 1000px;
-		box-shadow: 5px 5px 10px black;
-	}
-	.btn
-	{
-		display: inline-flex;
-	}
-
-	.btn > div:first-child
-	{
-		margin-right:  10px;
-	}
-
-	.btn > div:last-child > button
-	{
-		background-color: red ;
-		padding: 7px 20px;
-		border: none;
-		box-shadow: 2px 2px 3px black;
-		border-radius: 6px;
-	}
-
-	button
-	{
-		padding: 7px 20px;
-		background-color: rgba(0, 236, 31, 0.8) ;
-		border: none;
-		box-shadow: 2px 2px 3px black;
-		border-radius: 6px;
-
-	}
-
+	
 </style>
 <body>
 
@@ -150,7 +107,7 @@ if(isset($_POST['submit'])){
   								<input type="file" name="permit_url"  class="form-control" id="inputGroupFile01">
 							</div>
 						</div>
-						<div>
+						<div class="overflow">
 							<?php
 							include('dbcon.php');
 
@@ -161,13 +118,15 @@ if(isset($_POST['submit'])){
 
 							if ($res_img && mysqli_num_rows($res_img) > 0) {
 
-								if(!empty($row=mysqli_fetch_assoc($res_img))){
+								$row=mysqli_fetch_assoc($res_img);
 
-									echo "<img src='".$row['permit_url']."' class='img'>";
+								if ($row['permit_url'] == 'no_permit'){
+
+									echo '<h4>Please Submit your business permit<h4>';
 
 								}else{
 
-									echo '<img src="" alt="Business Permit" class="img">';
+									echo "<img src='".$row['permit_url']."' class='img'>";
 								}
 							}
 							?>

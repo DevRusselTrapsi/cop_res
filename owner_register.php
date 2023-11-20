@@ -72,11 +72,11 @@ mysqli_close($conn);
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/admin_search.css">
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>Admin</title>
 </head>
 	<style type="text/css">
@@ -168,7 +168,7 @@ mysqli_close($conn);
 			border-radius: 10px;
 			border: .5px solid black;
 			cursor: pointer;
-			background-color: #0097B2;
+			background-color: rgba(0, 236, 31, 0.8);
 		}
 		.btn_save:hover
 		{

@@ -14,14 +14,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <!-- Add Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    
     <!-- Add your custom CSS -->
     <link rel="stylesheet" href="./css/style.css">
-    
+    <link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
     <title>Admin</title>
 </head>
 <body>
@@ -86,15 +84,6 @@
             <div class="head-title">
                 <div class="left">
                     <h1>Dashboard</h1>
-                    <ul class="breadcrumb">
-                        <li>
-                            <a href="#">Dashboard</a>
-                        </li>
-                        <li><i class='bx bx-chevron-right'></i></li>
-                        <li>
-                            <a class="active" href="#">Home</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
 

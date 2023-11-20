@@ -20,6 +20,7 @@ include './dbcon.php';
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>Admin Login</title>
     </head>
 <style type="text/css">

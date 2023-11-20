@@ -351,6 +351,7 @@ body {
 	border-radius: 20px;
 	padding: 20px;
 	background-color: #F9F9F9;
+	box-shadow: 2px 2px 5px black;
 }
 
 .list-table
@@ -365,15 +366,14 @@ body {
 
 .list
 {
-	/*border: 1px solid black;*/
+	box-shadow: 1px 2px .5px black;
+	display: inline-flex;
 	border-radius: 10px;
+	border:  1px solid black;
 	padding: 5px;
-	box-shadow: 2px 2px 5px black;
-}
+	width: 100%;
+	margin-top: 10px;
 
-.list > div:last-child
-{
-	text-align: right;
 }
 
 .col-2
@@ -394,19 +394,22 @@ body {
 
 .text
 {
-	display: inline-flex;
+
 	justify-content: space-between;
-	width: 100%;
+			width: 100%;
 }
 
 
 .status
 {
-	margin-top: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 	margin-right: 15px;
-	width: 100px;
-	padding: 5px;
+	width: 150px;
+	/*padding: 5px;*/
+	padding-top: 10px;
 	text-align: center;
+	font-size: 15px;
 	border-radius: 20px;
 }
 

@@ -20,7 +20,7 @@ if (!isset($_SESSION['email'])) {
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_addresort.css">
-	
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>Admin</title>
 </head>
 <body>
@@ -107,7 +107,7 @@ if (!isset($_SESSION['email'])) {
 									<label>Name of the Establishment:</label>
 								</div>
 								<div>
-									<input type="text" class="input" name="resort_name" required>
+									<input type="text" class="input" name="resort_name" >
 								</div>
 							</div>
 
@@ -132,7 +132,7 @@ if (!isset($_SESSION['email'])) {
 									<label>Address:</label>
 								</div>
 								<div>
-									<input type="text" class="input" name="owner_address" placeholder="(Owner's Address)" required>
+									<input type="text" class="input" name="owner_address" placeholder="(Owner's Address)" >
 								</div>
 							</div>
 									
@@ -143,7 +143,7 @@ if (!isset($_SESSION['email'])) {
 									<label>Office Contact:</label>
 								</div>
 								<div>
-									<input type="text" name="resort_office" class="input" placeholder="09********" required>
+									<input type="text" name="resort_office" class="input" placeholder="09********" >
 								</div>
 							</div>							
 							<div class="col-2">
@@ -151,7 +151,7 @@ if (!isset($_SESSION['email'])) {
 									<label>Home Contact:</label>
 								</div>
 								<div>
-									<input type="text" name="resort_contact" class="input" placeholder="09********" required>
+									<input type="text" name="resort_contact" class="input" placeholder="09********" >
 								</div>
 							</div>
 							<div class="col-2">
@@ -159,14 +159,14 @@ if (!isset($_SESSION['email'])) {
 									<label>Owner Contact:</label>
 								</div>
 								<div>
-									<input type="text" name="owner_contact" class="input" placeholder="09********" required>
+									<input type="text" name="owner_contact" class="input" placeholder="09********" >
 								</div>
 							</div>
 							<div class="col-2">
 								<div>
 									<label>Manager Contact:</label>
 								</div>
-								<div>											<input type="text" name="manager_contact" class="input" placeholder="09********" required>
+								<div>											<input type="text" name="manager_contact" class="input" placeholder="09********" >
 									</div>
 
 							</div>						
@@ -243,7 +243,7 @@ if (!isset($_SESSION['email'])) {
 									<input type="text" class="input-1" name="faci_capacity" required>
 								</div>
 								<div>
-									<input type="text" class="input-1" name="faci_rates" required>
+									<input type="text" class="input-1" name="faci_rates">
 								</div>
 								<div>
 									<input type="file" class="insert_img2" name="faci_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>

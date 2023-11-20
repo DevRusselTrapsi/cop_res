@@ -4,28 +4,59 @@
 
 	if (!isset($_SESSION['email'])) {
 
-	header("Location: ./u_a_login.php");
+	header("Location: ./login.php");
 	exit();
 }
 
 include('dbcon.php');
 
 if (isset($_GET['get'])) {
+
     $resort_id = $_GET['get'];
 
-    // Rest of your code remains unchanged...
-
     if (isset($_POST['submit'])) {
-        $verified = 'verified';
-        $q = "UPDATE tbl_resort SET verification = '$verified' WHERE resort_id = '$resort_id'";
+        // $verified = 'verified';
+        // $q = "UPDATE tbl_resort SET verification = '$verified' WHERE resort_id = '$resort_id'";
         
-        if (mysqli_query($conn, $q)) {
+        // if (mysqli_query($conn, $q)) {
 
-           echo "<script>alert('Verified Permit');</script>";
+        //    echo "<script>alert('Verified Permit');</script>";
 
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
+        // } else {
+        //     echo "Error: " . mysqli_error($conn);
+        // }
+
+        $q_check = "SELECT permit_url FROM tbl_resort WHERE resort_id = '$resort_id'";
+
+$res = mysqli_query($conn, $q_check);
+
+if ($res && mysqli_num_rows($res)){
+
+	$row = mysqli_fetch_assoc($res);
+
+	if($row['permit_url'] == 'no_permit'){
+
+		echo"<script>alert('Cannot Verify. No Image Found');</script>";
+	}else{
+
+		$verified = 'verified';
+        	$q = "UPDATE tbl_resort SET verification = '$verified' WHERE resort_id = '$resort_id'";
+        
+        	if (mysqli_query($conn, $q)) {
+
+          	 echo "<script>alert('Verified Permit');</script>";
+
+       		 } else {
+            		echo "Error: " . mysqli_error($conn);
+       	 	}
+	}
+}else{
+
+	echo "Error: " . mysqli_error($conn);
+}
+
+
+
     }
 } else {
     echo "Parameter 'get' is missing.";
@@ -62,6 +93,7 @@ if (isset($_POST['delete'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>Verification</title>
 </head>
 <style type="text/css">

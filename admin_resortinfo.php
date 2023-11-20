@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['email'])) {
 
-	header("Location: ./user_index.php");
+	header("Location: ./login.php");
 	exit();
 }
 
@@ -28,7 +28,7 @@ if(isset($_POST['res_update'])){
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_resortinfo.css">
-
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>User Dashboard</title>
 </head>
 <body>
@@ -125,7 +125,7 @@ include('./dbcon.php');
 					<p>Office Contact:</p>
 				</div>
 				<div>
-					<p><?php echo $row_resort['resort_office'];?></p>
+					<p>+63 <?php echo $row_resort['resort_office'];?></p>
 				</div>
 			</div>
 			<div class="col-2">
@@ -133,7 +133,7 @@ include('./dbcon.php');
 					<p>Home Contact:</p>
 				</div>
 				<div>
-					<p><?php echo $row_resort['resort_contact'];?></p>
+					<p>+63 <?php echo $row_resort['resort_contact'];?></p>
 				</div>
 			</div>
 			<div class="col-2">
@@ -141,7 +141,7 @@ include('./dbcon.php');
 					<p>Owner Contact:</p>
 				</div>
 				<div>
-					<p><?php echo $row_resort['owner_contact'];?></p>
+					<p>+63 <?php echo $row_resort['owner_contact'];?></p>
 				</div>
 			</div>
 			<div class="col-2">
@@ -149,13 +149,15 @@ include('./dbcon.php');
 					<p>Manager Contact:</p>
 				</div>
 				<div>
-					<p><?php echo $row_resort['manager_contact'];?></p>
+					<p>+63 <?php echo $row_resort['manager_contact'];?></p>
 				</div>
 			</div>
 
 			<div class="col-3">
-				<a type="submit" class="update" name="res_update">Update</a>
-				<a type="submit" class="delete" name="res_delete">Delete</a>
+				<?php 
+				echo "
+				<a href='./crud/resort_update.php?get=".$row_resort['resort_id']."' type='submit' class='update' name='res_update'>Update</a>
+				<a href='./crud/resort_delete.php?get=".$row_resort['resort_id']."' type='submit' class='delete' name='res_delete'>Delete</a> ";?>
 			</div>
 		</div>
 		<?php
@@ -235,8 +237,10 @@ include('./dbcon.php');
 				</div>
 			</div>
 			<div class="col-3">
-				<a type="submit" class="update" name="res_update" >Update</a>
-				<a type="submit" class="delete" name="res_delete" >Delete</a>
+				<?php 
+				echo "
+				<a href='./crud/resort_update.php?get=".$row_resort['resort_id']."' type='submit' class='update' name='res_update'>Update</a>
+				<a href='./crud/resort_delete.php?get=".$row_resort['resort_id']."' type='submit' class='delete' name='res_delete'>Delete</a> ";?>
 			</div>
 		</div>
 				 <?php 
@@ -265,18 +269,18 @@ include('./dbcon.php');
 						</div>
 						<div>
 							Action:
-						</div>
 					</div>
-					<div class="accom_section">
+					
+						</div><div class="accom_section">
 				<?php 
 				include('dbcon.php');
 
 				$req = $_GET['get'];
 
-				$q = "SELECT type_of_room, no_accom_units, accom_capacity, accom_rates
-							FROM tbl_accommodation
+				$q = "SELECT *
+					  FROM tbl_accommodation
 							-- RIGHT JOIN tbl_accommodation
-							WHERE resort_id = '$req'";
+					  WHERE resort_id = '$req'";
 
 
 
@@ -301,10 +305,11 @@ include('./dbcon.php');
 								<p>".$row['accom_rates']."</p>
 							</div>
 							<div>
-								<a type='submit' class='update' name='accom_update'>Update</a>
-								<a type='submit' class='delete' name='accom_delete'>Delete</a>
+								<a href='./crud/accom_update.php?get=".$row['accom_id']."' type='submit' class='update' name='res_update'>Update</a>
+								<a href='./crud/accom_delete.php?get=".$row['accom_id']."' type='submit' class='delete' name='res_delete'>Delete</a> 
 							</div>
 						</div>
+
 					";
 					
 					 }
@@ -363,7 +368,9 @@ include('./dbcon.php');
 
 				include('dbcon.php');
 
-				$q = "SELECT type_of_facility, faci_capacity, no_faci_units, faci_rates FROM tbl_facility WHERE resort_id = '$req'";
+				$q = "SELECT * 
+					FROM tbl_facility 
+					WHERE resort_id = '$req'";
 
 				$res = mysqli_query($conn, $q);
 
@@ -386,8 +393,8 @@ include('./dbcon.php');
 								<p>".$row['faci_rates']."</p>
 							</div>
 							<div>
-								<a type='submit' class='update' name='faci_update' href='update.php'>Update</a>
-								<a type='submit' class='delete' name='faci_delete' href='delete.php'>Delete</a>
+								<a href='./crud/faci_update.php?get=".$row['faci_id']."' type='submit' class='update' name='res_update'>Update</a>
+								<a href='./crud/faci_delete.php?get=".$row['faci_id']."' type='submit' class='delete' name='res_delete'>Delete</a>
 						</div>
 						</div>
 					";
@@ -442,7 +449,9 @@ include('./dbcon.php');
 
 				$req = $_GET['get'];
 
-				$q = "SELECT type_of_service, description, service_rates FROM tbl_service WHERE resort_id = '$req'";
+				$q = "SELECT * 
+					FROM tbl_service 
+					WHERE resort_id = '$req'";
 				$res = mysqli_query($conn,$q);
 
 				if ($res && mysqli_num_rows($res) > 0) {
@@ -461,8 +470,8 @@ include('./dbcon.php');
 								<p>".$row['service_rates']."</p>
 							</div>
 							<div>
-								<a type='submit' class='update' name='faci_update' href='update.php'>Update</a>
-								<a type='submit' class='delete' name='faci_delete' href='delete.php'>Delete</a>
+								<a href='./crud/service_update.php?get=".$row['service_id']."' type='submit' class='update' name='res_update'>Update</a>
+								<a href='./crud/service_delete.php?get=".$row['service_id']."' type='submit' class='delete' name='res_delete'>Delete</a>
 						</div>
 						</div>
 					";
@@ -483,13 +492,17 @@ include('./dbcon.php');
 								<p>No data input</p>
 							</div>
 							<div>
-						<a type="submit" class="update" name="service_update" >Update</a>
-						<a type="submit" class="delete" name="service_delete" >Delete</a>
+								<?php 
+								echo"
+						<a href='./crud/service_update.php?get=".$row['service_id']."' type='submit' class='update' name='res_update'>Update</a>
+								<a href='./crud/service_delete.php?get=".$row['service_id']."' type='submit' class='delete' name='res_delete'>Delete</a> ";
+								?>
 					</div>
-
+					
 				<?php } ?>
 				</div>
 			</div>
+			<!-- Service section -->
 			<div class="btn_section">
 				<a type="submit" class="delete">Delete</a>
 			</div>

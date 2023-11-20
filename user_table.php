@@ -20,8 +20,8 @@ header("Location: ./login.php");
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_table.css">
-
-	<title>Owner Table</title>
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
+	<title>Owner List</title>
 </head>
 <body>
 
@@ -88,6 +88,7 @@ header("Location: ./login.php");
 
 		<!-- MAIN -->
 		<main>
+			<h1>Owner List</h1>
 		<form>
 		<div class="table-list">
 			<?php 
@@ -104,7 +105,10 @@ header("Location: ./login.php");
 							echo"
 									<div class='res_name'>
 										<div>
-											<a href='./resort_info.php?request=".$row['user_id']."'>".ucwords($row['fname'])." ".ucwords($row['lname'])."</a>
+											<a href='./user_info.php?request=".$row['user_id']."'>".ucwords($row['fname'])." ".ucwords($row['lname'])."</a>
+										</div>
+										<div>
+										<a href='./delete_user.php?id=".$row['user_id']."' name='delete' class='delete'><img src='./assets/icons/trash-2.svg'></a>
 										</div>
 									</div>
 									";

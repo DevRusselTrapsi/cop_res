@@ -3,22 +3,11 @@ session_start();
 
 if (!isset($_SESSION['email'])) {
 
-	header("Location: ./user_index.php");
+	header("Location: ./login.php");
 	exit();
 }
 
-$fname = $_SESSION["fname"];
-$user_id = $_SESSION["user_id"];
 
-
-if(isset($_POST['res_update'])){
-		
-
-		// UPDATE DATABASE
-		$sql = "UPDATE clients SET resort_name='$resort_name', resort_address='$resort_address', owner_name='$owner_name', owner_address='$owner_address',resort_office='$resort_office', resort_contact='$resort_contact', owner_contactv='$owner_contact', manager_contact='$manager_contact' WHERE id=$req";
-
-		$result = mysqli_query($conn,$sql);
-	}
 ?>
 
 
@@ -27,13 +16,12 @@ if(isset($_POST['res_update'])){
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_resortinfo.css">
-
-	<title>User Dashboard</title>
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
+	<title>Resort Information</title>
 </head>
 <body>
 
@@ -45,7 +33,8 @@ if(isset($_POST['res_update'])){
 			</div>
 			<div class="profile">
 				<?php 
-include('./dbcon.php');
+
+				include('./dbcon.php');
 
 				$req = $_GET['request'];
 
@@ -58,12 +47,13 @@ include('./dbcon.php');
 							if($r && mysqli_num_rows($r) > 0){
 
 								while($profile = mysqli_fetch_assoc($r)) {
-									?>
+									
+									echo"
 					<!-- this is where the image will popout -->
-				<img src='<?php echo $profile['resort_url']; ?>' alt="Image">
+				<img src='".$profile['resort_url']."' alt='Image'>";
 				
-				<?php 
-					}}
+					}
+				}
 			?>
 			</div>
 

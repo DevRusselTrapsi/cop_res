@@ -16,8 +16,9 @@ $password = "";
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Admin Login</title>
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<title>Admin Login</title>
 </head>
 <style type="text/css">
 
@@ -224,9 +225,8 @@ if (isset($_POST['submit'])) {
  	$q_email2 = "SELECT * FROM tbl_user  WHERE email = '$email'";
  	$result2 = mysqli_query($conn, $q_email2);
 
-
  	// checking the email from the admin
-    if(mysqli_num_rows($result) > 0){
+    if($result && mysqli_num_rows($result) > 0){
 
     	$row_admin = mysqli_fetch_assoc($result);
 
@@ -259,7 +259,7 @@ if (isset($_POST['submit'])) {
     	}
 
    	// checking the email from the user
-    }elseif (mysqli_num_rows($result2) > 0) {
+    }elseif ($result2 && mysqli_num_rows($result2) > 0) {
     	
     	$row_user = mysqli_fetch_assoc($result2);
 
@@ -267,7 +267,6 @@ if (isset($_POST['submit'])) {
 		$_SESSION['user_id'] = $row_user['user_id'];
 		$_SESSION['email'] = $row_user['email'];
 		$_SESSION['fname'] = $row_user['fname'];
-		$_SESSION['resort_id'] = $row_user['resort_id'];
 
 			$hashed_password_user = $row_user['user_pass'];
 

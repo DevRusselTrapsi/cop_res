@@ -3,15 +3,12 @@ session_start();
 
 if(!isset($_SESSION['email'])){
 
-header("Location: ./u_a_login.php");
+	header("Location: ./login.php");
 	exit();
 }
 
 $fname = $_SESSION["fname"];
 $user_id = $_SESSION["user_id"];
-
-
-
 
 ?>
 
@@ -26,7 +23,7 @@ $user_id = $_SESSION["user_id"];
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_list.css">
-
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>Resort Table</title>
 </head>
 <body>

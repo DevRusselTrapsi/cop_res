@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['email'])) {
 
-	header("Location: ./u_a_login.php");
+	header("Location: ./login.php");
 	exit();
 }
 
@@ -13,11 +13,11 @@ if (!isset($_SESSION['email'])) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/admin_search.css">
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>Admin</title>
 </head>
 <body>
@@ -84,16 +84,21 @@ if (!isset($_SESSION['email'])) {
 		<!-- MAIN -->
 		<main>
 			
-			<form class="form-content">
+			<form class="form-content" action="./admin_search.php" method="POST">
 				<div class="search_container">
 					<div>	
-					<input type="search" name="" id="search_engine" class="search">
+					<input type="search" name="search" id="eventSearch" class="search" placeholder="Search">
 					</div>
 					<div>
-						<img src="./assets/icons/search.svg">
+						<button type="submit" class="submit" name="submit">
+							<img src="./assets/icons/search.svg">
+						</button>
 					</div>
 				</div>
-				<div class="search_content">
+				
+			</form>
+
+			<div class="search_content">
 					<?php 
 
 						include('dbcon.php');
@@ -109,7 +114,7 @@ if (!isset($_SESSION['email'])) {
 						echo "
 					<div class='resort_rect'>
 						<div class='img_container'>
-							<img src='./assets/pictures_resort/haya.jpg'>
+							<img src='".$row['resort_url']."'>
 						</div>
 						<div>
 							<a href='./admin_resortinfo.php?get=".$row['resort_id']."'><p>".$row['resort_name']."</p></a>
@@ -121,7 +126,7 @@ if (!isset($_SESSION['email'])) {
 					?>
 					
 				</div>
-			</form>
+
 		</main>
 		<!-- MAIN -->
 	</section>

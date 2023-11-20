@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $owner_contact = $_POST['owner_contact'];
     $manager_contact = $_POST['manager_contact'];
     $verif = "not_verified";
+    $permit_url = "no_permit";
 
     // resort image upload
     $resort_url = $_FILES['resort_url']['name'];
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resort_path = $estab_dir . $resort_url;
 
     // Insert data into the tbl_resort table
-    $query_resort = "INSERT INTO tbl_resort (user_id, resort_name, owner_name, owner_address, owner_contact, resort_office, resort_contact, manager_contact, resort_url, verification, resort_address) VALUES ('$user_id', '$resort_name', '$owner_name', '$owner_address', '$owner_contact', '$resort_office', '$resort_contact', '$manager_contact', '$resort_path','$verif', '$resort_address')";
+    $query_resort = "INSERT INTO tbl_resort (user_id, resort_name, owner_name, owner_address, owner_contact, resort_office, resort_contact, manager_contact, resort_url, verification, permit_url, resort_address) VALUES ('$user_id', '$resort_name', '$owner_name', '$owner_address', '$owner_contact', '$resort_office', '$resort_contact', '$manager_contact', '$resort_path','$verif','$permit_url', '$resort_address')";
 
     $result = mysqli_query($conn, $query_resort);
 
@@ -163,18 +164,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // service end query
 
     if ($uploadSuccess) {
-
-        $_SESSION['status'] = "success"; 
-        $_SESSION['success'] = "Survey Form Uploaded Successfuly";
+        
+        echo "<script>alert('Survey Form Uploaded Successfuly')</script>";
         header("Location: ./user_addresort.php");
         
-
     } else {
 
-        
-        $_SESSION['status'] = "error";
-        $_SESSION['error'] = "Some of the files are unable to upload";
-        header("Location: ./user_addresort.php");
+       echo "<script>alert('Some of the files are unable to upload')</script>";
+       header("Location: ./user_addresort.php");
     }
 
         if ($stmt !== null) {

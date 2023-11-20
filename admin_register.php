@@ -4,7 +4,7 @@ session_start();
 
 if (!isset($_SESSION['email'])) {
 
-	header("Location: ./u_a_login.php");
+	header("Location: ./login.php");
 	exit();
 }
 
@@ -66,10 +66,9 @@ mysqli_close($conn);
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
 	<title>Admin Login</title>
-	<link rel="stylesheet" type="text/css" href="
-
-	">
+	<link rel="stylesheet" type="text/css" href="">
 </head>
 <style type="text/css">
 
