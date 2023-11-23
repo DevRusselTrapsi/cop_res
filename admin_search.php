@@ -7,6 +7,8 @@ if (!isset($_SESSION['email'])) {
 	exit();
 }
 
+$_SESSION['name'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +19,7 @@ if (!isset($_SESSION['email'])) {
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/admin_search.css">
-	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
 	<title>Admin</title>
 </head>
 <body>
@@ -28,7 +30,7 @@ if (!isset($_SESSION['email'])) {
         <a href="./admin_dash.php" class="brand">
             <i><img src="./assets/img/tourism.jpg" class="logo"></i>
             <p>WELCOME!</p>
-            <span>ADMIN</span>
+            <span><?php echo ucfirst($_SESSION['name']);?></span>
         </a>
 		<ul class="side-menu top">
             <li>
@@ -37,12 +39,12 @@ if (!isset($_SESSION['email'])) {
                     <span class="text">Dashboard</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="./admin_addresort.php">
                     <i class='bx bxs-plus-circle'></i>
                     <span class="text">Add Resort</span>
                 </a>
-            </li>
+            </li> -->
             <li class="active">
                 <a href="./admin_search.php">
                     <i class='bx bxs-search-alt-2' ></i>

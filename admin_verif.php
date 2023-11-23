@@ -8,80 +8,100 @@
 	exit();
 }
 
+$name = $_SESSION['name'];
+
 include('dbcon.php');
+
+
 
 if (isset($_GET['get'])) {
 
     $resort_id = $_GET['get'];
 
     if (isset($_POST['submit'])) {
-        // $verified = 'verified';
-        // $q = "UPDATE tbl_resort SET verification = '$verified' WHERE resort_id = '$resort_id'";
-        
-        // if (mysqli_query($conn, $q)) {
-
-        //    echo "<script>alert('Verified Permit');</script>";
-
-        // } else {
-        //     echo "Error: " . mysqli_error($conn);
-        // }
 
         $q_check = "SELECT permit_url FROM tbl_resort WHERE resort_id = '$resort_id'";
 
-$res = mysqli_query($conn, $q_check);
+		$res = mysqli_query($conn, $q_check);
 
-if ($res && mysqli_num_rows($res)){
+		if ($res && mysqli_num_rows($res)){
 
-	$row = mysqli_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 
-	if($row['permit_url'] == 'no_permit'){
+			if($row['permit_url'] == 'no_permit'){
 
-		echo"<script>alert('Cannot Verify. No Image Found');</script>";
-	}else{
+				echo"<script>alert('Cannot Verify. No Image Found');</script>";
+			}else{
 
-		$verified = 'verified';
-        	$q = "UPDATE tbl_resort SET verification = '$verified' WHERE resort_id = '$resort_id'";
+				$verified = 'verified';
+				$comment = '';
+
+        		$q = "UPDATE tbl_resort SET verification = '$verified',verifiedby = '$name', comment = '' WHERE resort_id = '$resort_id'";
         
-        	if (mysqli_query($conn, $q)) {
+        		if (mysqli_query($conn, $q)) {
 
-          	 echo "<script>alert('Verified Permit');</script>";
+          	 		echo "<script>alert('Verified Permit');</script>";
 
-       		 } else {
+       		 	} else {
+            	
             		echo "Error: " . mysqli_error($conn);
-       	 	}
+       	 		}
+			}
+		}else{
+
+			echo "Error: " . mysqli_error($conn);
+		}
+
 	}
-}else{
 
-	echo "Error: " . mysqli_error($conn);
-}
-
-
-
-    }
 } else {
+
     echo "Parameter 'get' is missing.";
 }
 
 
-   $resort_id = $_GET['get'];
 
 if (isset($_POST['delete'])) {
 
+ 	$resort_id = $_GET['get'];
 
 		$not_verif = "not_verified";
-		
-		$q = "UPDATE tbl_resort SET verification = '$not_verif' WHERE resort_id = '$resort_id'";
+		$currentDate = date('Y-m-d');
+		$comment = $_POST['comment'];
 
-		$res = mysqli_query($conn, $q);
 
-		if($res){
+$q2 = "SELECT permit_url FROM tbl_resort WHERE resort_id = $resort_id"; // query for the permit_url
 
-			echo "<script>alert('Permit Unverified');</script>";
+$res_check = mysqli_query($conn, $q2);
+
+	if($res_check && mysqli_num_rows($res_check) > 0){
+
+	$row_check = mysqli_fetch_assoc($res_check);
+
+		if($row_check['permit_url'] == 'no_permit'){
+			// if there is no permit admin is not allow to verify the status
+			echo"<script>alert('Cannot Unverify. No Image Found');</script>";
+
 		}else{
+
+			$q = "UPDATE tbl_resort SET verification = '$not_verif', event_date = '$currentDate', verifiedby = '$name', comment = '$comment' WHERE resort_id = '$resort_id'";
+
+			$res = mysqli_query($conn, $q);
+
+			if($res){
+
+				echo "<script>alert('Permit Unverified');</script>";
+			
+			}else{
 
 			echo "Error: ".mysqli_error($conn);
 		}
+
 	}
+
+}
+
+}
 
 
 ?>
@@ -93,7 +113,8 @@ if (isset($_POST['delete'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
 	<title>Verification</title>
 </head>
 <style type="text/css">
@@ -101,30 +122,6 @@ if (isset($_POST['delete'])) {
 	{
 		font-family: 'Lato', sans-serif;;
 		background-color: lightgrey;
-	}
-	.navbar
-	{
-		position: absolute;
-		top: 0;
-		left: 0;
-		background-color: white;
-		width: 100%;
-		height: 50px;
-	}
-	.container
-	{
-		margin-top: 100px;
-		border: 2px solid black;
-		/*width: 70%;*/
-		min-width: 200px;
-		max-width: 1200px;
-		width: 100%;
-		background-color: white;
-		display: inline-block;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
 	}
 	.content > div > img
 	{
@@ -150,7 +147,7 @@ if (isset($_POST['delete'])) {
 		font-weight: bold;
 
 	}
-	.btn
+	.btn2
 	{
 		margin-top: 50px;
 		margin-bottom: 10px;
@@ -160,7 +157,7 @@ if (isset($_POST['delete'])) {
 		justify-content: flex-end;
 	}
 
-	.btn > div:last-child > button
+	.btn2 > div:last-child > button
 	{
 		background-color: red;
 		padding: 10px 20px;
@@ -176,14 +173,13 @@ if (isset($_POST['delete'])) {
 </style>
 <body>
 
-<nav class="navbar">
-	<div>
-		<a href="./admin_dash.php"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M12.707 17.293 8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z"></path></svg></a>
-	</div>
-</nav>
-
 <form method="POST">
-<div class="container">
+
+<div class="container-lg border border-5-warning bg-light mt-5 mb-5 p-4 d-block justify-content-center text-center shadow">
+
+	<div class="d-flex justify-content-start">
+		<a href="./admin_dash.php" type="submit" class="btn btn-primary">Cancel</a>
+	</div>
 	<?php 
 
 		include('dbcon.php');
@@ -208,35 +204,40 @@ if (isset($_POST['delete'])) {
 		</div>
 		<div>
 			<?php
-			if(!empty($row['permit_url'])){
+			if($row['permit_url'] == 'no_permit'){
 				
 				echo"
 			
-			<img src='".$row['permit_url']."'>";
+			<p class='mt-5 border p-5 shadow'>NO PERMIT SUBMITTED</p>";
 
 			}else{
 
-				echo"
+				
+			echo"
 			
-			<h1>NO PERMIT SUBMITTED</h1>";
+			<img src='".$row['permit_url']."'>";
 			}
 			?>
 		</div>
 		
 	</div>
-	<?php 
-	
-	}
-	?>
-	<div class="btn">
-		<div>
+
+	<div class="form-floating mt-3">
+  		<textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <label for="floatingTextarea2">Comments</label>
+</div>
+
+	<?php } ?>
+
+		<div class="btn2">
+			<div>
 			<button type="submit" value="submit" name="submit">Verify</button>
-		</div>
-		<div>
-			<button type="submit" value="submit" name="delete" class="delete">Unverified</button>
+			</div>
+			<div>
+				<button type="submit" value="submit" name="delete" class="delete">Unverified</button>
+			</div>
 		</div>
 	</div>
-</div>
 </form>
 
 <script src="./js/sweetalert.min.js"></script>

@@ -16,9 +16,9 @@ $password = "";
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<title>Admin Login</title>
+	<title>Login</title>
 </head>
 <style type="text/css">
 
@@ -239,6 +239,7 @@ if (isset($_POST['submit'])) {
 			if (password_verify($password, $hashed_password)) {
 				
 				$_SESSION['email'] = $row_admin['email'];
+				$_SESSION['name'] = $row_admin['name'];
 
 				header("Location: admin_dash.php");
 
@@ -308,4 +309,3 @@ if (isset($_POST['submit'])) {
 
 </body>
 </html>
-

@@ -8,7 +8,7 @@ if (!isset($_SESSION['email'])) {
 	exit();
 }
 
-$resort_id = $_SESSION['res_id'];
+$id = $_SESSION['res_id'];
 
 include('../dbcon.php');
 
@@ -20,7 +20,7 @@ $req = $_GET['updt'];
 	$description = $_POST['description'];
 	$service_rates = $_POST['service_rates'];
 
-	$q = "UPDATE tbl_service SET type_of_service = '$type_of_service', description = '$description', service_rates = '$service_rates' WHERE resort_id = $req";
+	$q = "UPDATE tbl_service SET type_of_service = '$type_of_service', description = '$description', service_rates = '$service_rates' WHERE service_id = $req";
 
 	$res = mysqli_query($conn, $q);
 
@@ -52,12 +52,14 @@ $req = $_GET['updt'];
 	<div>
 		<?php
 		echo"
-		<a href='../admin_resortinfo.php?get=".$resort_id."' type='submit' class='btn btn-secondary'>Cancel</a>
+		<a href='../user_resortinfo.php?request=".$id."' type='submit' class='btn btn-secondary'>Cancel</a>
 		";?>
 	</div>
 	<div class="d-flex justify-content-center">
 
-		<h3>Services</h3>
+		<h3>
+			Services
+		</h3>
 	</div>
 
 			<?php 

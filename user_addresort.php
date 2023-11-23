@@ -254,7 +254,7 @@ $user_id = $_SESSION["user_id"];
 									<input type="text" class="input" name="faci_capacity[]" required>
 								</div>
 								<div>
-									<input type="text" class="input" name="faci_rates[]" required>
+									<input type="text" class="input" name="faci_rates[]">
 								</div>
 								<div>
 									<input type="file" class="insert_img" name="faci_url[]" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>

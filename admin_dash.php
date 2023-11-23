@@ -7,6 +7,7 @@
     exit();
 }
 
+$name =$_SESSION['name'];
     // Implement session later after you manage to fix the login system
 ?>
 
@@ -19,7 +20,7 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- Add your custom CSS -->
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
+    <link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
     <title>Admin</title>
 </head>
 <body>
@@ -28,7 +29,7 @@
         <a href="./admin_dash.php" class="brand">
             <i><img src="./assets/img/tourism.jpg" class="logo"></i>
             <p>WELCOME!</p>
-            <span>ADMIN</span>
+            <span><?php echo ucwords($name);?></span>
         </a>
         <ul class="side-menu top">
             <li class="active">
@@ -37,12 +38,12 @@
                     <span class="text">Dashboard</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="./admin_addresort.php">
                     <i class='bx bxs-plus-circle'></i>
                     <span class="text">Add Resort</span>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a href="./admin_search.php">
                     <i class='bx bxs-search-alt-2' ></i>
@@ -90,6 +91,7 @@
             <!-- Box Info -->
             <ul class="box-info">
                 <!-- Replace the values with your data -->
+                <a href="#1#" style="text-decoration: none; color: none;">
                 <li>
                     <i class='bx bxs-building-house'></i>
                     <span class="text">
@@ -107,7 +109,9 @@
                         <p>Establishment</p>
                     </span>
                 </li>
-                <li>
+                 </a>
+                <a href="#2#">
+                <li> 
                     <i class='bx bxs-group'></i>
                     <span class="text">
                         <?php
@@ -122,8 +126,11 @@
 
                         ?>
                         <p>User</p>
+
                     </span>
                 </li>
+                </a>
+                <a href="#3#">
                 <li>
                     <i class='bx bxs-user-pin'></i>
                     <span class="text">
@@ -141,6 +148,8 @@
                         <p>Owner</p>
                     </span>
                 </li>
+                 </a>
+                 <a href="#4#">
                 <li>
                     <i class='bx bxs-show'></i>
                     <span class="text">
@@ -169,6 +178,7 @@
                         <p>Views</p>
                     </span>
                 </li>
+                 </a>
             </ul>
             <!-- End Box Info -->
 
@@ -183,7 +193,11 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Barangay</th>
+                                <th>Owner</th>
                                 <th>Status</th>
+                                <th></th>
+                                <th>Comments</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -197,29 +211,156 @@
                             $res = mysqli_query($conn, $q);
 
                             if ($res && mysqli_num_rows($res) > 0) {
+
                             
                                 while($row = mysqli_fetch_assoc($res)){
 
-                            echo "
+
+                                     echo "
                             <tr>
                                 <td>
                                     <img src='".$row['resort_url']."'>
-                                    <p><a href='./admin_verif.php?get=".$row['resort_id']."'>".$row['resort_name']."</a></p>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                    <p>".$row['resort_name']."</p></a>
                                 </td>";
 
-                                if($row['verification'] === 'not_verified'){
-                            echo"
-                                <td><span class='status pending'>Not Verified</span></td>
+                                    // check if there is an image submission
+                                    if($row['permit_url'] == 'no_permit'){
+
+                                        //Pending
+
+                                        echo"
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 12px;'>
+                                        ".ucwords($row['resort_address'])."
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                        ".ucwords($row['owner_name'])."
+                                   </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                        <span class='status pending'>Pending</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                    
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                    
+                                    </a>
+                                </td>
                             </tr>";
-                                    }else{
+
+                            }else{
+                                // if there is a permit submission proceed on checking the verification
+
+                                    $currentDate = $row['event_date'];
+
+                                    $formattedDate = date('m-d-Y', strtotime($currentDate));
+                           
+
+                                if($row['verification'] === 'verified'){
+                            echo"
+                                 <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 12px;'>
+                                        ".ucwords($row['resort_address'])."
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                        ".ucwords($row['owner_name'])."
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                        <span class='status verified'>Verified</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 10px;'>
+                                        verified by ".ucwords($row['verifiedby'])." on ".$formattedDate."
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                        ".ucwords($row['comment'])."
+                                    </a>
+                                </td>
+                            </tr>";
+                                        // Not Verified
+                                    }elseif($row['verification'] === 'not_verified'){
 
                             echo"
-                                <td><span class='status verified'>Verified</span></td>
+                                 <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 12px;'>
+                                        ".ucwords($row['resort_address'])."
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                   ".ucwords($row['owner_name'])."
+                                   </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                        <span class='status unverified'>Unverified</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 10px;'>
+                                        Unverified by ".ucwords($row['verifiedby'])." on ".$formattedDate."
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 10px; word-wrap: break-word; font-weight: bold;'>
+                                        ".ucfirst($row['comment'])."
+                                    </a>
+                                </td>
+                            </tr>";
+                            }else{
+                            // end of checking if there is image submitted
+                            
+                            // pending if there is an image but hasn't verified yet
+
+                            echo"
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 12px;'>
+                                        ".ucwords($row['resort_address'])."
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                        ".ucwords($row['owner_name'])."
+                                   </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                        <span class='status pending'>Pending</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                    
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
+                                    
+                                    </a>
+                                </td>
                             </tr>";
                                     }
                                 }
                             }
+                        }
                             ?>
+
                             <!-- Add more rows as needed -->
                         </tbody>
                     </table>

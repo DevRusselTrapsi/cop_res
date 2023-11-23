@@ -23,7 +23,7 @@ $user_id = $_SESSION["user_id"];
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_list.css">
-	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
 	<title>Resort Table</title>
 </head>
 <body>
@@ -32,7 +32,7 @@ $user_id = $_SESSION["user_id"];
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="./user_addresort.php" class="brand">
-			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
+			<i><img src="./assets/img/tourism-favicon.png" class="logo"></i>
 			<p>WELCOME!</p>
 			<span><?php echo ucwords($fname);?></span>
 		</a>
@@ -108,8 +108,10 @@ $user_id = $_SESSION["user_id"];
 
 						while($row = mysqli_fetch_assoc($res)){
 
+							$_SESSION['res_id'] = $row['resort_id'];
+
 							echo"
-									<div class='res_name'><a href='./resort_info.php?request=".$row['resort_id']."'>".ucwords($row['resort_name'])."</a></div>";
+									<a href='./user_resortinfo.php?request=".$row['resort_id']."'><div class='res_name'>".ucwords($row['resort_name'])."</div></a>";
 						 }
 						} 
 						?>

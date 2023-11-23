@@ -9,6 +9,7 @@ if (!isset($_SESSION['email'])) {
 }
 
 include('../dbcon.php');
+$id = $_SESSION['res_id'];
 
 
 if(isset($_POST['update'])){
@@ -59,7 +60,7 @@ $req = $_GET['updt'];
 	<div>
 		<?php
 		echo"
-		<a href='../admin_resortinfo.php?get=".$req= $_GET['updt']."' type='submit' class='btn btn-secondary'>Cancel</a>
+		<a href='../user_resortinfo.php?request=".$id."' type='submit' class='btn btn-secondary'>Cancel</a>
 		";?>
 	</div>
 	<div class="d-flex justify-content-center">

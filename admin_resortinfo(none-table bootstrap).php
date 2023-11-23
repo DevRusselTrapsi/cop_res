@@ -60,7 +60,7 @@ include('./dbcon.php');
 			</div>
 
 	<div class="container">
-				<p>Resorts Info</p>
+				<p>Resorts Info <?php echo $_SESSION['res_id']; ?></p>
 
 		<div class="res_content">
 				<?php 
@@ -230,156 +230,271 @@ include('./dbcon.php');
 
 				<h3>Accommodations</h3>
 
-<div class="table-responsive-md d-flex justify-content-center">
-			<table class="table" style="width: 100%;">
-	<thead style="background-color: rgba(0, 197, 186, 0.72)">
-		<tr>
-			<td>Type of Room</td>
-
-			<td>No. of Rooms</td>
-
-			<td>Capacity</td>
-
-			<td>Price</td>
-
-			<td>Action</td>
-		</tr>
-	</thead>
-	<tbody style="background-color: rgba(84, 88, 88, 0.14);">
-<?php
-include('dbcon.php');
+				<div class="content">
+					<div class="accom_header">
+						<div>
+							<p>Type of Room:</p>
+						</div>
+						<div>
+							<p>No. of Rooms:</p>
+						</div>
+						<div>
+							<p>Capacity:</p>
+						</div>
+						<div>
+							<p>Price:</p>
+						</div>
+						<div>
+							Action:
+						</div>
+					</div>
+				<div class="accom_section">
+				<?php 
+				include('dbcon.php');
 
 				$req = $_GET['get'];
 
-				$q = "SELECT * 
-					FROM tbl_accommodation 
-					WHERE resort_id = '$req'";
+				$q = "SELECT *
+					  FROM tbl_accommodation
+							-- RIGHT JOIN tbl_accommodation
+					  WHERE resort_id = '$req'";
+
+
+
 				$res = mysqli_query($conn,$q);
 
-				if ($res && mysqli_num_rows($res) > 0) {
+				if (mysqli_num_rows($res) > 0) {
     				// Fetch the first row from the result set as an associative array.
    				 while ($row = mysqli_fetch_assoc($res)) {
-		echo"
-		<tr>
-			<td> ".$row['type_of_room']."</td>
-			<td>".$row['no_accom_units']." </td>
-			<td> ".$row['accom_capacity']."</td>
-			<td> ".$row['accom_rates']."</td>
-			<td>
-			<a href='./crud/accom_update.php?updt=".$row['accom_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+   				 
+   				 echo"
+   				 <div class='col'>
+							<div>
+								<p>".$row['type_of_room']."</p>
+							</div>
+							<div>
+								<p>".$row['no_accom_units']."</p>
+							</div>
+							<div>
+								<p>".$row['accom_capacity']."</p>
+							</div>
+							<div>
+								<p>".$row['accom_rates']."</p>
+							</div>
+							<div>
+								<a href='./crud/accom_update.php?updt=".$row['accom_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+								<a href='./crud/accom_delete.php?del=".$row['accom_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a> 
+							</div>
+						</div>
 
-				<a href='./crud/accom_delete.php?del=".$row['accom_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
-			</td>
-		</tr>
+					";
+					
+					 }
+					}else{
 
-		"; }
-	}else{
+					?>
+					<div class='col'>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+						<a type="submit" class="update" name="accom_update" >Update</a>
+						<a type="submit" class="delete" name="accom_delete" >Delete</a>
+					</div>
 
-		echo"
-		<tr>
-			<td>No data Found</td>
-			<td>No data Found</td>
-			<td>No data Found</td>
-			<td>No data Found</td>
-			<td>
-			<a href='./crud/service_update.php?updt=".$row['accom_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+						<?php 
+							} 
+						?>
 
-				<a href='./crud/service_delete.php?del=".$row['accom_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
-			</td>
-		</tr>";
-}
-?>
-	</tbody>
-</table>
-</div>
+					</div>
+				</div>
 
-<!-- end of Accommodation Table -->
 
 				<!-- Facilities -->
 
 		<h3>Existing Facilities and Amenities</h3>
 
 
-<div class="table-responsive-md d-flex justify-content-center">
-			<table class="table" style="width: 100%;">
-	<thead style="background-color: rgba(0, 197, 186, 0.72)">
-		<tr>
-			<td>Type of Facility</td>
+				<div class="content">
+					<div class="faci_header">
+						<div>
+							<p>Type of Facility:</p>
+						</div>
+						<div>
+							<p>No. of Units:</p>
+						</div>
+						<div>
+							<p>Capacity:</p>
+						</div>
+						<div>
+							<p>Price:</p>
+						</div>
+						<div>
+							Action:
+						</div>
+					</div>
+					<div class="faci_section">
 
-			<td>No. of Units</td>
+					<?php 
 
-			<td>Capacity</td>
+				include('dbcon.php');
 
-			<td>Price</td>
+				$q = "SELECT * 
+					FROM tbl_facility 
+					WHERE resort_id = '$req'";
 
-			<td>Action</td>
-		</tr>
-	</thead>
-	<tbody style="background-color: rgba(84, 88, 88, 0.14);">
-<?php
-include('dbcon.php');
+				$res = mysqli_query($conn, $q);
+
+				if ($res && mysqli_num_rows($res) > 0) {
+    				// Fetch the first row from the result set as an associative array.
+   				 while ($row = mysqli_fetch_assoc($res)) {
+
+   				 echo"
+   				 <div class='col'>
+							<div>
+								<p>".$row['type_of_facility']."</p>
+							</div>
+							<div>
+								<p>".$row['no_faci_units']."</p>
+							</div>
+							<div >
+								<p>".$row['faci_capacity']."</p>
+							</div>
+							<div >
+								<p>".$row['faci_rates']."</p>
+							</div>
+							<div>
+								<a href='./crud/faci_update.php?updt=".$row['faci_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+								<a href='./crud/faci_delete.php?del=".$row['faci_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;'name='res_delete'>Delete</a>
+						</div>
+						</div>
+					";
+						}
+				}else{
+					?>
+					<div class='col'>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+						<a type="submit" class="update" name="faci_update" >Update</a>
+						<a type="submit" class="delete" name="faci_delete" >Delete</a>
+					</div>
+
+					<?php } ?>
+				</div>
+			</div>
+
+				<!-- End of Facilities -->
+
+			<!-- Service -->
+
+				<h3>Services</h3>
+
+				<!-- <div class="content">
+
+					<div class="service_header">
+						<div>
+							<p>Type of Service:</p>
+						</div>
+						<div>
+							<p>Descriptions:</p>
+						</div>
+						<div>
+							<p>Price:</p>
+						</div>
+						<div>
+							Action:
+						</div>
+					</div>
+					<div class="service_section">
+			<?php 
+				include('dbcon.php');
 
 				$req = $_GET['get'];
 
 				$q = "SELECT * 
-					FROM tbl_facility 
+					FROM tbl_service 
 					WHERE resort_id = '$req'";
 				$res = mysqli_query($conn,$q);
 
 				if ($res && mysqli_num_rows($res) > 0) {
     				// Fetch the first row from the result set as an associative array.
    				 while ($row = mysqli_fetch_assoc($res)) {
-		echo"
-		<tr>
-			<td> ".$row['type_of_facility']."</td>
-			<td>".$row['no_faci_units']." </td>
-			<td> ".$row['faci_capacity']."</td>
-			<td> ".$row['faci_rates']."</td>
-			<td>
-			<a href='./crud/faci_update.php?updt=".$row['faci_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+   				 	
+   				 echo"
+   				 <div class='col'>
+							<div>
+								<p>".$row['type_of_service']."</p>
+							</div>
+							<div>
+								<p>".$row['description']."</p>
+							</div>
+							<div>
+								<p>".$row['service_rates']."</p>
+							</div>
+							<div>
+								<a href='./crud/service_update.php?updt=".$row['service_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+								<a href='./crud/service_delete.php?del=".$row['service_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
+						</div>
+						</div>
+					";
 
-				<a href='./crud/faci_delete.php?del=".$row['faci_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
-			</td>
-		</tr>
+						}
 
-		"; }
-	}else{
+					}else{
+						?> 
 
-		echo"
-		<tr>
-			<td>No data Found</td>
-			<td>No data Found</td>
-			<td>No data Found</td>
-			<td>No data Found</td>
-			<td>
-			<a href='./crud/service_update.php?updt=".$row['faci_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
-
-				<a href='./crud/service_delete.php?del=".$row['faci_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
-			</td>
-		</tr>";
-}
-?>
-	</tbody>
-</table>
-</div>
-
-				<!-- End of Facilities -->
-
-			<!-- table Service -->
-
-				<h3>Services</h3>
-
-<div class="table-responsive-md d-flex justify-content-center">
-			<table class="table" style="width: 100%;">
+					<div class='col'>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+								<p>No data input</p>
+							</div>
+							<div>
+								<?php 
+								echo"
+								<a href='./crud/service_update.php?get=".$row['service_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+								<a href='./crud/service_delete.php?get=".$row['service_id']."' type='submit' class='delete' style='color:black;'name='res_delete'>Delete</a> ";
+								?>
+					</div>
+					
+				<?php } ?>
+				</div>
+			</div> -->
+<div class="table-responsive-md overflow-y d-flex justify-content-center">
+			<table class="table" style="width: 80%;">
 	<thead style="background-color: rgba(0, 197, 186, 0.72)">
 		<tr>
-			<td>Type of Service</td>
+			<td>Type of Service </td>
 
 			<td>Descriptions</td>
 
-			<td>Price</td>
+			<td>Price </td>
 
-			<td>Action</td>
+			<td>Action </td>
 		</tr>
 	</thead>
 	<tbody style="background-color: rgba(84, 88, 88, 0.14);">
@@ -409,33 +524,18 @@ include('dbcon.php');
 		</tr>
 
 		"; }
-	}else{
-
-		echo"
-		<tr>
-			<td>No data Found</td>
-			<td>No data Found</td>
-			<td>No data Found</td>
-			<td>
-			<a href='./crud/service_update.php?updt=".$row['service_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
-
-				<a href='./crud/service_delete.php?del=".$row['service_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
-			</td>
-		</tr>";
-}
+	}
 ?>
 	</tbody>
 </table>
 </div>
-				<!-- service table end -->
-
+			<!-- Service section -->
 			<div class="d-flex justify-content-lg-end mt-4">
 				<a type="submit" class="btn btn-danger pe-2 ps-2 delete">Delete</a>
 			</div>
 		</div>
 	</div>
-
-
+<!-- </form> -->
 	</main>
 		<!-- MAIN -->
 	</section>

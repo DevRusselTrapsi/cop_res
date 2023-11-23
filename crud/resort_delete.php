@@ -1,8 +1,22 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['email'])) {
+
+	header("Location: ./login.php");
+	exit();
+}
+
+include('../dbcon.php');
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="../assets/img/tourism-favicon.jpg">
 	<title>Delete Resort</title>
 </head>
 <body>
@@ -13,7 +27,7 @@
 		include('../dbcon.php');
 
 			// use session resort_id to the user_addresort to get the data from the tbl_resort 
-			$req = $_GET['get'];
+			$req = $_GET['del'];
 
 			$sql = "SELECT *
 					FROM tbl_resort

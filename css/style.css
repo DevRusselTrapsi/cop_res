@@ -496,10 +496,17 @@ body {
     border-radius: 20px;
     font-weight: 700;
 }
-#content main .table-data .order table tr td .status.pending {
+/*red when not verified*/
+#content main .table-data .order table tr td .status.unverified {
     background: red;
     font-size: .7rem;
 }
+/*orange when pending*/
+#content main .table-data .order table tr td .status.pending {
+    background: orange;
+    font-size: .7rem;
+}
+/*green if verified*/
 #content main .table-data .order table tr td .status.verified {
     background: rgba(32, 232, 42, 1);
     font-size: .7rem;

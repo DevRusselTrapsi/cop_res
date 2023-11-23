@@ -13,7 +13,7 @@ $user_id = $_SESSION["user_id"];
 include('dbcon.php');
 
 if (isset($_POST['submit'])) {
-    $verif = "unverified";
+    $verif = "pending";
     
     // Get the uploaded file details
     $file_name = $_FILES['permit_url']['name'];
@@ -148,7 +148,7 @@ if (isset($_POST['submit'])) {
 									<div class='text'>
 										<div>
 
-										<h1 style='font-size: 2.5rem;'><a href='bp_submit.php?get=".$row['resort_id']."'>".$row['resort_name']."</a></h1>
+										<a href='bp_submit.php?get=".$row['resort_id']."'><h1 style='font-size: 2rem;'>".$row['resort_name']."</h1></a>
 										</div>
 									</div>
 								
@@ -162,10 +162,14 @@ if (isset($_POST['submit'])) {
 	   				 	
 	   				 	echo '<div class="status" style="background-color: rgba(67, 255, 32, 1);">Verified</div>';
 
-   				 	}else{
+   				 	}elseif($verif == 'not_verified'){
 
    				     echo '<div class="status" style="background-color: red;">Not Verified</div>';
-   				 	}?>
+   				 	}else{
+
+   				 		echo '<div class="status" style="background-color: orange;">Pending</div>';
+   				 	}
+   				 	?>
 
 					</div>
 				</div>

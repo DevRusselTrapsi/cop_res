@@ -1,9 +1,14 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['email'])) {
+
+    header("Location: ./login.php");
+    exit();
+}
+$_SESSION['name'];
+
 include './dbcon.php';
-// $_SERVER['REQUEST_METHOD'] == 'POST'
-//POST is connected to the input using the request method
 
     $email = "";
     $fname = "";
@@ -76,8 +81,8 @@ mysqli_close($conn);
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/admin_search.css">
-	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
-	<title>Admin</title>
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
+	<title>Admin Create User</title>
 </head>
 	<style type="text/css">
 		.container
@@ -216,7 +221,7 @@ mysqli_close($conn);
         <a href="./admin_dash.php" class="brand">
             <i><img src="./assets/img/tourism.jpg" class="logo"></i>
             <p>WELCOME!</p>
-            <span>ADMIN</span>
+            <span><?php echo ucfirst($_SESSION['name']);?></span>
         </a>
 		<ul class="side-menu top">
             <li>
@@ -225,12 +230,12 @@ mysqli_close($conn);
                     <span class="text">Dashboard</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="./admin_addresort.php">
                     <i class='bx bxs-plus-circle'></i>
                     <span class="text">Add Resort</span>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a href="./admin_search.php">
                     <i class='bx bxs-search-alt-2' ></i>

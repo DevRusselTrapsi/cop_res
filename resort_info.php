@@ -7,6 +7,7 @@ if (!isset($_SESSION['email'])) {
 	exit();
 }
 
+$req = $_GET['request'];
 
 ?>
 
@@ -149,7 +150,6 @@ if (!isset($_SESSION['email'])) {
 
 			<div class="col-3">
 				<a type="submit" class="update" name="res_update">Update</a>
-				<a type="submit" class="delete" name="res_delete">Delete</a>
 			</div>
 		</div>
 		<?php
