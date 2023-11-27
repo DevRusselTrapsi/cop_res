@@ -123,7 +123,7 @@ $_SESSION['res_id'] = "$req";
 			<div class="d-flex justify-content-end">
 				<?php 
 				echo "
-				<a href='./crud/resort_update.php?updt=".$row_resort['resort_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'><img src='./assets/icons/edit.svg'></a>
+				<a href='./crud_ownerlist/resort_update.php?updt=".$row_resort['resort_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'><img src='./assets/icons/edit.svg'></a>
 				";?>
 			</div>
 		</div>

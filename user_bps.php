@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_bps.css">
-	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
 	<title>User Dashboard</title>
 </head>
 <body>
@@ -128,19 +128,21 @@ if (isset($_POST['submit'])) {
 				</div>
 				
 				
-				<div class="list-table">
+				<div class="list-table" >
 					
 
 					<?php
 						include('dbcon.php');
 
-						$q = "SELECT resort_id, resort_name, verification, resort_url FROM tbl_resort WHERE user_id = '$user_id'";
+						$q = "SELECT * FROM tbl_resort WHERE user_id = '$user_id'";
 
 						$res = mysqli_query($conn, $q);
 						
 						if (mysqli_num_rows($res) > 0){
 
 							while ($row = mysqli_fetch_assoc($res)) {
+
+								if($row['archive'] == 'show'){
 								
 								$resort_url = $row['resort_url'];
 								$verif = $row['verification'];
@@ -180,6 +182,8 @@ if (isset($_POST['submit'])) {
 					</div>
 				</div>
 					<?php
+					break;
+								}
 							}
 						
 						}

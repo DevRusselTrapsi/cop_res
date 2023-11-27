@@ -101,11 +101,17 @@ $user_id = $_SESSION["user_id"];
 
 					include './dbcon.php';
 
-					$q = "SELECT * FROM tbl_resort WHERE user_id = '$user_id'";
+					$q = "SELECT archive FROM tbl_resort WHERE user_id = '$user_id'";
 
 					$res = mysqli_query($conn, $q);
 
 					if ($res && mysqli_num_rows($res) > 0){
+
+$q = "SELECT * FROM tbl_resort WHERE user_id = '$user_id'";
+
+					$res2 = mysqli_query($conn, $q);
+
+					if ($res2 && mysqli_num_rows($res2) > 0){
 
 						while($row = mysqli_fetch_assoc($res)){
 
@@ -115,20 +121,17 @@ $user_id = $_SESSION["user_id"];
 							
 								echo"
 									<a href='./user_resortinfo.php?request=".$row['resort_id']."'>
-										<div class='res_name'>".ucwords($row['resort_name'])."<a href='./crud_user/all_data_delete.php?del=".$row['resort_id']."' type='button' class='button'><img src='./assets/icons/trash-2.svg'></a>
+										<div class='res_name'>".ucwords($row['resort_name'])."
+
+										<a href='./crud_user/all_data_delete.php?del=".$row['resort_id']."' type='button' class='button'><img src='./assets/icons/trash-2.svg'></a>
 										</div>
 									</a>";
+						 		break;
 						 		
-						 		}else{
-
-						 			echo"
-						 				<h1>NO DATA</h1>
-						 			";
-						 			break;
 						 		}
 						}
-
-					} ?>
+					}
+				} ?>
 		</div>
 
 		</form>

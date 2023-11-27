@@ -419,18 +419,24 @@ body {
 	width: 90%;
 	padding: 10px;
 	margin-bottom: 9px;
+	background-color: lightskyblue;
 }
 
-.res_name > a
+.res_name > a:first-child
 {
-	margin-right: 20px;
-	border: 6px solid black;
+	width: 100%;
+
 }
 
-
-.res_name > a:hover
+.res_name > a:last-child
 {
-	color: black;
+	padding: 5px;
+	height: 45px;
+}
+
+.res_name > a:first-child:hover
+{
+	color: white;
 }
 
 .res_name > .button
