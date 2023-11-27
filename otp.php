@@ -5,8 +5,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-//Load Composer's autoloader
-require './vendor/autoload.php';
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
 
 // Generate OTP
 $otp = mt_rand(100000, 999999);
@@ -19,19 +20,19 @@ if (isset($_POST['submit'])){
 $email = $_POST['email'];
 
 // Create a new PHPMailer instance
-$mail = new PHPMailer;
+$mail = new PHPMailer(true);
 
 // SMTP configuration
 $mail->isSMTP();
-$mail->Host = 'smtp.gmail.com';
+$mail->Host = 'smtp.gmail.com;';
 $mail->SMTPAuth = true;
-$mail->Username = 'ralphcustodio@pcb.edu.ph';
-$mail->Password = 'itsmeralphonpcb#09';
-$mail->SMTPSecure = 'tls';
-$mail->Port = 587;
+$mail->Username = 'markrusseltrapsi@pcb.edu.ph';
+$mail->Password = 'TrapsiPCB2023';
+$mail->SMTPSecure = 'ssl';
+$mail->Port = 465;
 
 // Email content
-$mail->From = 'ralphcustodio@pcb.edu.ph';
+$mail->From = 'markrusseltrapsi@pcb.edu.ph';
 $mail->FromName = 'PCB Alumni System';
 $mail->addAddress($email);
 $mail->Subject = 'OTP Verification';
@@ -47,7 +48,7 @@ if (!$mail->send()) {
     $_SESSION['email'] = $email;
 
     // Redirect to the OTP verification page
-    header('Location: verify.php');
+    // header('Location: verify.php');
     exit;
 }
 }
@@ -65,7 +66,7 @@ if (!$mail->send()) {
 <body>
     <div class="container">
         <h1>Pre-Registration Verification</h1>
-        <form method="POST" action="pre-reg.php">
+        <form method="POST" action="otp.php">
             <div class="form-group">
                 <label for="email">Email address:</label>
                 <input type="email" class="form-control" id="email" name="email" required>

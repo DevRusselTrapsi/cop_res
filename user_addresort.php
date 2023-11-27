@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['email'])) {
+
+	header("Location: ./login.php");
+	exit();
+}
+
+$fname = $_SESSION["fname"];
+$user_id = $_SESSION["user_id"];
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +21,11 @@
 
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_addresort.css">
-	
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
 	<title>User Dashboard</title>
 </head>
 <body>
@@ -16,32 +33,38 @@
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand">
+		<a href="./user_addresort.php" class="brand">
 			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
-			<span class="text">User Admin</span>
+			<p>WELCOME!</p>
+			<span><?php echo ucwords($fname);?></span>
 		</a>
 		<ul class="side-menu top">
-			<li>
-				<a href="./user_dash.php">
-					<i class='bx bxs-dashboard' ></i>
-					<span class="text">Owner & User Info</span>
-
-				</a>
-			</li>
-			<li>
-				<a href="./user_resortinfo.php">
-					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">Resort Info</span>
-				</a>
-			</li>
 			<li class="active">
 				<a href="./user_addresort.php">
 					<i class='bx bxs-plus-circle'></i>
 					<span class="text">Add Resort</span>
 				</a>
 			</li>
+			<!-- <li>
+				<a href="./user_resortinfo.php">
+					<i class='bx bxs-info-circle'></i>
+					<span class="text">Resort Info</span>
+				</a>
+			</li> -->
 			<li>
-				<a href="./index.php">
+				<a href="./user_res_table.php">
+					<i class='bx bx-list-ul'></i>
+					<span class="text">Resort List Table</span>
+				</a>
+			</li>
+			<li>
+				<a href="./user_bps.php">
+					<i class='bx bxs-send'></i>
+					<span class="text">Business Permit Submission</span>
+				</a>
+			</li>
+			<li>
+				<a href="./logout.php">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
@@ -57,13 +80,23 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
+
+			<div class="dropdown">
+				<button onclick="myFunction()" class="dropbtn" >
+					Profile
+				</button>
+				<div id="myDropdown" class="dropdown-content">
+    				<a href="#about">User Account</a>
+					<a href="#home">Change Email</a>
+				</div>
+			</div>
 		</nav>
 		<!-- NAVBAR -->
 
 		<!-- MAIN -->
 		<main>
-
-			<form method="post" action="./backend-addresort.php" enctype="multipart/form-data">
+				
+			<form method="POST" action="./backend-addresort.php" enctype="multipart/form-data">
 
 		<div class="container">
 
@@ -78,46 +111,82 @@
 						<div class="input-form">
 
 						<h3>Information</h3>
-							<div>
-								<label>Name of the Establishment:</label>
-								<input type="text" class="input" name="resort_name" required>
+							<div class="col-2">
+								<div>
+									<label>Name of the Establishment:</label>
+								</div>
+								<div>
+									<input type="text" id="input" name="resort_name" placeholder="Resort's name" required>
+								</div>
 							</div>
 
-							<div>
-							<label>Address:</label>
-								<input type="text" class="input" name="resort_address" placeholder="Establishment's Address" required>
-
+							<div class="col-2">
+								<div>
+									<label>Barangay Address:</label>
+								</div>
+								<div>
+									<input type="text" id="input" name="resort_address" placeholder="Barangay Address">
+								</div>
 							</div>
-							<div>
-								<label>Owners Fullname:</label>
-								<input type="text" class="input" name="owner_name" placeholder="Enter your Name" required>
+							<div class="col-2">
+								<div>
+									<label>Owner:</label>
+								</div>
+								<div>
+									<input type="text" id="input" name="owner_name" placeholder="(Firstname, Middlename, Lastname)" required>
+								</div>
 							</div>
-							<div>
-								<label>Address:</label>
-								<input type="text" class="input" name="owner_address" placeholder="(Owner's Address)" required>
+							<div class="col-2">
+								<div>
+									<label>Address:</label>
+								</div>
+								<div>
+									<input type="text" id="input" name="owner_address" placeholder="(Owner's Address)" required>
+								</div>
 							</div>
 									
 							<p>Contacts:</p>
 
-							<div>
-								<label>Office Contact:</label>
-								<input type="text" name="resort_office" class="input" placeholder="09********" required><br>
+							<div class="col-2">
+								<div>
+									<label>Office Contact:</label>
+								</div>
+								<div>
+									<input type="text" name="resort_office" id="input" placeholder="09********" required>
+								</div>
 							</div>							
-							<div>
-								<label>Home Contact:</label>
-								<input type="text" name="resort_contact" class="input" placeholder="09********" required>
+							<div class="col-2">
+								<div>
+									<label>Home Contact:</label>
+								</div>
+								<div>
+									<input type="text" name="resort_contact" id="input" placeholder="09********" required>
+								</div>
 							</div>
-							<div>
-								<label>Owner Contact:</label>
-								<input type="text" name="owner_contact" class="input" placeholder="09********" required>
+							<div class="col-2">
+								<div>
+									<label>Owner Contact:</label>
+								</div>
+								<div>
+									<input type="text" name="owner_contact" id="input" placeholder="09********" required>
+								</div>
 							</div>
-							<div>
-								<label>Manager Contact:</label>
-								<input type="text" name="manager_contact" class="input" placeholder="09********" required>
+							<div class="col-2">
+								<div>
+									<label>Manager Contact:</label>
+								</div>
+								<div>											
+									<input type="text" name="manager_contact" id="input" placeholder="09********" required>
+								</div>
+
 							</div>						
-							<div>
-								<label>Upload image of the establishment:</label>
-								<input type="file" class="insert_img" name="resort_url"  style="background-color: white; cursor: pointer;" required>
+							<div class="col-2">
+								<div>
+									<label>Upload image of the establishment:</label>
+								</div>
+								<div>
+									<input type="file" id="insert_img" name="resort_url"  style="background-color: white; cursor: pointer;" required>
+								</div>
 							</div>
 					</div>
 				</div>
@@ -127,31 +196,34 @@
 
 					<p>Accommodation</p>
 
-					<button class="btn-add" name="add_more" type="submit" >Add more</button>
-
 					<div class="input-form">
 						<div class="header-accom">
 							<div><label>Type of Room:</label></div>
 							<div><label>No. of Rooms:<label></div>
 							<div><label>Capacity:</label></div>
-							<div><label>Rate:</label></div>
-							<div><label>Insert Image of the Room:</label></div>
+							<div><label>Price:</label></div>
+							<!-- <div><label>Insert Image of the Room:</label></div> -->
 						</div>
-						<div class="accom_section">
-							<div>
-								<input type="text" class="input" name="type_of_room" required>
-							</div>
-							<div>
-								<input type="text" class="input" name="no_accom_units" required>
-							</div>
-							<div>
-								<input type="text" class="input" name="accom_capacity" required>
-							</div>
-							<div>
-								<input type="text" class="input" name="accom_rates" required>
-							</div>
-							<div>
-								<input type="file" class="insert_img" id="input_file" name="accom_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;">
+							<div class="accom_section" id="formContainer3">
+							<div class="input_group3" >
+								<div class="input_group3">
+    								<div>
+        								<input type="text" class="input" name="type_of_room[]">
+    								</div>
+    								<div>
+        								<input type="text" class="input" name="no_accom_units[]">
+    								</div>
+    								<div>
+       								 <input type="text" class="input" name="accom_capacity[]">
+    								</div>
+    								<div>
+        								<input type="text" class="input" name="accom_rates[]">
+    								</div>
+    								<div>
+        								<input type="file" class="insert_img" id="input_file" name="acom_url[]" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;">
+   								 </div>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -162,31 +234,32 @@
 				<div class="third-form">
 
 					<p>Existing Facilities and Ammenities</p>
-					<button class="btn-add" name="add_more" type="submit" >Add more</button>
 
 					<div class="input-form">
 						<div class="header-faci">
 							<div><label>Type of Facility:</label></div>
 							<div><label>No. of Units:<label></div>
 							<div><label>Capacity:</label></div>
-							<div><label>Rate:</label></div>
+							<div><label>Price:</label></div>
 							<div><label>Insert Image of the Room:</label></div>
 						</div>
-						<div class="faci_section">
-							<div>
-								<input type="text" class="input" name="type_of_facility" required>
-							</div>
-							<div>
-								<input type="text" class="input" name="no_faci_units" required>
-							</div>
-							<div>
-								<input type="text" class="input" name="faci_capacity" required>
-							</div>
-							<div>
-								<input type="text" class="input" name="faci_rates" required>
-							</div>
-							<div>
-								<input type="file" class="insert_img" name="faci_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>
+						<div class="faci_section" id="formContainer2">
+							<div class="input_group2">
+								<div>
+									<input type="text" class="input" name="type_of_facility[]" required>
+								</div>
+								<div>
+									<input type="text" class="input" name="no_faci_units[]" required>
+								</div>
+								<div>
+									<input type="text" class="input" name="faci_capacity[]" required>
+								</div>
+								<div>
+									<input type="text" class="input" name="faci_rates[]">
+								</div>
+								<div>
+									<input type="file" class="insert_img" name="faci_url[]" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -198,25 +271,25 @@
 				<div class="fourth-form">
 
 					<p>Services</p>
-					<button class="btn-add" name="add_more" type="submit" >Add more</button>
 
-					<div class="input-form">
-						<div class="header-service">
+					<div class="input-form" id="input-form">
+						<div  class="header-service">
 							<div><label>Type of Service:</label></div>
 							<div><label>Description:<label></div>
-							<div><label>Rates:</label></div>
+							<div><label>Price:</label></div>
 						</div>
-						<div class="service_section">
-							<div>
-								<input type="text" class="input" name="type_of_service" required>
+						<div class="service_section" id="formContainer">
+							<div class="input_group">
+								<div>
+									<input type="text" class="input" name="type_of_service[]">
+								</div>
+								<div>
+									<input type="text" class="input" name="description[]">
+								</div>
+								<div>
+									<input type="text" class="input" name="service_rates[]">
+								</div>
 							</div>
-							<div>
-								<input type="text" class="input" name="description" required>
-							</div>
-							<div>
-								<input type="text" class="input" name="service_rates" required>
-							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -229,48 +302,57 @@
 		</div>
 
 	</form>
-				
+						<!-- add and remove -->
+
+			<div class="hover-tool">
+					<div>
+						<div>
+							<img src="./assets/icons/add-circle-black.svg" alt="" style=" margin-left: -2.5px; margin-top: 5px;">
+						</div>
+					</div>
+					<div class="accom">
+						<div>
+							<p>Service</p>
+						</div>
+						<div>
+							<button id="addButton" class="btn-add" name="add" type="submit">+</button>
+						</div>
+						<div>
+							<button id="removeButton" class="btn-remove" name="remove" type="submit">-</button>
+						</div>      
+        	</div>
+					<div class="facility">
+						<div>
+							<p>Facility</p>
+						</div>
+						<div>
+							<button id="addfaci" class="btn-add" name="add" type="submit">+</button>
+						</div>
+						<div>
+							<button id="removefaci" class="btn-remove" name="remove" type="submit">-</button>
+						</div>
+        			</div>
+					<div class="service">
+						<div>
+							<p>Accommodation</p>
+						</div>
+						<div>
+							<button id="addaccom" class="btn-add" name="add" type="submit">+</button>
+						</div>
+						<div>
+							<button id="removeaccom" class="btn-remove" name="remove" type="submit">-</button>
+						</div>
+					</div>
+				</div>	
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
 
-	<script src="script.js"></script>
-	<script>
-        // Function to add the input form
-        function addInputForm() {
-            const formContainer = document.getElementById('formContainer');
-            const inputForm = document.createElement('div');
-            inputForm.className = 'inputform';
-            inputForm.innerHTML = `
-                <div class="service_section">
-                    <div>
-                    <input type="text" class="input" name="service_name">
-                    </div>
-                    <div>
-                    <input type="text" class="input" name="description">
-                    </div>
-                    <div>
-                    <input type="text" class="input" name="rates">
-                    </div>
-                </div>
-            `;
-            formContainer.appendChild(inputForm);
-        }
-
-        // Function to remove the last input form
-        function removeInputForm() {
-            const formContainer = document.getElementById('formContainer');
-            const inputForms = formContainer.getElementsByClassName('inputform');
-            if (inputForms.length > 0) {
-                formContainer.removeChild(inputForms[inputForms.length - 1]);
-            }
-        }
-
-        // Add event listeners to the buttons
-        document.getElementById('addButton').addEventListener('click', addInputForm);
-        document.getElementById('removeButton').addEventListener('click', removeInputForm);
-    </script>
+<script type="text/javascript" src="./js/profile_btn.js"></script>
+<script src="./script.js"></script>
+<script src="./js/addservice.js"></script>
+<script src="./js/addaccom.js"></script>
+<script src="./js/addfaci.js"></script>
 </body>
 </html>

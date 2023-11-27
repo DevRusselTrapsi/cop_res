@@ -6,19 +6,19 @@
             inputForm.innerHTML = `
 
                            <div>
-                                    <input type="text" class="input" name="type_of_facility" required>
+                                    <input type="text" class="input" name="type_of_facility[]" required>
                                 </div>
                                 <div>
-                                    <input type="text" class="input" name="no_faci_units" required>
+                                    <input type="text" class="input" name="no_faci_units[]" required>
                                 </div>
                                 <div>
-                                    <input type="text" class="input" name="faci_capacity" required>
+                                    <input type="text" class="input" name="faci_capacity[]" required>
                                 </div>
                                 <div>
-                                    <input type="text" class="input" name="faci_rates" required>
+                                    <input type="text" class="input" name="faci_rates[]">
                                 </div>
                                 <div>
-                                    <input type="file" class="insert_img" name="faci_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>
+                                    <input type="file" class="insert_img" name="faci_url[]" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;" required>
                                 </div>
                             
             `;

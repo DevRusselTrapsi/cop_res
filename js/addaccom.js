@@ -6,19 +6,22 @@
             inputForm.innerHTML = `
 
                            <div>
-                                    <input type="text" class="input" name="type_of_room" required>
+                                    <input type="text" class="input" name="type_of_room[]" required>
                                 </div>
                                 <div>
-                                    <input type="text" class="input" name="no_accom_units" required>
+                                    <input type="text" class="input" name="no_accom_units[]" required>
                                 </div>
                                 <div>
-                                    <input type="text" class="input" name="accom_capacity" required>
+                                    <input type="text" class="input" name="accom_capacity[]" required>
                                 </div>
                                 <div>
-                                    <input type="text" class="input" name="accom_rates" required>
+                                    <input type="text" class="input" name="accom_rates[]" required>
                                 </div>
                                 <div>
-                                    <input type="file" class="insert_img" id="input_file" name="accom_url" accept="image/png, image/jpg, image/jpeg, image/PNG" style="background-color: white; cursor: pointer;">
+                                    <input type="file" class="insert_img" id="input_file" name="acom_url[]" 
+                                    accept="image/png, image/jpg, image/jpeg, image/PNG" 
+                                    style="background-color: white; cursor: pointer;"
+                                     required>
                                 </div>
                             
             `;

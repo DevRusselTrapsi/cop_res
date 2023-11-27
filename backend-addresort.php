@@ -1,133 +1,190 @@
-<?php 
+ <?php 
 session_start();
 
-	require('./dbcon.php');
-if(isset($_SESSION['user_id'])){
-	$user_id = $_SESSION['user_id'];
+$_SESSION['email'];
 
-	if (isset($_POST['submit'])) {
+    require('./dbcon.php');
 
-	mysqli_query($conn, "SET FOREIGN_KEY_CHECKS=0");
+$uploadSuccess = true;
 
-    // initialize of tbl service
-    $type_service = $_POST['type_of_service'];
-    $description = $_POST['description'];
-    $service_rates = $_POST['service_rates'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Create the directory if it doesn't exist
-    $destination_estabfolder = "estab_img/";
-    $destination_accomfolder = "accom_img/";
-  	$destination_facifolder = "faci_img/";
+    // mysqli_query($conn, "SET FOREIGN_KEY_CHECKS=0");
 
-    // $destination_estabfolder = "estab_img/";
-    if (!is_dir($destination_estabfolder)) {
-        mkdir($destination_estabfolder, 0755, true);
+    $user_id = $_SESSION["user_id"];
+
+    // Initialize variables for the resort table
+
+    $resort_name = $_POST['resort_name'];
+    $resort_address = $_POST['resort_address'];
+    $owner_name = $_POST['owner_name'];
+    $owner_address = $_POST['owner_address'];
+    $resort_office = $_POST['resort_office'];
+    $resort_contact = $_POST['resort_contact'];
+    $owner_contact = $_POST['owner_contact'];
+    $manager_contact = $_POST['manager_contact'];
+    $archive = "show";
+    $verif = "no_permit";
+    $permit_url = "no_permit";
+
+    // resort image upload
+    $resort_url = $_FILES['resort_url']['name'];
+    $resort_url_tmp = $_FILES['resort_url']['tmp_name'];
+
+    $estab_dir = "estab_img/";
+
+    // Move the uploaded files to the folder of estab_img
+    move_uploaded_file($resort_url_tmp, $estab_dir . $resort_url);
+
+    $resort_path = $estab_dir . $resort_url;
+
+    // Insert data into the tbl_resort table
+    $query_resort = "INSERT INTO tbl_resort (user_id, resort_name, owner_name, owner_address, owner_contact, resort_office, resort_contact, manager_contact, resort_url, verification, permit_url, resort_address, archive) VALUES ('$user_id', '$resort_name', '$owner_name', '$owner_address', '$owner_contact', '$resort_office', '$resort_contact', '$manager_contact', '$resort_path','$verif','$permit_url', '$resort_address','$archive')";
+
+    $result = mysqli_query($conn, $query_resort);
+
+    // Check if the query_resort is true
+    if ($result){
+        
+        // accommodation query
+    $type_of_room = $_POST['type_of_room'];
+    $no_accom_units = $_POST['no_accom_units'];
+    $accom_capacity = $_POST['accom_capacity'];
+    $accom_rates = $_POST['accom_rates'];
+    $archive = "show";
+    $accom_url = $_FILES['acom_url']['name']; // Correct the file input name
+    $accom_file_tmp = $_FILES['acom_url']['tmp_name'];
+
+     $resort_id = $conn->insert_id; // Replace with the actual resort_id if applicable
+
+     $_SESSION['resort_id'] = $conn->insert_id;
+
+
+    foreach ($type_of_room as $key => $value) {
+       
+        // Retrieve values from arrays
+        $type_of_room_value = $type_of_room[$key];
+        $no_accom_units_value = $no_accom_units[$key];
+        $accom_capacity_value = $accom_capacity[$key];
+        $accom_rates_value = $accom_rates[$key];
+        $archive_value = $archive[$key];
+        $accom_url_value = $accom_url[$key]; // Correct the array access
+        $accom_file_tmp_value = $accom_file_tmp[$key]; // Correct the array access
+
+        $upload_dir = "accom_img/";
+
+        // Move the uploaded file to the specified folder
+        if (move_uploaded_file($accom_file_tmp_value, $upload_dir . $accom_url_value)) {
+            
+            $file_path = $upload_dir . $accom_url_value;
+
+            // Insert the file path into the database
+            $stmt = $conn->prepare("INSERT INTO `tbl_accommodation` (resort_id, type_of_room, no_accom_units, accom_capacity, accom_rates, acom_url, archive) VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+            $stmt->bind_param("isiids", $resort_id, $type_of_room_value, $no_accom_units_value, $accom_capacity_value, $accom_rates_value, $file_path, $archive);
+
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) { // Check the number of affected rows
+                // Do nothing if the insertion is successful
+            } else {
+                $uploadSuccess = false; // Set the flag to false if there's an error
+            }
+        } else {
+            $uploadSuccess = false; // Set the flag to false if there's an error during file upload
+        }
+    }
+    // accommodation end of query
+
+    // facility query
+        $type_of_facility = $_POST['type_of_facility'];
+        $no_faci_units = $_POST['no_faci_units'];
+        $faci_capacity = $_POST['faci_capacity'];
+        $faci_rates = $_POST['faci_rates'];
+        $archive = "show";
+        $faci_url = $_FILES['faci_url']['name']; // Correct the file input name
+        $faci_file_tmp = $_FILES['faci_url']['tmp_name'];
+
+        foreach ($faci_url as $key => $value) {
+
+        // Retrieve values from type_of_facility
+        $type_of_facility_value = $type_of_facility[$key];
+        $no_faci_units_value = $no_faci_units[$key];
+        $faci_capacity_value = $faci_capacity[$key];
+        $faci_rates_value = $faci_rates[$key];
+        $archive_value = $archive[$key];
+        $faci_url_value = $faci_url[$key]; // Correct the array access
+        $faci_file_tmp_value = $faci_file_tmp[$key]; // Correct the array access
+
+        $upload_dir = "faci_img/";
+
+        // Move the uploaded file to the specified folder
+        if (move_uploaded_file($faci_file_tmp_value, $upload_dir . $faci_url_value)) {
+            
+            $file_path = $upload_dir . $faci_url_value;
+
+            // Insert the file path into the database
+            $stmt = $conn->prepare("INSERT INTO `tbl_facility` (resort_id, type_of_facility, no_faci_units, faci_capacity, faci_rates, faci_url, archive) VALUES (?, ?, ?, ?, ?, ?,?)");
+
+            $stmt->bind_param("isiidss", $resort_id, $type_of_facility_value, $no_faci_units_value, $faci_capacity_value, $faci_rates_value, $file_path, $archive);
+
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) { // Check the number of affected rows
+                // Do nothing if the insertion is successful
+            } else {
+                $uploadSuccess = false; // Set the flag to false if there's an error
+            }
+        } else {
+            $uploadSuccess = false; // Set the flag to false if there's an error during file upload
+        }
+    }
+    // facility end query
+
+     // service query
+        $type_of_service = $_POST['type_of_service'];
+        $description = $_POST['description'];
+        $service_rates = $_POST['service_rates'];
+        $archive = "show";
+
+        foreach ($type_of_service as $key => $value) {
+
+        // Retrieve values from type_of_facility
+        $type_of_service_value = $type_of_service[$key];
+        $description_value = $description[$key];
+        $service_rates_value = $service_rates[$key];
+        $archive = $archive[$key];   
+
+            // Insert the file path into the database
+            $stmt = $conn->prepare("INSERT INTO `tbl_service` (resort_id, type_of_service, description, service_rates) VALUES (?, ?, ?, ?,?)");
+
+            $stmt->bind_param("issds", $resort_id, $type_of_service_value, $description_value, $service_rates_value);
+
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) { // Check the number of affected rows
+                // Do nothing if the insertion is successful
+            } else {
+                 echo "Error".mysqli_error($conn); // Set the flag to false if there's an error
+            }
+    }
+    // service end query
+
+    if ($uploadSuccess) {
+        
+        echo "<script>alert('Survey Form Uploaded Successfuly')</script>";
+        header("Location: ./user_addresort.php");
+        
+    } else {
+
+       echo "<script>alert('Some of the files are unable to upload')</script>";
+       header("Location: ./user_addresort.php");
     }
 
-    if (!is_dir($destination_accomfolder)) {
-        mkdir($destination_accomfolder, 0755, true);
+        if ($stmt !== null) {
+            $stmt->close();
+        }
     }
-    if (!is_dir($destination_facifolder)) {
-        mkdir($destination_facifolder, 0755, true);
-    }
-
-	//query for the tbl service
-    $query = "INSERT INTO tbl_service (type_of_service, description, service_rates) VALUES ('$type_service','$description','$service_rates')";
-
- 	if (mysqli_query($conn,$query)) {
-
- 		echo "Error: " . mysqli_error($conn);
-		// Retrieve the auto-generated primary key value
- 		$service_id = $conn->insert_id;
-
- 		// Initialize for the faci table
-    	$faci_type = $_POST['type_of_facility'];
-    	$faci_capacity = $_POST['faci_capacity'];
-    	$faci_units = $_POST['no_faci_units'];
-    	$faci_rates = $_POST['faci_rates'];
-    	$faci_url = $_FILES['faci_url'];
-
- 	//query for the tbl facility
-    $query2 = "INSERT INTO tbl_facility (type_of_facility, faci_capacity, no_faci_units, faci_rates, faci_url) VALUES ('$faci_type','$faci_capacity','$faci_units','$faci_rates','$faci_url')";
-
-
-    	if (mysqli_query($conn, $query2)){
-
- 			// moving the upload files to the folder of faci_img
-    	move_uploaded_file($_FILES['faci_url']['tmp_name'], "faci_img/".$_FILES['faci_url']['name']);
-
-    	// Retrieve the auto-generated primary key value
-    	$faci_id = $conn->insert_id;
-
-    	//Initialize for the accom table 
-		$room_type = $_POST['type_of_room'];
-		$num_accom = $_POST['no_accom_units'];
-		$accom_capacity = $_POST['accom_capacity'];
-		$accom_rates = $_POST['accom_rates'];
-		$accom_tmp_name = $_FILES['accom_url']['tmp_name'];
-
-	//query for the tbl_accom
- 	$query3 = "INSERT INTO tbl_accommodation (type_of_room, no_accom_units, accom_capacity, accom_rates, acom_url) VALUES ('$room_type', '$num_accom', '$accom_capacity', '$accom_rates', '$destination_accomfolder".$_FILES['accom_url']['name']."')";
-
-
- 			// check if the query3 is true
- 			if(mysqli_query($conn, $query3)) {
-
- 				// moving the upload files to the folder of accom_img
-    			move_uploaded_file($_FILES['accom_url']['tmp_name'], $destination_accomfolder . $_FILES['accom_url']['name']);
-
-
-    			// Retrieve the auto-generated primary key value
-    			$accom_id = $conn->insert_id;
-
-    			$user_id = $_SESSION['user_id'];    			
-    			// initialize for the resort table
-				$resort_name = $_POST['resort_name'];
-				$resort_address = $_POST['resort_address'];
-				$owner_name = $_POST['owner_name'];
-				$owner_address = $_POST['owner_address'];
-				$resort_office = $_POST['resort_office'];
-				$resort_contact = $_POST['resort_contact'];
-				$owner_contact = $_POST['owner_contact'];
-				$manager_contact = $_POST['manager_contact'];
-				$resort_url = $_FILES['resort_url']['tmp_name'];
-
-
-				// query to the table resort
-				$query4 = "INSERT INTO tbl_resort (user_id, resort_name, owner_name, owner_address, owner_contact, resort_office, resort_contact, manager_contact, resort_url, resort_address, accom_id, faci_id, service_id) VALUES ('$user_id', '$resort_name', '$owner_name', '$owner_address', '$owner_contact', '$resort_office', '$resort_contact', '$manager_contact', '$resort_url', '$resort_address', '$accom_id', '$faci_id', '$service_id')";
-
-				if (mysqli_query($conn, $query4)){
-
-    				// moving the upload files to the folder of estab_img
-    				move_uploaded_file($_FILES['resort_url']['tmp_name'], "estab_img/".$_FILES['resort_url']['name']);
-
-    				echo"<script>alert('Registration Complete')</script>";
-
-    				
-
-				}else{
-					echo"<script>alert('Error: ')</script>".mysqli_error($conn);
-				}
-
- 			}else{
-
- 				echo"<script>alert('Error: ')</script>".mysqli_error($conn);
- 			}
-
-    	}else{
-
-    		echo"<script>alert('Error: ')</script>".mysqli_error($conn);
-    	}
-	}else{
-
-		echo"<script>alert('Error: ')</script>".mysqli_error($conn);
-	}
 }
-mysqli_close($conn);
-} else {
-
-	echo "<script>alert('User not logged in')</script>";
-}
-
-
+        
 ?>

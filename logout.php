@@ -9,6 +9,7 @@ unset($_SESSION["fname"]);
 session_destroy();
 
 // Redirect to the login page or any other desired page
-header("Location: index.php");
+header("Location: ./login.php");
 exit();
+
 ?>

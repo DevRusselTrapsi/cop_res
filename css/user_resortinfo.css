@@ -4,6 +4,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: var(--lato);
 }
 
 a {
@@ -270,22 +271,6 @@ body {
 }
 /* NAVBAR */
 
-
-.logo
-{
-	width: 30px;
-	height: 30px;
-	border-radius: 100%;
-	margin-left: 10px;
-	margin-right: 20px;
-}
-
-table,tr,th,td
-{
-	border: 1px solid black;
-}
-
-
 /* MAIN */
 #content main {
 	width: 100%;
@@ -295,12 +280,80 @@ table,tr,th,td
 	overflow-y: auto;
 }
 
+
+/*modal*/
+	.form
+    {
+    	margin-top:25px;
+        width:450px;
+        font-size: 14px;
+        border: 1px solid black;
+        display: block;
+        justify-content: center;
+        align-items:center;
+        text-align:center;
+        margin-bottom: 25px;
+    }
+    
+    .form > div:last-child , div:first-child
+    {
+    	margin-top: 25px;
+    }
+/*end modal*/
+
 .form-content
 {
-	border: 1px solid black;
+	display: inline-block;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 100%;
 	background-color: white;
 	border-radius: 10px;
-	padding: 20px;
+	padding: 15px;
+
+}
+
+.container
+{
+	display: block;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	text-align: center;
+}
+
+.container > p
+{
+	font-size: 2.2rem;
+
+}
+
+/*Profile css*/
+
+.profile
+{
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	margin-bottom: 20px;
+
+}
+
+.resort_img
+{
+	width: 60vw;
+}
+
+
+
+h3
+{
+	font-family: var(--lato);
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 .form-content > h1
@@ -317,49 +370,215 @@ table,tr,th,td
 .content
 {
 	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+	/*Error css*/
+
+.error
+{
+	width: 250px;
+	height: 70px;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 500px;
+}
+
+
+	/*Resort Info CSS*/
+
+
+
+	.res_content
+	{
+		width: 90%;
+		display: block;
+		justify-content: center;
+		align-items: center;
+		text-align: left;
+		margin-top: 50px;
+		margin-left: 5%;
+	}
+
+	.col-2
+	{
+		border-bottom: 1px solid black;
+		border-bottom-left-radius: 10px;
+		width: 60%;
+		display: inline-flex;
+		word-wrap: break-word;
+		justify-content: space-between;
+		margin-bottom: 5px;
+		text-indent: 10px;
+	}
+
+
+	.col-2 > div
+	{
+		width: 70%;
+		font-size: 20px;
+	}
+
+	.col-2 >div:first-child
+	{
+		font-weight: bold;
+	}
+
+	.col-3
+	{
+		display: flex;
+		justify-content: flex-end;
+
+	}
+	/*Resort Info CSS*/
+
+			/*------>Accom Content CSS<--------*/
+
+.accom_header
+{
+	width: 90%;
+	padding: 5px;
+	background-color: rgba(0, 197, 186, 0.72);
+	display: flex;
+	justify-content: space-evenly;
+	border: 1px solid green;
+	font-weight: bold;
+}
+
+.accom_section
+{
+	width: 90%;
+	padding: 10px;
+	background-color: rgba(84, 88, 88, 0.14);
+	display: inline-block;
+	justify-content: space-around;
+
+}
+
+.col
+{
+	display: inline-flex;
 	justify-content: space-between;
-	margin-top: 20px;
-	margin-bottom: 50px;
+	margin-bottom: 10px;
+	text-align: center;
+
+}
+
+.accom_header > div
+{
 	width: 100%;
 }
 
-.content > div
+.accom_section > div
+{
+	width: 100%;
+}
+	/*Accom Content CSS*/
+
+	/*------>Faci Content CSS<--------*/
+
+.faci_header
+{
+	display: flex;
+	justify-content: space-between;
+	background-color: rgba(0, 197, 186, 0.72);
+	border: 1px solid black;
+	width: 90%;
+}
+
+.faci_section
+{
+	display: inline-block;
+	width: 90%;
+	padding: 10px;
+	justify-content: space-between;
+	background-color: rgba(84, 88, 88, 0.14);
+}
+
+.faci_header > div
+{
+		width: 100%;
+}
+
+
+.faci_section > div
+{
+		width: 100%;
+}
+
+	/*------>Faci Content CSS<--------*/
+
+
+	/*------>Service Content CSS<--------*/
+
+.service_header
+{
+	display: flex;
+	justify-content: space-between;
+	background-color: rgba(0, 197, 186, 0.72);
+	border: 1px solid black;
+	width: 90%;
+}
+
+.service_section
 {
 	display: inline-block;
 	justify-content: space-between;
-	text-align: left;
-	max-width: 300px;
-	min-width: 100px;
-	width: 100%;
-}
-
-.content > div > p:last-child
-{
-	background-color: #eee;
-}
-
-.content > div > p:last-child
-{
-	background-color: #eee;
-	border-radius: 5px;
-	margin: 0px 1px;
+	background-color: rgba(84, 88, 88, 0.14);
+	width: 90%;
 	padding: 10px;
 }
 
-.content > div > p:first-child
+.service_header > div
 {
-	font-size: 20px;
-	font-weight: bold;
-	font-family: var(--lato);
+	width: 100%;
 }
 
-.content > div > p:last-child
+.service_section > div
 {
-	font-family: var(--lato);
-	font-size: 20px;
-	text-indent: 10px;
+	width: 100%;
 }
 
+/*------>Service Content CSS<--------*/
+
+
+
+.btn_section
+{
+	display: inline-flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-top: 50px;
+	width: 100%;
+}
+
+.delete
+{
+	padding: 2.9px;
+	font-size: .9rem;
+	background-color: red;
+	font-family: var(--lato);
+	border: .5px solid red;
+	filter: drop-shadow(1px 1px 1px black);
+	cursor: pointer;
+	border-radius: 5px;
+	margin-left: 10px;
+}
+
+.update
+{
+	padding: 2.9px;
+	font-size: .9rem;
+	background-color: rgba(0, 239, 27, 1);
+	font-family: var(--lato);
+	border: .5px solid rgba(0, 239, 27, 1);
+	filter: drop-shadow(1px 1px 1px black);
+	cursor: pointer;
+	border-radius: 5px;
+}
 /* MAIN */
 
 @media screen and (max-width: 768px) {
@@ -403,6 +622,17 @@ table,tr,th,td
 
 
 @media screen and (max-width: 576px) {
+
+	#profile
+	{
+		display: inline-block;
+		justify-content: center;
+		align-items: center;
+		border: 10px solid black;
+		font-size: 12px;
+		flex-wrap: wrap;
+		flex-direction: column;
+	}
 	#content nav form .form-input input {
 		display: none;
 	}

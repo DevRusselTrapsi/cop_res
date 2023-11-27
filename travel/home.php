@@ -1,16 +1,9 @@
 <?php
+require('../view_count.php');
 
-         session_start();
+session_start();
 
-         if(isset($_SESSION['count']))
-         {
-                    $_SESSION['count']++;
-         }
-         else
-         {
-                    $_SESSION['count']=1;
-         }
-
+$_SESSION['user'] = 'loggedInUser'; // You can set this to any value you like
 ?>
 
 <!DOCTYPE html>
@@ -72,20 +65,6 @@
 </div>
 
 <!-- home section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 

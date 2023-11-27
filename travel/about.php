@@ -1,3 +1,15 @@
+<?php
+require('../view_count.php');
+
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    // Redirect to the Home page or any other page
+    header("Location: ./home.php");
+    exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -162,19 +174,6 @@
 </div>
 
 <!-- reviews section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <!-- custom js file link  -->
