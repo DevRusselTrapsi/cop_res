@@ -36,7 +36,7 @@ if (!isset($_SESSION['email'])) {
         <ul class="side-menu top">
             <li>
                 <a href="./admin_dash.php">
-                    <i class='bx bxs-shopping-bag-alt' ></i>
+                    <i class='bx bxs-dashboard'></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
@@ -53,13 +53,13 @@ if (!isset($_SESSION['email'])) {
                 </a>
             </li>
             <li>
-                <a href="./owner_register.php">
+                <a href="./admin_create_owner.php">
                     <i class='bx bxs-user-plus' ></i>
                     <span class="text">Add Owner Account</span>
                 </a>
             </li>
             <li>
-				<a href="./user_table.php">
+				<a href="./admin_user_table.php">
 					<i class='bx bx-list-ul'></i>
 					<span class="text">Owner List</span>
 				</a>

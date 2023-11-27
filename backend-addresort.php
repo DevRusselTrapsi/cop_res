@@ -23,7 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resort_contact = $_POST['resort_contact'];
     $owner_contact = $_POST['owner_contact'];
     $manager_contact = $_POST['manager_contact'];
-    $verif = "not_verified";
+    $archive = "show";
+    $verif = "no_permit";
     $permit_url = "no_permit";
 
     // resort image upload
@@ -38,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resort_path = $estab_dir . $resort_url;
 
     // Insert data into the tbl_resort table
-    $query_resort = "INSERT INTO tbl_resort (user_id, resort_name, owner_name, owner_address, owner_contact, resort_office, resort_contact, manager_contact, resort_url, verification, permit_url, resort_address) VALUES ('$user_id', '$resort_name', '$owner_name', '$owner_address', '$owner_contact', '$resort_office', '$resort_contact', '$manager_contact', '$resort_path','$verif','$permit_url', '$resort_address')";
+    $query_resort = "INSERT INTO tbl_resort (user_id, resort_name, owner_name, owner_address, owner_contact, resort_office, resort_contact, manager_contact, resort_url, verification, permit_url, resort_address, archive) VALUES ('$user_id', '$resort_name', '$owner_name', '$owner_address', '$owner_contact', '$resort_office', '$resort_contact', '$manager_contact', '$resort_path','$verif','$permit_url', '$resort_address','$archive')";
 
     $result = mysqli_query($conn, $query_resort);
 
@@ -50,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $no_accom_units = $_POST['no_accom_units'];
     $accom_capacity = $_POST['accom_capacity'];
     $accom_rates = $_POST['accom_rates'];
+    $archive = "show";
     $accom_url = $_FILES['acom_url']['name']; // Correct the file input name
     $accom_file_tmp = $_FILES['acom_url']['tmp_name'];
 
@@ -65,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $no_accom_units_value = $no_accom_units[$key];
         $accom_capacity_value = $accom_capacity[$key];
         $accom_rates_value = $accom_rates[$key];
+        $archive_value = $archive[$key];
         $accom_url_value = $accom_url[$key]; // Correct the array access
         $accom_file_tmp_value = $accom_file_tmp[$key]; // Correct the array access
 
@@ -76,9 +79,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $file_path = $upload_dir . $accom_url_value;
 
             // Insert the file path into the database
-            $stmt = $conn->prepare("INSERT INTO `tbl_accommodation` (resort_id, type_of_room, no_accom_units, accom_capacity, accom_rates, acom_url) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO `tbl_accommodation` (resort_id, type_of_room, no_accom_units, accom_capacity, accom_rates, acom_url, archive) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-            $stmt->bind_param("isiids", $resort_id, $type_of_room_value, $no_accom_units_value, $accom_capacity_value, $accom_rates_value, $file_path);
+            $stmt->bind_param("isiids", $resort_id, $type_of_room_value, $no_accom_units_value, $accom_capacity_value, $accom_rates_value, $file_path, $archive);
 
             $stmt->execute();
 
@@ -98,6 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $no_faci_units = $_POST['no_faci_units'];
         $faci_capacity = $_POST['faci_capacity'];
         $faci_rates = $_POST['faci_rates'];
+        $archive = "show";
         $faci_url = $_FILES['faci_url']['name']; // Correct the file input name
         $faci_file_tmp = $_FILES['faci_url']['tmp_name'];
 
@@ -108,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $no_faci_units_value = $no_faci_units[$key];
         $faci_capacity_value = $faci_capacity[$key];
         $faci_rates_value = $faci_rates[$key];
+        $archive_value = $archive[$key];
         $faci_url_value = $faci_url[$key]; // Correct the array access
         $faci_file_tmp_value = $faci_file_tmp[$key]; // Correct the array access
 
@@ -119,9 +124,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $file_path = $upload_dir . $faci_url_value;
 
             // Insert the file path into the database
-            $stmt = $conn->prepare("INSERT INTO `tbl_facility` (resort_id, type_of_facility, no_faci_units, faci_capacity, faci_rates, faci_url) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO `tbl_facility` (resort_id, type_of_facility, no_faci_units, faci_capacity, faci_rates, faci_url, archive) VALUES (?, ?, ?, ?, ?, ?,?)");
 
-            $stmt->bind_param("isiids", $resort_id, $type_of_facility_value, $no_faci_units_value, $faci_capacity_value, $faci_rates_value, $file_path);
+            $stmt->bind_param("isiidss", $resort_id, $type_of_facility_value, $no_faci_units_value, $faci_capacity_value, $faci_rates_value, $file_path, $archive);
 
             $stmt->execute();
 
@@ -140,18 +145,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $type_of_service = $_POST['type_of_service'];
         $description = $_POST['description'];
         $service_rates = $_POST['service_rates'];
+        $archive = "show";
 
         foreach ($type_of_service as $key => $value) {
 
         // Retrieve values from type_of_facility
         $type_of_service_value = $type_of_service[$key];
         $description_value = $description[$key];
-        $service_rates_value = $service_rates[$key];   
+        $service_rates_value = $service_rates[$key];
+        $archive = $archive[$key];   
 
             // Insert the file path into the database
-            $stmt = $conn->prepare("INSERT INTO `tbl_service` (resort_id, type_of_service, description, service_rates) VALUES (?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO `tbl_service` (resort_id, type_of_service, description, service_rates) VALUES (?, ?, ?, ?,?)");
 
-            $stmt->bind_param("issd", $resort_id, $type_of_service_value, $description_value, $service_rates_value);
+            $stmt->bind_param("issds", $resort_id, $type_of_service_value, $description_value, $service_rates_value);
 
             $stmt->execute();
 

@@ -36,7 +36,7 @@ if (isset($_GET['get'])) {
 				$verified = 'verified';
 				$comment = '';
 
-        		$q = "UPDATE tbl_resort SET verification = '$verified',verifiedby = '$name', comment = '' WHERE resort_id = '$resort_id'";
+        		$q = "UPDATE tbl_resort SET verification = '$verified', verifiedby = '$name', comment = '' WHERE resort_id = '$resort_id'";
         
         		if (mysqli_query($conn, $q)) {
 
@@ -61,6 +61,8 @@ if (isset($_GET['get'])) {
 
 
 
+$comment = "";
+
 if (isset($_POST['delete'])) {
 
  	$resort_id = $_GET['get'];
@@ -84,26 +86,69 @@ $res_check = mysqli_query($conn, $q2);
 
 		}else{
 
-			$q = "UPDATE tbl_resort SET verification = '$not_verif', event_date = '$currentDate', verifiedby = '$name', comment = '$comment' WHERE resort_id = '$resort_id'";
+			$q = "UPDATE tbl_resort SET verification = ?, event_date = ?, verifiedby = ?, comment = ? WHERE resort_id = ?";
+			$stmt = mysqli_prepare($conn, $q);
 
-			$res = mysqli_query($conn, $q);
+			if ($stmt) {
 
-			if($res){
-
-				echo "<script>alert('Permit Unverified');</script>";
+    			mysqli_stmt_bind_param($stmt, "ssssi", $not_verif, $currentDate, $name, $comment, $resort_id);
+    			$not_verif = "not_verified";
+    			$currentDate = date('Y-m-d');
+    			$comment = $_POST['comment'];
 			
-			}else{
+				if (mysqli_stmt_execute($stmt)) {
 
-			echo "Error: ".mysqli_error($conn);
+        			echo "<script>alert('Permit Unverified');</script>";
+
+   				 } else {
+
+        			echo "Error: " . mysqli_error($conn);
+    			}
+
+			} else {
+
+    			echo "Error in preparing statement: " . mysqli_error($conn);
+			}
+
 		}
 
 	}
-
 }
 
-}
+// sub_comment
 
+if(isset($_POST['sub_comment'])){
 
+$resort_id = $_GET['get'];
+
+		$comment = $_POST['comment'];
+		$date_event = date('Y-m-d');
+
+			$q = "INSERT INTO tbl_notif (comment, resort_id, date_event) VALUES (?, ?, ?)";
+			$stmt = mysqli_prepare($conn, $q);
+
+			if ($stmt) {
+
+    			mysqli_stmt_bind_param($stmt, "sis", $comment, $resort_id, $date_event);
+
+    			$comment = $_POST['comment'];
+				$date_event = date('Y-m-d');
+			
+				if (mysqli_stmt_execute($stmt)) {
+
+        			echo "<script>alert('Message Sent');</script>";
+
+   				 } else {
+
+        			echo "Error: " . mysqli_error($conn);
+    			}
+
+			} else {
+
+    			echo "Error in preparing statement: " . mysqli_error($conn);
+			}
+
+		}
 ?>
 
 <!DOCTYPE html>
@@ -125,8 +170,8 @@ $res_check = mysqli_query($conn, $q2);
 	}
 	.content > div > img
 	{
-		height: 1500px;
-		width: 1000px;
+		height: 800px;
+		width: 600px;
 		filter: drop-shadow(1px 1px 5px black);
 		border: 1px solid black;
 	}
@@ -137,16 +182,6 @@ $res_check = mysqli_query($conn, $q2);
 		flex-wrap: wrap;
 	}
 	
-	button[type=submit]{
-		background-color: rgba(0, 236, 31, 0.8);
-		padding: 10px 25px;
-		border-radius: 10px;
-		cursor: pointer;
-		border: none;
-		filter: drop-shadow(1px 1px 5px grey);
-		font-weight: bold;
-
-	}
 	.btn2
 	{
 		margin-top: 50px;
@@ -157,18 +192,6 @@ $res_check = mysqli_query($conn, $q2);
 		justify-content: flex-end;
 	}
 
-	.btn2 > div:last-child > button
-	{
-		background-color: red;
-		padding: 10px 20px;
-		border-radius: 10px;
-		margin-left: 10px;
-		margin-right: 24px;
-		cursor: pointer;
-		border: none;
-		filter: drop-shadow(1px 1px 5px grey);
-		font-weight: bold;
-	}
 	
 </style>
 <body>
@@ -179,6 +202,7 @@ $res_check = mysqli_query($conn, $q2);
 
 	<div class="d-flex justify-content-start">
 		<a href="./admin_dash.php" type="submit" class="btn btn-primary">Cancel</a>
+
 	</div>
 	<?php 
 
@@ -221,20 +245,30 @@ $res_check = mysqli_query($conn, $q2);
 		</div>
 		
 	</div>
+<div class="d-flex justify-content-center">
 
-	<div class="form-floating mt-3">
-  		<textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-  <label for="floatingTextarea2">Comments</label>
+	<div class="form-floating mt-3 col-5">
+  		<textarea class="form-control " name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  	<label for="floatingTextarea2">Comments</label>
+  		<div class="mb-1 fs-6">
+			<span >Note: Click the sent icon if you want to send notification to the user</span>
+  		</div>
+  		<div class="d-flex justify-content-end">
+  			<button type="submit" name="sub_comment" class="btn btn-primary mt-1 pe-3 ps-3 shadow">
+  				<img src="./assets/icons/send_light.svg">
+  			</button>
+  		</div>
+	</div>
 </div>
 
 	<?php } ?>
 
 		<div class="btn2">
 			<div>
-			<button type="submit" value="submit" name="submit">Verify</button>
+			<button type="submit" value="submit" name="submit" class="btn btn-success pe-5 ps-5 me-3">Verify</button>
 			</div>
 			<div>
-				<button type="submit" value="submit" name="delete" class="delete">Unverified</button>
+				<button type="submit" value="submit" name="delete" class="btn btn-danger pe-4 ps-4 me-3">Unverified</button>
 			</div>
 		</div>
 	</div>

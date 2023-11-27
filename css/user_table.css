@@ -439,7 +439,7 @@ body {
 {
 	background-color: red;
 	filter: drop-shadow(1px .9px .9px black);
-	padding: 3px;
+	padding: 5px;
 	width: 50px;
 	border-radius: 3.5px;
 	border: none;

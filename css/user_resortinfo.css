@@ -340,11 +340,9 @@ body {
 
 }
 
-.profile > img
+.resort_img
 {
-	width: 60%;
-	height: 350px;
-	border: 1px solid black;
+	width: 60vw;
 }
 
 
@@ -624,6 +622,17 @@ h3
 
 
 @media screen and (max-width: 576px) {
+
+	#profile
+	{
+		display: inline-block;
+		justify-content: center;
+		align-items: center;
+		border: 10px solid black;
+		font-size: 12px;
+		flex-wrap: wrap;
+		flex-direction: column;
+	}
 	#content nav form .form-input input {
 		display: none;
 	}

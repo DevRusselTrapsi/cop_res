@@ -4,6 +4,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: var(--lato);
 }
 
 a {
@@ -408,22 +409,36 @@ body {
 
 .res_name
 {
-	text-align: center;
 	background-color: whitesmoke;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
 	filter: drop-shadow(0px 1px 5px black);
 	border-radius: 10px;
 	font-size: 2rem;
 	width: 90%;
 	padding: 10px;
 	margin-bottom: 9px;
-	/*border: 1px solid black;*/
 }
+
+.res_name > a
+{
+	margin-right: 20px;
+	border: 6px solid black;
+}
+
 
 .res_name > a:hover
 {
 	color: black;
 }
 
+.res_name > .button
+{
+	background-color: red;
+	padding: 2px;
+	border-radius: 3.5px;
+}
 		/*--------------MAIN*--------------*/
 
 

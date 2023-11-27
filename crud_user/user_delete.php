@@ -11,6 +11,8 @@ if (!isset($_SESSION['email'])) {
 
 include('../dbcon.php');
 
+$id = $_GET['id'];
+
 if(isset($_POST['delete'])){
 
 $id = $_GET['id'];
@@ -40,13 +42,43 @@ $id = $_GET['id'];
 	<link rel="icon" type="image/x-icon" href="../assets/img/tourism-favicon.png">
 	<title>Delete Accommodation</title>
 </head>
+<style>
+	.res_name
+	{
+		/*border: 1px solid black;*/
+		height: 50px;
+		margin-bottom: 5px;
+		text-align: center;
+		text-decoration: none;
+		color: black;
+		font-size: 1.3rem;
+		padding: 10px;
+		filter:  drop-shadow(1px 2px 3px black);
+		background-color: lightgrey;
+		border-radius: 5px;
+		margin-top: 30px;
+	}
+
+@media screen and (max-width: 576px) {
+.overflow
+{
+	overflow-x: scroll;
+	font-size: 19px;
+}
+
+
+}
+</style>
 <body>
 
-<form method="POST">
-	<div class="container-lg border border-5-warning mt-5 mb-5 p-4 shadow">
+<form method="POST" class="overflow">
+	<div class="container-lg border border-5-warning mb-5 p-4 shadow border border-5">
 			<div>
-				<a href="../user_table.php" type="submit" class="btn btn-secondary">BACK</a>
+				<a href="../admin_user_table.php" type="submit" class="btn btn-secondary">BACK</a>
 				
+			</div>
+			<div class="border bg-danger text-center p-2 fs-4 rounded mt-3 mb-5">
+						Are you sure you want to delete this account?			
 			</div>
 
 		<?php  
@@ -66,32 +98,60 @@ $id = $_GET['id'];
 
 		?>
 		<div class="mb-3 row text-end d-flex justify-content-center">
-    				<label for="staticEmail" class="col-lg-3 col-form-label" style="font-size: 20px;">Name :</label>
+    				<label for="staticEmail" class="col-lg-3 text-center col-form-label" style="font-size: 20px;">Name :</label>
     			<div class="col-lg-4">
       				<input type="text" class="form-control-plaintext text-center" id="staticEmail" value="<?php echo ucwords($row['fname']).ucwords($row['lname']);?>" style="font-size: 20px;">
     			</div>
 			</div>
 
 		<div class="mb-3 row text-end d-flex justify-content-center">
-    				<label for="staticEmail" class="col-lg-3 col-form-label" style="font-size: 20px;">Email :</label>
+    				<label for="staticEmail" class="col-lg-3 text-center col-form-label" style="font-size: 20px;">Email :</label>
     			<div class="col-lg-4">
       				<input type="text" readonly class="form-control-plaintext text-center" id="staticEmail" value="<?php echo $row['email'];?>" style="font-size: 20px;">
     			</div>
 			</div>
 
 		<div class="mb-3 row text-end d-flex justify-content-center">
-    				<label for="staticEmail" class="col-lg-3 col-form-label" style="font-size: 20px;">Contact :</label>
+    				<label for="staticEmail" class="col-lg-3 text-center col-form-label" style="font-size: 20px;">Contact :</label>
     			<div class="col-lg-4">
       				<input type="text" readonly class="form-control-plaintext text-center" id="staticEmail" value="<?php echo $row['contact'];?>" style="font-size: 20px;">
     			</div>
 			</div>
 
 			<div class="mb-3 row text-end d-flex justify-content-center">
-    				<label for="staticEmail" class="col-lg-3 col-form-label" style="font-size: 20px;">Addres :</label>
+    				<label for="staticEmail" class="col-lg-3 text-center col-form-label" style="font-size: 20px;">Addres :</label>
     			<div class="col-lg-4">
       				<input type="text" readonly class="form-control-plaintext text-center" id="staticEmail" value="<?php echo ucwords($row['user_address']);?>" style="font-size: 20px;">
     			</div>
 			</div>
+			<?php 
+
+				include '../dbcon.php';
+
+					$q = "SELECT * FROM tbl_resort WHERE user_id = $id ";
+
+					$res = mysqli_query($conn, $q);
+
+					if ($res && mysqli_num_rows($res) > 0){
+
+						while($row = mysqli_fetch_assoc($res)){
+
+								if ($row['archive'] == "show"){
+
+								$_SESSION['res_id'] = $row['resort_id'];
+							
+								echo"
+									<div class='res_name'>".ucwords($row['resort_name'])."</div>";
+						 		}else{
+
+						 			echo"
+						 				<h1>NO DATA</h1>
+						 			";
+						 			break;
+						 		}
+						}
+
+					} ?>
 
 	</div>
 </form>

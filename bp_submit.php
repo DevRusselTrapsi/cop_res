@@ -21,39 +21,43 @@ $id = $_GET['get'];
 		$row = mysqli_fetch_assoc($res);
 	}
 
+
 if(isset($_POST['submit'])){
+
+			$img = $_FILES['permit_url']['name'];
+    		$img_file_tmp = $_FILES['permit_url']['tmp_name'];
+    		$verif = "pending";
+    		$permit_dir = "permit_img/";
+
+    	 	// Move the uploaded files to the folder of estab_img
+    		move_uploaded_file($img_file_tmp, $permit_dir . $img);
+
+    		$permit_path = $permit_dir . $img;
+
+			// UPDATE DATABASE
+			$sql = "UPDATE tbl_resort SET verification = '$verif', permit_url = '$permit_path' WHERE resort_id = '$id'";
+
+			$result = mysqli_query($conn,$sql);
+
+	if($result){
 		
+		echo "<script>alert('Successfully Submitted');</script>";
 		
-		$img = $_FILES['permit_url']['name'];
-    	$img_file_tmp = $_FILES['permit_url']['tmp_name'];
+	}else{
 
-    	$permit_dir = "permit_img/";
-
-    	 // Move the uploaded files to the folder of estab_img
-    	move_uploaded_file($img_file_tmp, $permit_dir . $img);
-
-    	$permit_path = $permit_dir . $img;
-
-		// UPDATE DATABASE
-		$sql = "UPDATE tbl_resort SET permit_url = '$permit_path' WHERE resort_id = '$id'";
-
-		$result = mysqli_query($conn,$sql);
-
-		if($result){
-			echo "<script>alert('Successfully Submitted');</script>";
-		}else{
-			echo "Error: ".mysqli_error($conn);
-		}
+		echo "Error: ".mysqli_error($conn);
 	}
-
+}
+		
 	$id = $_GET['get'];
 
 
 	if (isset($_POST['delete'])) {
 
 		$del_permit = "no_permit";
+		$verif = "no_permit";
 		
-		$q = "UPDATE tbl_resort SET permit_url = '$del_permit' WHERE resort_id = '$id'";
+		$q = "UPDATE tbl_resort SET verification = '$verif', permit_url = '$del_permit' WHERE resort_id = '$id'";
 
 		$res = mysqli_query($conn, $q);
 
@@ -126,7 +130,10 @@ if(isset($_POST['submit'])){
 
 								}else{
 
-									echo "<img src='".$row['permit_url']."' class='img'>";
+
+									echo "
+										<img src='".$row['permit_url']."' class='img'>
+										";
 								}
 							}
 							?>

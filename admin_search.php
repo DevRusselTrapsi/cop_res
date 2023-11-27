@@ -21,6 +21,8 @@ $_SESSION['name'];
 	<link rel="stylesheet" href="./css/admin_search.css">
 	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
 	<title>Admin</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	
 </head>
 <body>
 
@@ -35,7 +37,7 @@ $_SESSION['name'];
 		<ul class="side-menu top">
             <li>
                 <a href="./admin_dash.php">
-                    <i class='bx bxs-shopping-bag-alt' ></i>
+                    <i class='bx bxs-dashboard'></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
@@ -52,13 +54,13 @@ $_SESSION['name'];
                 </a>
             </li>
             <li>
-                <a href="./owner_register.php">
+                <a href="./admin_create_owner.php">
                     <i class='bx bxs-user-plus' ></i>
                     <span class="text">Add Owner Account</span>
                 </a>
             </li>
             <li>
-				<a href="./user_table.php">
+				<a href="./admin_user_table.php">
 					<i class='bx bx-list-ul'></i>
 					<span class="text">Owner List</span>
 				</a>
@@ -79,28 +81,43 @@ $_SESSION['name'];
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>	
+			<i class='bx bx-menu' ></i>
+<!-- 			<form action="" class="filter_form">
+				<label>filter:</label>
+				<select id="filter_barangay">
+					<option value="Location">Barangay</option>
+					<option value="">Danacbunga</option>
+					<option value="">Panan</option>
+					<option value="">Porac</option>
+					<option value="">Tampo</option>
+				</select>
+				<label>filter:</label>
+				<select id="filter_accom">
+					<option value="Location">Type of Room</option>
+					<option value="">bedroom</option>
+					<option value="">queen bed</option>
+					<option value="">king bed</option>
+					<option value="">double deck</option>
+				</select> 
+			</form>-->
 		</nav>
 		<!-- NAVBAR -->
 
 		<!-- MAIN -->
 		<main>
-			
-			<form class="form-content" action="./admin_search.php" method="POST">
+			<div>
 				<div class="search_container">
 					<div>	
 					<input type="search" name="search" id="eventSearch" class="search" placeholder="Search">
 					</div>
-					<div>
-						<button type="submit" class="submit" name="submit">
+						<button type="submit" class="search_btn" name="submit">
 							<img src="./assets/icons/search.svg">
 						</button>
-					</div>
 				</div>
-				
-			</form>
+				</div>
 
-			<div class="search_content">
+			<div class="search_content" id="resort_result">
+
 					<?php 
 
 						include('dbcon.php');
@@ -115,26 +132,43 @@ $_SESSION['name'];
 
 						echo "
 					<div class='resort_rect'>
+					<a href='./admin_resortinfo.php?get=".$row['resort_id']."'>
 						<div class='img_container'>
 							<img src='".$row['resort_url']."'>
+							<div class='overlay'>
+								<div class='txt'>Resort: ".$row['resort_name']."<br>Barangay: ".ucwords($row['resort_address'])."<br>Owner: ".ucwords($row['owner_name'])."</div>
+							</div>
 						</div>
-						<div>
-							<a href='./admin_resortinfo.php?get=".$row['resort_id']."'><p>".$row['resort_name']."</p></a>
-						</div>
+						</a>
 					</div>";
 
 						}
 					}
 					?>
-					
 				</div>
-
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
 	
 
-	<script src="script.js"></script>
+<script src="script.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+  	$('#eventSearch').on("keyup", function(){
+    		var eventSearch = $(this).val();
+    	$.ajax({
+    		method:'POST',
+    		url:'liveSearch.php',
+    		data: {input:eventSearch},
+    		success:function(response)
+    		{
+    			$("#resort_result").html(response);
+    		}
+    	});
+    });
+});
+</script>
 </body>
 </html>

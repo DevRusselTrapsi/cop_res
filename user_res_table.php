@@ -21,6 +21,7 @@ $user_id = $_SESSION["user_id"];
 
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_list.css">
 	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
@@ -95,7 +96,7 @@ $user_id = $_SESSION["user_id"];
 		<!-- MAIN -->
 		<main>
 		<form>
-		<div class="table-list">
+		<div id="table-list" class="table-list">
 			<?php 
 
 					include './dbcon.php';
@@ -108,13 +109,26 @@ $user_id = $_SESSION["user_id"];
 
 						while($row = mysqli_fetch_assoc($res)){
 
-							$_SESSION['res_id'] = $row['resort_id'];
+								if ($row['archive'] == "show"){
 
-							echo"
-									<a href='./user_resortinfo.php?request=".$row['resort_id']."'><div class='res_name'>".ucwords($row['resort_name'])."</div></a>";
-						 }
-						} 
-						?>
+								$_SESSION['res_id'] = $row['resort_id'];
+							
+								echo"
+									<a href='./user_resortinfo.php?request=".$row['resort_id']."'>
+										<div class='res_name'>".ucwords($row['resort_name'])."<a href='./crud_user/all_data_delete.php?del=".$row['resort_id']."' type='button' class='button'><img src='./assets/icons/trash-2.svg'></a>
+										</div>
+									</a>";
+						 		
+						 		}else{
+
+						 			echo"
+						 				<h1>NO DATA</h1>
+						 			";
+						 			break;
+						 		}
+						}
+
+					} ?>
 		</div>
 
 		</form>
@@ -145,6 +159,7 @@ toggle between hiding and showing the dropdown content */
     }
   }
 }
+
 	</script>
 </body>
 </html>

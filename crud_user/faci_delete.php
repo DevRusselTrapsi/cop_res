@@ -7,6 +7,7 @@ if (!isset($_SESSION['email'])) {
 	header("Location: ./login.php");
 	exit();
 }
+include('../dbcon.php');
 
 $id = $_SESSION['res_id'];
 
@@ -16,13 +17,15 @@ if(isset($_POST['delete'])){
 $req = $_GET['del'];
 	
 
-	$q = "DELETE FROM tbl_facility WHERE faci_id = $id";
+	$archive = "delete";
+
+	$q = "UPDATE tbl_facility SET archive = '$archive' WHERE faci_id = $req";
 
 	$res = mysqli_query($conn, $q);
 
 	if($res){
 
-		echo"<script>alert('Update Successfully')</script>";
+		echo"<script>alert('Delete Successfully')</script>";
 	
 	}else{
 		echo "Error.".mysqli_error($conn);
@@ -37,7 +40,7 @@ $req = $_GET['del'];
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<link rel="icon" type="image/x-icon" href="../assets/img/tourism-favicon.jpg">
+	<link rel="icon" type="image/x-icon" href="../assets/img/tourism-favicon.png">
 	<title>Delete Facility</title>
 </head>
 <body>

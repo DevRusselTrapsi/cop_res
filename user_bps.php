@@ -13,8 +13,8 @@ $user_id = $_SESSION["user_id"];
 include('dbcon.php');
 
 if (isset($_POST['submit'])) {
+
     $verif = "pending";
-    
     // Get the uploaded file details
     $file_name = $_FILES['permit_url']['name'];
     $file_tmp = $_FILES['permit_url']['tmp_name'];
@@ -30,12 +30,14 @@ if (isset($_POST['submit'])) {
         $sql = "UPDATE SET permit_url =  verification (resort_id, verified, business_url) VALUES ('$verif', '$file_path')";
         
         if (mysqli_query($conn, $sql)) {
-            echo "Submission complete";
+
+            echo "<script>alert('Submission complete')</script>";
         } else {
             echo "Error: " . mysqli_error($conn);
         }
     } else {
-        echo "File upload failed.";
+
+    	  echo "<script>alert('File upload failed')</script>";
     }
 }
 ?>
@@ -157,7 +159,11 @@ if (isset($_POST['submit'])) {
 						<?php 
 					// this id must be change to id of the user for checking the image from the user
 
-   				 	if ($verif == 'verified'){
+					if($verif == 'no_permit'){
+
+						echo '<div class="status" style="background-color: rgba(210, 211, 49, 1);">No Permit</div>';
+
+   				 	}elseif ($verif == 'verified'){
 
 	   				 	
 	   				 	echo '<div class="status" style="background-color: rgba(67, 255, 32, 1);">Verified</div>';

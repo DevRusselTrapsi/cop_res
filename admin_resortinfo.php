@@ -24,45 +24,26 @@ $_SESSION['res_id'] = "$req";
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_resortinfo.css">
-	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
-	<title>User Dashboard</title>
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
+	<title>User Resort Info</title>
 </head>
 <body>
 
 
 	<!-- <form> -->
-		<div class="form-content mb-4">
+		<div class="form-content mb-4 shadow border border-2 m-auto">
 			<div>
-				<a href="./admin_search.php">BACK</a>
-			</div>
-			<div class="profile">
-				<?php 
-include('./dbcon.php');
-
-				$req = $_GET['get'];
-
-							$sql = "SELECT resort_url
-											FROM tbl_resort
-        							WHERE resort_id = '$req'";
-
-        			$r = mysqli_query($conn, $sql);
-
-							if($r && mysqli_num_rows($r) > 0){
-
-								while($profile = mysqli_fetch_assoc($r)) {
-									?>
-					<!-- this is where the image will popout -->
-				<img src='<?php echo $profile['resort_url']; ?>' alt="Image">
 				
-				<?php 
-					}}
-			?>
+				<a href="./admin_search.php">BACK</a>
+				
 			</div>
+			<!-- profile Display to the right side -->
+			<div class="profile d-flex justify-content-around">
+				<div class="res_content">
+					<div>
+						<h4 class="text-center">Resorts Info</h4>
+					</div>
 
-	<div class="container">
-				<p>Resorts Info</p>
-
-		<div class="res_content">
 				<?php 
 
 							include('./dbcon.php');
@@ -80,12 +61,10 @@ include('./dbcon.php');
 
 								while($row_resort = mysqli_fetch_assoc($res)) {
 
-
-
 							?>
 
 			<div class="mb-3 row">
-    				<label for="staticEmail" class="col-lg-3 col-form-label" style="font-size: 20px; border-bottom: 1px solid black;">Name of the Establishment :</label>
+    				<label for="staticEmail" class="col-lg-3 col-form-label" style="font-size: 20px; border-bottom: 1px solid black;">Name of the Establishment:</label>
     			<div class="col-lg-4" style="border-bottom: 1px solid black; border-bottom-right-radius: 10px;">
       				<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<?php echo $row_resort['resort_name'];?>" style="font-size: 20px;">
     			</div>
@@ -144,10 +123,12 @@ include('./dbcon.php');
 			<div class="d-flex justify-content-end">
 				<?php 
 				echo "
-				<a href='./crud/resort_update.php?updt=".$row_resort['resort_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+				<a href='./crud/resort_update.php?updt=".$row_resort['resort_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'><img src='./assets/icons/edit.svg'></a>
 				";?>
 			</div>
 		</div>
+
+					<!-- this will show if there is a data -->
 		<?php
 				} 
 
@@ -213,24 +194,52 @@ include('./dbcon.php');
       				<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="No Data Found" style="font-size: 20px;">
     			</div>
 			</div>
-			<div class="col-3">
+			<div class="d-flex justify-content-end">
 				<?php 
 				echo "
-				<a href='./crud/resort_update.php?get=".$row_resort['resort_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' name='res_update'>Update</a>
+				<a href='./crud_ownerlist/resort_update.php?get=".$row_resort['resort_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' name='res_update'><img src='./assets/icons/edit.svg'></a>
 				 ";?>
 			</div>
 		</div>
-				 <?php 
-						} 
-					?>
 
+		<?php } ?>
+
+		<!-- image right side -->
+				<?php 
+						include('./dbcon.php');
+
+				$req = $_GET['get'];
+
+							$sql = "SELECT resort_url
+											FROM tbl_resort
+        							WHERE resort_id = '$req'";
+
+        			$r = mysqli_query($conn, $sql);
+
+							if($r && mysqli_num_rows($r) > 0){
+
+								while($profile = mysqli_fetch_assoc($r)) {
+									?>
+					<!-- this is where the image will popout -->
+				<div class="resort_img">
+					<img src='<?php echo $profile['resort_url']; ?>' alt="Image" width="100%" height="90%">
+				</div>
+				<?php 
+					}
+				}
+			?>
+	</div>
+
+	<div class="container">
+		<div class="res_content">
+				
 	<!-- END OF tbl_resort -->
 
 				<!-- Accommodations -->
 
-				<h3>Accommodations</h3>
+				<h3 class="text-center">Accommodations</h3>
 
-<div class="table-responsive-md d-flex justify-content-center">
+<div class="table-responsive-md text-center d-flex justify-content-center">
 			<table class="table" style="width: 100%;">
 	<thead style="background-color: rgba(0, 197, 186, 0.72)">
 		<tr>
@@ -266,9 +275,9 @@ include('dbcon.php');
 			<td> ".$row['accom_capacity']."</td>
 			<td> ".$row['accom_rates']."</td>
 			<td>
-			<a href='./crud/accom_update.php?updt=".$row['accom_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+			<a href='./crud/accom_update.php?updt=".$row['accom_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'><img src='./assets/icons/edit.svg'></a>
 
-				<a href='./crud/accom_delete.php?del=".$row['accom_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
+				<a href='./crud/accom_delete.php?del=".$row['accom_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'><img src='./assets/icons/trash-2.svg'></a>
 			</td>
 		</tr>
 
@@ -282,9 +291,9 @@ include('dbcon.php');
 			<td>No data Found</td>
 			<td>No data Found</td>
 			<td>
-			<a href='./crud/service_update.php?updt=".$row['accom_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+			<a href='./crud/service_update.php?updt=".$row['accom_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'><img src='./assets/icons/edit.svg'></a>
 
-				<a href='./crud/service_delete.php?del=".$row['accom_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
+				<a href='./crud/service_delete.php?del=".$row['accom_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'><img src='./assets/icons/trash-2.svg'></a>
 			</td>
 		</tr>";
 }
@@ -297,10 +306,10 @@ include('dbcon.php');
 
 				<!-- Facilities -->
 
-		<h3>Existing Facilities and Amenities</h3>
+		<h3 class="text-center">Existing Facilities and Amenities</h3>
 
 
-<div class="table-responsive-md d-flex justify-content-center">
+<div class="table-responsive-md text-center d-flex justify-content-center">
 			<table class="table" style="width: 100%;">
 	<thead style="background-color: rgba(0, 197, 186, 0.72)">
 		<tr>
@@ -336,9 +345,9 @@ include('dbcon.php');
 			<td> ".$row['faci_capacity']."</td>
 			<td> ".$row['faci_rates']."</td>
 			<td>
-			<a href='./crud/faci_update.php?updt=".$row['faci_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+			<a href='./crud/faci_update.php?updt=".$row['faci_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'><img src='./assets/icons/edit.svg'></a>
 
-				<a href='./crud/faci_delete.php?del=".$row['faci_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
+				<a href='./crud/faci_delete.php?del=".$row['faci_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'><img src='./assets/icons/trash-2.svg'></a>
 			</td>
 		</tr>
 
@@ -352,9 +361,9 @@ include('dbcon.php');
 			<td>No data Found</td>
 			<td>No data Found</td>
 			<td>
-			<a href='./crud/service_update.php?updt=".$row['faci_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+			<a href='./crud/service_update.php?updt=".$row['faci_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'><img src='./assets/icons/edit.svg'></a>
 
-				<a href='./crud/service_delete.php?del=".$row['faci_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
+				<a href='./crud/service_delete.php?del=".$row['faci_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'><img src='./assets/icons/trash-2.svg'></a>
 			</td>
 		</tr>";
 }
@@ -367,9 +376,9 @@ include('dbcon.php');
 
 			<!-- table Service -->
 
-				<h3>Services</h3>
+				<h3 class="text-center">Services</h3>
 
-<div class="table-responsive-md d-flex justify-content-center">
+<div class="table-responsive-md text-center d-flex justify-content-center">
 			<table class="table" style="width: 100%;">
 	<thead style="background-color: rgba(0, 197, 186, 0.72)">
 		<tr>
@@ -402,9 +411,9 @@ include('dbcon.php');
 			<td>".$row['description']." </td>
 			<td> ".$row['service_rates']."</td>
 			<td>
-			<a href='./crud/service_update.php?updt=".$row['service_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+			<a href='./crud/service_update.php?updt=".$row['service_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'><img src='./assets/icons/edit.svg'></a>
 
-				<a href='./crud/service_delete.php?del=".$row['service_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
+				<a href='./crud/service_delete.php?del=".$row['service_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'><img src='./assets/icons/trash-2.svg'></a>
 			</td>
 		</tr>
 
@@ -417,9 +426,9 @@ include('dbcon.php');
 			<td>No data Found</td>
 			<td>No data Found</td>
 			<td>
-			<a href='./crud/service_update.php?updt=".$row['service_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'>Edit</a>
+			<a href='./crud/service_update.php?updt=".$row['service_id']."' type='submit' class='btn btn-success pe-3 ps-3 pt-1 pb-1 update' style='color:black;' name='res_update'><img src='./assets/icons/edit.svg'></a>
 
-				<a href='./crud/service_delete.php?del=".$row['service_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'>Delete</a>
+				<a href='./crud/service_delete.php?del=".$row['service_id']."' type='submit' class='btn btn-danger pe-2 ps-2 pt-1 pb-1 delete' style='color:black;' name='res_delete'><img src='./assets/icons/trash-2.svg'></a>
 			</td>
 		</tr>";
 }
@@ -429,13 +438,8 @@ include('dbcon.php');
 </div>
 				<!-- service table end -->
 
-			<div class="d-flex justify-content-lg-end mt-4">
-				<a type="submit" class="btn btn-danger pe-2 ps-2 delete">Delete</a>
-			</div>
 		</div>
 	</div>
-
-
 	</main>
 		<!-- MAIN -->
 	</section>

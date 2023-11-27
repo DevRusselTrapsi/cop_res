@@ -22,9 +22,10 @@ $user_id = $_SESSION["user_id"];
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
 	<!-- My CSS -->
 	<link rel="stylesheet" href="./css/user_addresort.css">
-	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.jpg">
+	<link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
 	<title>User Dashboard</title>
 </head>
 <body>
@@ -115,16 +116,16 @@ $user_id = $_SESSION["user_id"];
 									<label>Name of the Establishment:</label>
 								</div>
 								<div>
-									<input type="text" id="input" name="resort_name" required>
+									<input type="text" id="input" name="resort_name" placeholder="Resort's name" required>
 								</div>
 							</div>
 
 							<div class="col-2">
 								<div>
-									<label>Address:</label>
+									<label>Barangay Address:</label>
 								</div>
 								<div>
-									<input type="text" id="input" name="resort_address" placeholder="Establishment's Address">
+									<input type="text" id="input" name="resort_address" placeholder="Barangay Address">
 								</div>
 							</div>
 							<div class="col-2">

@@ -16,12 +16,14 @@ $name =$_SESSION['name'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <title>Admin</title>
     <!-- Add Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- Add your custom CSS -->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" type="image/x-icon" href="./assets/img/tourism-favicon.png">
-    <title>Admin</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
     <!-- SIDEBAR -->
@@ -57,7 +59,7 @@ $name =$_SESSION['name'];
                 </a>
             </li>
             <li>
-                <a href="./user_table.php">
+                <a href="./admin_user_table.php">
                     <i class='bx bx-list-ul'></i>
                     <span class="text">Owner List</span>
                 </a>
@@ -82,16 +84,9 @@ $name =$_SESSION['name'];
 
         <!-- MAIN -->
         <main>
-            <div class="head-title">
-                <div class="left">
-                    <h1>Dashboard</h1>
-                </div>
-            </div>
-
             <!-- Box Info -->
             <ul class="box-info">
                 <!-- Replace the values with your data -->
-                <a href="#1#" style="text-decoration: none; color: none;">
                 <li>
                     <i class='bx bxs-building-house'></i>
                     <span class="text">
@@ -106,11 +101,9 @@ $name =$_SESSION['name'];
                         echo '<h3> '.$row. '</h3>'
 
                         ?>
-                        <p>Establishment</p>
+                        <p>Resorts</p>
                     </span>
                 </li>
-                 </a>
-                <a href="#2#">
                 <li> 
                     <i class='bx bxs-group'></i>
                     <span class="text">
@@ -126,13 +119,10 @@ $name =$_SESSION['name'];
 
                         ?>
                         <p>User</p>
-
                     </span>
                 </li>
-                </a>
-                <a href="#3#">
                 <li>
-                    <i class='bx bxs-user-pin'></i>
+                    <i class='bx bx-user-pin'></i>
                     <span class="text">
                         <?php
                         require('dbcon.php');
@@ -145,13 +135,11 @@ $name =$_SESSION['name'];
                         echo '<h3> '.$row. '</h3>'
 
                         ?>
-                        <p>Owner</p>
+                        <p>Resort Owner</p>
                     </span>
                 </li>
-                 </a>
-                 <a href="#4#">
                 <li>
-                    <i class='bx bxs-show'></i>
+                    <i class='bx bx-show'></i>
                     <span class="text">
                         <?php
                         require('dbcon.php');
@@ -178,7 +166,6 @@ $name =$_SESSION['name'];
                         <p>Views</p>
                     </span>
                 </li>
-                 </a>
             </ul>
             <!-- End Box Info -->
 
@@ -186,180 +173,80 @@ $name =$_SESSION['name'];
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>Recent Resort</h3>
-                        
+                        <h3>Business Permit Submission</h3>
+
+                      <?php
+                include('./dbcon.php');
+
+                // in this query COUNT() is a function the counts all the value from the verification note: use count when you want to see how many value are there in one column of you database
+                $query = "SELECT 
+                            COUNT(CASE WHEN verification = 'verified' THEN 1 END) AS verified_count,
+                            COUNT(CASE WHEN verification = 'not_verified' THEN 1 END) AS unverified_count,
+                            COUNT(CASE WHEN verification = 'pending' THEN 1 END) AS pending_count,
+                            COUNT(CASE WHEN verification = 'no_permit' THEN 1 END) AS no_permit_count
+                        FROM tbl_resort";
+
+                        $result = $conn->query($query);
+
+                        if (!$result) {
+                            die("Query failed: " . mysqli_error($conn));
+                        }
+
+                        if (mysqli_num_rows($result) > 0) {
+                            // Fetch result as an associative array
+                            $row = $result->fetch_assoc();
+
+                            // Access counts for each status
+                            $verifiedCount = $row['verified_count'];
+                            $unverifiedCount = $row['unverified_count'];
+                            $pendingCount = $row['pending_count'];
+                            $noPermitCount = $row['no_permit_count'];
+                        ?>
+                        <!-- HTML Output -->
+                        <p style="margin-right: 30px; color: rgba(32, 232, 42, 1); text-align: center;">verified: 
+                            <span style='font-weight: bold;'><?php echo $verifiedCount; ?></span>
+                        </p>
+                        <p style="margin-right: 50px; color: red; text-align: center;">unverified: 
+                            <span style='font-weight: bold;'><?php echo $unverifiedCount; ?></span>
+                        </p>
+                        <p style="margin-right: 50px; color: orange; text-align: center;">pending: 
+                            <span style='font-weight: bold;'><?php echo $pendingCount; ?></span>
+                        </p>
+                        <p style="margin-right: 50px; color:rgba(210, 211, 49, 1); text-align: center;">no permit: 
+                            <span style='font-weight: bold;'><?php echo $noPermitCount; ?></span>
+                        </p>
+                        <?php 
+                        } else {
+                            echo "No results found";
+                        }
+
+                        // Close the database connection
+                        $conn->close();
+                        ?>
+                            <div>
+                                <span>Status</span>
+                                <select onchange="selectdata(this.options[this.selectedIndex].value)">
+                                    <option value="all">All status</option>
+                                    <option value="verified">Verified</option>
+                                    <option value="not_verified">Unverified</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="no_permit">No Permit</option>
+                                </select>
+                            </div>
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Barangay</th>
+                                <th>Resort Name</th>
+                                <th>Location</th>
                                 <th>Owner</th>
-                                <th>Status</th>
+                                <th>Submission Status</th>
                                 <th></th>
                                 <th>Comments</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="result">
                             <!-- Add your table rows with resort data here -->
-                            <?php
-
-                            include("dbcon.php");
-
-                            $q = "SELECT * FROM tbl_resort";
-
-                            $res = mysqli_query($conn, $q);
-
-                            if ($res && mysqli_num_rows($res) > 0) {
-
-                            
-                                while($row = mysqli_fetch_assoc($res)){
-
-
-                                     echo "
-                            <tr>
-                                <td>
-                                    <img src='".$row['resort_url']."'>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                    <p>".$row['resort_name']."</p></a>
-                                </td>";
-
-                                    // check if there is an image submission
-                                    if($row['permit_url'] == 'no_permit'){
-
-                                        //Pending
-
-                                        echo"
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 12px;'>
-                                        ".ucwords($row['resort_address'])."
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                        ".ucwords($row['owner_name'])."
-                                   </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                        <span class='status pending'>Pending</span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                    
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                    
-                                    </a>
-                                </td>
-                            </tr>";
-
-                            }else{
-                                // if there is a permit submission proceed on checking the verification
-
-                                    $currentDate = $row['event_date'];
-
-                                    $formattedDate = date('m-d-Y', strtotime($currentDate));
-                           
-
-                                if($row['verification'] === 'verified'){
-                            echo"
-                                 <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 12px;'>
-                                        ".ucwords($row['resort_address'])."
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                        ".ucwords($row['owner_name'])."
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                        <span class='status verified'>Verified</span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 10px;'>
-                                        verified by ".ucwords($row['verifiedby'])." on ".$formattedDate."
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                        ".ucwords($row['comment'])."
-                                    </a>
-                                </td>
-                            </tr>";
-                                        // Not Verified
-                                    }elseif($row['verification'] === 'not_verified'){
-
-                            echo"
-                                 <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 12px;'>
-                                        ".ucwords($row['resort_address'])."
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                   ".ucwords($row['owner_name'])."
-                                   </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                        <span class='status unverified'>Unverified</span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 10px;'>
-                                        Unverified by ".ucwords($row['verifiedby'])." on ".$formattedDate."
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 10px; word-wrap: break-word; font-weight: bold;'>
-                                        ".ucfirst($row['comment'])."
-                                    </a>
-                                </td>
-                            </tr>";
-                            }else{
-                            // end of checking if there is image submitted
-                            
-                            // pending if there is an image but hasn't verified yet
-
-                            echo"
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."' style='font-size: 12px;'>
-                                        ".ucwords($row['resort_address'])."
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                        ".ucwords($row['owner_name'])."
-                                   </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                        <span class='status pending'>Pending</span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                    
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href='./admin_verif.php?get=".$row['resort_id']."'>
-                                    
-                                    </a>
-                                </td>
-                            </tr>";
-                                    }
-                                }
-                            }
-                        }
-                            ?>
 
                             <!-- Add more rows as needed -->
                         </tbody>
@@ -374,5 +261,43 @@ $name =$_SESSION['name'];
 
     <!-- Include your custom JavaScript file -->
     <script src="script.js"></script>
+    <script type="text/javascript">
+        
+        $(document).ready(function(){
+            showdata();
+        });
+
+        function showdata()
+        {
+
+            $.ajax({
+                url: 'show-data.php',
+                method: 'post',
+                success: function(result)
+                {
+                    $("#result").html(result);
+                }
+            });
+        }
+
+// function to the filter where
+        function selectdata(cat)
+        {
+            $.ajax({
+                // - the code from select-data will be executed
+                url: 'select-data.php',
+                // the type of method from the select is given as post
+                method: 'post',
+                // initializing a variable cat_name for the variable function cat that contains the value of the select tag from the html
+                data: 'cat_name='+cat,
+                // this will display the result after querying the $("#result") is from the id of the table
+                success: function(result)
+                {
+                    $("#result").html(result);
+                }
+            });
+        }
+
+    </script>
 </body>
 </html>
