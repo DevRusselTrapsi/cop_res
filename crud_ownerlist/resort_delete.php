@@ -9,7 +9,6 @@ if (!isset($_SESSION['email'])) {
 }
 
 $_SESSION['user_id'];
-$id = $_SESSION['resort_id'];
 
 include('../dbcon.php');
 
@@ -21,19 +20,19 @@ $req = $_GET['del'];
 
 	$q1 = "UPDATE tbl_resort 
 			SET archive ='$archive' 
-			WHERE resort_id = $id";
+			WHERE resort_id = $req";
 
 	$q2 = "UPDATE tbl_accommodation
 	 		SET archive ='$archive' 
-	 		WHERE resort_id = $id";
+	 		WHERE resort_id = $req";
 
 	$q3 = "UPDATE tbl_facility
 	 		SET archive ='$archive' 
-	 		WHERE resort_id = $id";
+	 		WHERE resort_id = $req";
 
 	 $q4 = "UPDATE tbl_service
 	 		SET archive ='$archive' 
-	 		WHERE resort_id = $id";
+	 		WHERE resort_id = $req";
 
 	$arch_resort = mysqli_query($conn, $q1);
 	$arch_accom = mysqli_query($conn, $q2);

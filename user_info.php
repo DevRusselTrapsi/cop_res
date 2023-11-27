@@ -30,7 +30,7 @@ $user_id = $_GET['request'];
 
 
 	<form>
-		<div class="container-lg border border-5-warning mt-5 mb-5 p-4 shadow">
+		<div class="container container-lg bg-light mt-5 mb-5 p-4 shadow">
 			<div>
 				<a href="./admin_user_table.php" type="submit" class="btn btn-secondary">BACK</a>
 				
@@ -96,14 +96,22 @@ $user_id = $_GET['request'];
 
 									$_SESSION['user_id'] = $row['user_id'];
 									$_SESSION['resort_id'] = $row['resort_id'];
+
+							if($row['archive'] == "show"){
+
+									
 							echo"
-									<div class='res_name border'>
-										<div>
-											<a href='./resort_info_admin.php?get=".$row['resort_id']."'>".ucwords($row['resort_name'])."</a>
-										</div>
+									<div class='res_name'>
+										<a href='./resort_info_admin.php?get=".$row['resort_id']."'>
+											<div>
+												".ucwords($row['resort_name'])."
+											</div>
+										</a>
 										<a href='./crud_ownerlist/resort_delete.php?del=".$_SESSION['resort_id']."' name='delete' class=' p-2 pb-2  delete'><img src='./assets/icons/trash-2.svg' class='mb-1'></a>
 									</div>
 									";
+									break;
+							}
 						 }
 						}else{
 

@@ -43,7 +43,7 @@ body.dark {
 }
 
 body {
-	background: var(--grey);
+	background-color: grey;
 	overflow-x: hidden;
 }
 
@@ -297,11 +297,7 @@ body {
 
 .container
 {
-	display: block;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	text-align: center;
+	border-radius: 20px;
 }
 
 .container > p
@@ -421,45 +417,36 @@ h3
 	display: inline-flex;
 	flex-wrap: wrap;
 	align-items: center;
-	/*justify-content: space-around;*/
+	justify-content: space-between;
 	text-align: center;
 	background-color: whitesmoke;
 	filter: drop-shadow(0px 4px 5px black);
 	border-radius: 10px;
-	font-size: 1.5rem;
+	
 	width: 80%;
 	padding: 15px;
 	margin-bottom: 9px;
+	background-color: lightskyblue;
+
 }
 
-.res_name > div:first-child
+.res_name > a:first-child
 {
-	width: 70%;
+	width: 90%;
+	color: black;
+	font-size: 1.7rem;
+	font-weight: bold;
 }
 
-.res_name > div:last-child 
-{
-	width: 50px;
-	/*border: 1px solid black;*/
-	position: relative;
-	left: 50px;
-}
+.delete:hover{
 
-.res_name > div:last-child > .delete
-{
-	background-color: red;
-	filter: drop-shadow(1px .9px .9px black);
-	padding: 3px;
-	width: 50px;
-	border-radius: 3.5px;
-	border: none;
-	cursor: pointer;
+	background-color: darkred;
 }
 
 
 .res_name > a:hover
 {
-	color: black;
+	color: white;
 }	
 
 

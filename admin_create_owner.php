@@ -29,6 +29,7 @@ if (isset($_POST['submit'])) {
     $contact = $_POST['contact'];
     $password = $_POST['user_pass'];
     $confirm_password = $_POST['confirm_pass'];
+    $archive = "show";
 
     // Use a prepared statement to check if the email already exists in the database
     $query = "SELECT * FROM `tbl_user` WHERE `email` = ?";
@@ -51,12 +52,12 @@ if (isset($_POST['submit'])) {
         
             // hashed_password variable turns the password into a hash for security
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-            $query = "INSERT INTO `tbl_user` (`fname`, `lname`, `email`, `contact`, `user_address`, `user_pass`) VALUES (?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO `tbl_user` (`fname`, `lname`, `email`, `contact`, `user_address`, `user_pass`,'archive') VALUES (?, ?, ?, ?, ?, ?)";
 
             // Use a prepared statement to insert data into the database
             $stmt = mysqli_prepare($conn, $query);
             // note: when using hashed_password make sure that stmt_bind_param of the hashed is "s" not "i"
-            mysqli_stmt_bind_param($stmt, "sssiss" ,$fname, $lname, $email, $contact,$address, $hashed_password);
+            mysqli_stmt_bind_param($stmt, "sssisss" ,$fname, $lname, $email, $contact,$address, $hashed_password, $archive);
 
              if (mysqli_stmt_execute($stmt)){
 
@@ -277,7 +278,7 @@ mysqli_close($conn);
 
 		<!-- MAIN -->
 		<main>
-		<form method="POST" action="./owner_register.php">
+		<form method="POST" action="./admin_create_owner.php">
 			
 			<div class="container">
 				<div class="registration-form">

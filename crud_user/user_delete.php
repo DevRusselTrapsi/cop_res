@@ -20,11 +20,34 @@ $id = $_GET['id'];
 
 	$q = "DELETE FROM tbl_user WHERE user_id = $id";
 
-	$res = mysqli_query($conn, $q);
+	
 
-	if($res){
+	$q1 = "UPDATE tbl_resort 
+			SET archive ='$archive' 
+			WHERE resort_id = $id";
 
-		echo"<script>alert('Update Successfully')</script>";
+	$q2 = "UPDATE tbl_accommodation
+	 		SET archive ='$archive' 
+	 		WHERE resort_id = $id";
+
+	$q3 = "UPDATE tbl_facility
+	 		SET archive ='$archive' 
+	 		WHERE resort_id = $id";
+
+	 $q4 = "UPDATE tbl_service
+	 		SET archive ='$archive' 
+	 		WHERE resort_id = $id";
+
+	$arch_resort = mysqli_query($conn, $q1);
+	$arch_accom = mysqli_query($conn, $q2);
+	$arch_faci = mysqli_query($conn, $q3);
+	$arch_service = mysqli_query($conn, $q4);
+	$arch_user = mysqli_query($conn, $q);
+
+
+	if($arch_resort && $arch_accom && $arch_faci && $arch_service){
+
+		echo"<script>alert('Delete Successfully')</script>";
 	
 	}else{
 		echo "Error.".mysqli_error($conn);

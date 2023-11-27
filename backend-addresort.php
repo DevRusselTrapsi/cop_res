@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Insert the file path into the database
             $stmt = $conn->prepare("INSERT INTO `tbl_accommodation` (resort_id, type_of_room, no_accom_units, accom_capacity, accom_rates, acom_url, archive) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-            $stmt->bind_param("isiids", $resort_id, $type_of_room_value, $no_accom_units_value, $accom_capacity_value, $accom_rates_value, $file_path, $archive);
+            $stmt->bind_param("isiidss", $resort_id, $type_of_room_value, $no_accom_units_value, $accom_capacity_value, $accom_rates_value, $file_path, $archive);
 
             $stmt->execute();
 
@@ -156,9 +156,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $archive = $archive[$key];   
 
             // Insert the file path into the database
-            $stmt = $conn->prepare("INSERT INTO `tbl_service` (resort_id, type_of_service, description, service_rates) VALUES (?, ?, ?, ?,?)");
+            $stmt = $conn->prepare("INSERT INTO `tbl_service` (resort_id, type_of_service, description, service_rates, archive) VALUES (?, ?, ?, ?,?)");
 
-            $stmt->bind_param("issds", $resort_id, $type_of_service_value, $description_value, $service_rates_value);
+            $stmt->bind_param("issds", $resort_id, $type_of_service_value, $description_value, $service_rates_value, $archive);
 
             $stmt->execute();
 

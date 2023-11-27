@@ -41,7 +41,7 @@ $id = $_SESSION['res_id'];
 			<div class="profile d-flex justify-content-around">
 				<div class="res_content">
 					<div>
-						<h4 class="text-center">Resorts Info <?= $id; ?></h4>
+						<h4 class="text-center">Resorts Info</h4>
 					</div>
 
 				<?php 

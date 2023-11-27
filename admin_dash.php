@@ -93,13 +93,22 @@ $name =$_SESSION['name'];
                         <?php
                         require('dbcon.php');
 
-                        $query = "SELECT resort_id FROM tbl_resort ORDER BY resort_id";
+                        $query = "SELECT 
+                        COUNT(CASE WHEN archive = 'show' THEN 1 END) AS show_count
+                        FROM tbl_resort";
+
                         $query_run = mysqli_query($conn, $query);
 
-                        $row = mysqli_num_rows($query_run);	
+                        if (mysqli_num_rows($query_run)){
 
-                        echo '<h3> '.$row. '</h3>'
+                        $row = mysqli_fetch_assoc($query_run);
 
+                        $row_count = $row['show_count'];
+
+                            echo '<h3> '.$row_count. '</h3>';
+                        }else{
+                            echo "".mysqli_error($conn);
+                        }
                         ?>
                         <p>Resorts</p>
                     </span>
