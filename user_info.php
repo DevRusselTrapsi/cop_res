@@ -110,7 +110,7 @@ $user_id = $_GET['request'];
 										<a href='./crud_ownerlist/resort_delete.php?del=".$_SESSION['resort_id']."' name='delete' class=' p-2 pb-2  delete'><img src='./assets/icons/trash-2.svg' class='mb-1'></a>
 									</div>
 									";
-									break;
+
 							}
 						 }
 						}else{

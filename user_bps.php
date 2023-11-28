@@ -62,8 +62,8 @@ if (isset($_POST['submit'])) {
 	<section id="sidebar">
 		<a href="./user_addresort.php" class="brand">
 			<i><img src="./assets/img/tourism.jpg" class="logo"></i>
-			<p>WELCOME!</p>
-			<span><?php echo ucwords($fname);?></span>
+			<p style="color: black;">WELCOME!</p>
+			<span style="color: black;"><?php echo ucwords($fname);?></span>
 		</a>
 
 		<ul class="side-menu top">

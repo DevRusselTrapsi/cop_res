@@ -34,8 +34,8 @@ $user_id = $_SESSION["user_id"];
 	<section id="sidebar">
 		<a href="./user_addresort.php" class="brand">
 			<i><img src="./assets/img/tourism-favicon.png" class="logo"></i>
-			<p>WELCOME!</p>
-			<span><?php echo ucwords($fname);?></span>
+			<p style="color: black;">WELCOME!</p>
+			<span style="color: black;"><?php echo ucwords($fname);?></span>
 		</a>
 
 		<ul class="side-menu top">
@@ -101,17 +101,11 @@ $user_id = $_SESSION["user_id"];
 
 					include './dbcon.php';
 
-					$q = "SELECT archive FROM tbl_resort WHERE user_id = '$user_id'";
+					$q = "SELECT * FROM tbl_resort WHERE user_id = '$user_id'";
 
 					$res = mysqli_query($conn, $q);
 
 					if ($res && mysqli_num_rows($res) > 0){
-
-$q = "SELECT * FROM tbl_resort WHERE user_id = '$user_id'";
-
-					$res2 = mysqli_query($conn, $q);
-
-					if ($res2 && mysqli_num_rows($res2) > 0){
 
 						while($row = mysqli_fetch_assoc($res)){
 
@@ -126,12 +120,17 @@ $q = "SELECT * FROM tbl_resort WHERE user_id = '$user_id'";
 										<a href='./crud_user/all_data_delete.php?del=".$row['resort_id']."' type='button' class='button'><img src='./assets/icons/trash-2.svg'></a>
 										</div>
 									</a>";
-						 		break;
 						 		
+						 		}else{
+
+						 			echo"
+						 				<h1>NO DATA</h1>
+						 			";
+						 			break;
 						 		}
 						}
-					}
-				} ?>
+
+					} ?>
 		</div>
 
 		</form>

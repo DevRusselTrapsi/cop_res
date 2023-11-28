@@ -199,21 +199,21 @@ body {
 	bottom: -40px;
 	left: 0;
 	border-radius: 50%;
-	box-shadow: -20px -20px 0 var(--light);
+	box-shadow: var(--light);
 }
 #content nav a {
 	color: var(--dark);
 }
 #content nav .bx.bx-menu {
 	cursor: pointer;
-	color: var(--dark);
+	color: black;
 }
 #content nav .nav-link {
 	font-size: 16px;
 	transition: .3s ease;
 }
 #content nav .nav-link:hover {
-	color: var(--blue);
+	color: black;
 }
 #content nav form {
 	max-width: 400px;
@@ -315,7 +315,8 @@ body {
 	cursor: pointer;
 	padding: 10px 20px;
 	border: none;
-	background-color: #2980B9;
+	background-color: lightgray;
+	border-radius: 6px;
 	
 }
 
@@ -350,7 +351,7 @@ body {
 {
 	border-radius: 20px;
 	padding: 20px;
-	background-color: #F9F9F9;
+	background-color: lightgrey;
 	box-shadow: 2px 2px 5px black;
 }
 
@@ -373,6 +374,7 @@ body {
 	padding: 5px;
 	width: 100%;
 	margin-top: 10px;
+	background: whitesmoke;
 
 }
 
@@ -410,12 +412,21 @@ body {
 	text-align: center;
 	font-size: 15px;
 	border-radius: 20px;
+	background: green;
+	color: black;
+	font-weight: bold;
 }
 
 .text > div > a > h1{
 	font-family: var(--lato);
 	color: black;
 	font-weight: normal;
+	text-align: center;
+}
+
+.text > div > a > h1:hover
+{
+	color: skyblue;
 }
 /* MAIN */
 

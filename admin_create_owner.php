@@ -52,12 +52,12 @@ if (isset($_POST['submit'])) {
         
             // hashed_password variable turns the password into a hash for security
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-            $query = "INSERT INTO `tbl_user` (`fname`, `lname`, `email`, `contact`, `user_address`, `user_pass`,'archive') VALUES (?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO `tbl_user` (`fname`, `lname`, `email`, `contact`, `user_address`, `user_pass`,`archive`) VALUES (?, ?, ?, ?, ?, ?,?)";
 
             // Use a prepared statement to insert data into the database
             $stmt = mysqli_prepare($conn, $query);
             // note: when using hashed_password make sure that stmt_bind_param of the hashed is "s" not "i"
-            mysqli_stmt_bind_param($stmt, "sssisss" ,$fname, $lname, $email, $contact,$address, $hashed_password, $archive);
+            mysqli_stmt_bind_param($stmt, "sssisss" ,$fname, $lname, $email, $contact, $address, $hashed_password, $archive);
 
              if (mysqli_stmt_execute($stmt)){
 
